@@ -1,0 +1,3763 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": false,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "Ragtech Dashboard",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 18,
+  "links": [],
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 27,
+      "panels": [],
+      "title": "Ragtech One Nitro Up 2000VA",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bel4x5olhc000d"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "ALARM OB ECO": {
+                  "color": "semi-dark-orange",
+                  "index": 25,
+                  "text": "OnBatteryECO"
+                },
+                "ALARM OL BYPASS": {
+                  "color": "blue",
+                  "index": 17,
+                  "text": "OnBypass"
+                },
+                "ALARM OL ECO": {
+                  "color": "dark-blue",
+                  "index": 24,
+                  "text": "  OnECO  "
+                },
+                "BOOST": {
+                  "color": "purple",
+                  "index": 9,
+                  "text": "SmartBoost"
+                },
+                "BYPASS": {
+                  "color": "blue",
+                  "index": 11,
+                  "text": "OnBypass"
+                },
+                "CAL": {
+                  "color": "purple",
+                  "index": 4,
+                  "text": "Calibration"
+                },
+                "CHRG": {
+                  "color": "purple",
+                  "index": 12,
+                  "text": "Charging"
+                },
+                "DISCHRG": {
+                  "color": "purple",
+                  "index": 13,
+                  "text": "Discharging"
+                },
+                "ECO": {
+                  "color": "dark-blue",
+                  "index": 22,
+                  "text": "  OnECO  "
+                },
+                "FSD OB": {
+                  "color": "dark-yellow",
+                  "index": 14,
+                  "text": "ShutDownBatt"
+                },
+                "FSD OB ECO": {
+                  "color": "dark-yellow",
+                  "index": 15,
+                  "text": "ShutDownBattECO"
+                },
+                "FSD OL": {
+                  "color": "dark-yellow",
+                  "index": 21,
+                  "text": "OnShutDown"
+                },
+                "LB": {
+                  "color": "orange",
+                  "index": 6,
+                  "text": "LowBattery"
+                },
+                "OB": {
+                  "color": "semi-dark-orange",
+                  "index": 1,
+                  "text": "OnBattery"
+                },
+                "OB DISCHRG ECO": {
+                  "color": "semi-dark-orange",
+                  "index": 3,
+                  "text": "OnBattDischargeECO"
+                },
+                "OB ECO": {
+                  "color": "semi-dark-orange",
+                  "index": 2,
+                  "text": "OnBatteryECO"
+                },
+                "OFF": {
+                  "color": "dark-red",
+                  "index": 10,
+                  "text": "   Off    "
+                },
+                "OL": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "  OnLine  "
+                },
+                "OL BYPASS": {
+                  "color": "blue",
+                  "index": 16,
+                  "text": "OnBypass"
+                },
+                "OL CHRG": {
+                  "color": "dark-green",
+                  "index": 18,
+                  "text": "OnCharging"
+                },
+                "OL CHRG ECO": {
+                  "color": "dark-green",
+                  "index": 19,
+                  "text": "OnChargeECO"
+                },
+                "OL ECO": {
+                  "color": "dark-blue",
+                  "index": 23,
+                  "text": "  OnECO  "
+                },
+                "OVER": {
+                  "color": "yellow",
+                  "index": 5,
+                  "text": "Overload"
+                },
+                "OVER BYPASS": {
+                  "color": "super-light-yellow",
+                  "index": 20,
+                  "text": "OverBypass"
+                },
+                "RB": {
+                  "color": "red",
+                  "index": 7,
+                  "text": "ReplaceBatt"
+                },
+                "TRIM": {
+                  "color": "purple",
+                  "index": 8,
+                  "text": "SmartTrim"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "noValue": "N/A",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "string"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 0,
+        "y": 1
+      },
+      "hideTimeOverride": true,
+      "id": 4,
+      "interval": "10s",
+      "maxDataPoints": 300,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^ups\\.last$/",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.2.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bel4x5olhc000d"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "ups",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")  \r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"upsd\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"ups_status\")\r\n  |> drop(columns: [\"serial\",\"host\",\"model\",\"driver_version\",\"driver_version_data\",\"status_OL\",\"status_OB\"])\r\n  //|> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\r\n  |> last()\r\n  |> yield(name: \"last\")",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "ups.status"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "timeFrom": "1h",
+      "title": "UPS Status",
+      "transformations": [
+        {
+          "disabled": true,
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": false,
+              "ups_status": false
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "ups_status": "UPS Status",
+              "ups_status Eaton9E2000i": "UPS Status",
+              "ups_status {device_mfr=\"Eaton\", device_model=\"unknown 2000\", device_type=\"ups\", driver_version=\"2.7.4.1\", driver_version_data=\"MGE HID 1.43\", host=\"475c87924867\", ups_mfr=\"Eaton\", ups_model=\"unknown 2000\", ups_productid=\"ffff\", ups_vendorid=\"0463\"}": "Status",
+              "ups_status {device_mfr=\"Eaton\", device_model=\"unknown 2000\", device_type=\"ups\", driver_version=\"2.7.4.1\", driver_version_data=\"MGE HID 1.43\", host=\"ce43aa86d3ec\", ups_mfr=\"Eaton\", ups_model=\"unknown 2000\", ups_productid=\"ffff\", ups_vendorid=\"0463\"}": "Status",
+              "ups_status {device_mfr=\"Eaton\", device_model=\"unknown 2000\", device_type=\"ups\", driver_version=\"2.8.0\", driver_version_data=\"MGE HID 1.46\", host=\"475c87924867\", ups_mfr=\"Eaton\", ups_model=\"unknown 2000\", ups_productid=\"ffff\", ups_vendorid=\"0463\"}": "UPS Status",
+              "ups_status {device_mfr=\"Eaton\", device_model=\"unknown 2000\", device_type=\"ups\", driver_version=\"2.8.0\", driver_version_data=\"MGE HID 1.46\", host=\"ce43aa86d3ec\", ups_mfr=\"Eaton\", ups_model=\"unknown 2000\", ups_productid=\"ffff\", ups_vendorid=\"0463\"}": "Status",
+              "ups_status {device_mfr=\"Eaton\", device_model=\"unknown 2000\", device_type=\"ups\", ups_mfr=\"Eaton\", ups_model=\"unknown 2000\", ups_productid=\"ffff\", ups_vendorid=\"0463\"}": "UPS Status",
+              "ups_status {model=\"9E2000 (presumed)\", serial=\"<nil>\", ups_name=\"Eaton9E2000i\"}": "UPS Status",
+              "ups_status {model=\"unknown 2000\", serial=\"<nil>\", status_OL=\"true\", ups_name=\"Eaton9E2000i\"}": "UPS Status",
+              "ups_status {model=\"unknown 2000\", serial=\"<nil>\", ups_name=\"Eaton9E2000i\"}": "UPS Status",
+              "ups_status {serial=\"<nil>\", ups_name=\"Eaton9E2000i\"}": "UPS Status"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bel4x5olhc000d"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 70,
+          "min": 50,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": 0
+              },
+              {
+                "color": "dark-yellow",
+                "value": 54
+              },
+              {
+                "color": "dark-green",
+                "value": 56
+              },
+              {
+                "color": "#EAB839",
+                "value": 64
+              },
+              {
+                "color": "dark-red",
+                "value": 70
+              }
+            ]
+          },
+          "unit": "hertz"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 3,
+        "y": 1
+      },
+      "hideTimeOverride": true,
+      "id": 14,
+      "interval": "10s",
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.2.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bel4x5olhc000d"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "ups",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"upsd\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"input_frequency\")\r\n  |> drop(columns: [\"host\",\"model\",\"driver_version\",\"driver_version_data\",\"status_OL\",\"status_OB\"])\r\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\r\n  |> yield(name: \"last\")",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "input.frequency"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "timeFrom": "1h",
+      "title": "Frequencia Entrada",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        }
+      ],
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bel4x5olhc000d"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 250,
+          "min": 210,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": 0
+              },
+              {
+                "color": "dark-yellow",
+                "value": 235
+              },
+              {
+                "color": "dark-red",
+                "value": 240
+              }
+            ]
+          },
+          "unit": "volt"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 6,
+        "y": 1
+      },
+      "hideTimeOverride": true,
+      "id": 8,
+      "interval": "10s",
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.2.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bel4x5olhc000d"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "ups",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"upsd\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"output_voltage\")\r\n  |> drop(columns: [\"host\",\"model\",\"driver_version\",\"driver_version_data\",\"status_OL\",\"status_OB\"])\r\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\r\n  |> yield(name: \"last\")",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "output.voltage"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "timeFrom": "1h",
+      "title": "Voltagem Saída",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        }
+      ],
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bel4x5olhc000d"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 270,
+          "min": 210,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": 0
+              },
+              {
+                "color": "dark-yellow",
+                "value": 250
+              },
+              {
+                "color": "dark-red",
+                "value": 260
+              }
+            ]
+          },
+          "unit": "volt"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 9,
+        "y": 1
+      },
+      "hideTimeOverride": true,
+      "id": 9,
+      "interval": "10s",
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.2.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bel4x5olhc000d"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "ups",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"upsd\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"input_voltage\")\r\n  |> drop(columns: [\"host\",\"model\",\"driver_version\",\"driver_version_data\",\"status_OL\",\"status_OB\"])\r\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\r\n  |> yield(name: \"last\")",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "input.voltage"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "timeFrom": "1h",
+      "title": "Voltagem Entrada",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        }
+      ],
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bel4x5olhc000d"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": 0
+              },
+              {
+                "color": "dark-yellow",
+                "value": 75
+              },
+              {
+                "color": "dark-red",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "amp"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 12,
+        "y": 1
+      },
+      "id": 56,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^ups\\.mean$/",
+          "values": false
+        },
+        "showPercentChange": true,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.2.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bel4x5olhc000d"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "ups",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"upsd\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"output_current\" or r[\"_field\"] == \"output_voltage\" or r[\"_field\"] == \"ups_power_nominal\")\r\n  |> drop(columns: [\"serial\",\"host\",\"model\",\"driver_version\",\"driver_version_data\",\"status_OL\",\"status_OB\"])\r\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\r\n  |> yield(name: \"last\")",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "input.current"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "timeFrom": "1d",
+      "title": "Corrente Entrada (A)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bel4x5olhc000d"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": 0
+              },
+              {
+                "color": "dark-yellow",
+                "value": 75
+              },
+              {
+                "color": "dark-red",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "amp"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 18,
+        "y": 1
+      },
+      "id": 19,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^ups\\.mean$/",
+          "values": false
+        },
+        "showPercentChange": true,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.2.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bel4x5olhc000d"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "ups",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"upsd\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"output_current\" or r[\"_field\"] == \"output_voltage\" or r[\"_field\"] == \"ups_power_nominal\")\r\n  |> drop(columns: [\"serial\",\"host\",\"model\",\"driver_version\",\"driver_version_data\",\"status_OL\",\"status_OB\"])\r\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\r\n  |> yield(name: \"last\")",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "output.current"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "timeFrom": "1d",
+      "title": "Corrente Saida (A)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bel4x5olhc000d"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": 0
+              },
+              {
+                "color": "dark-yellow",
+                "value": 30
+              },
+              {
+                "color": "dark-red",
+                "value": 40
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 6,
+        "x": 12,
+        "y": 4
+      },
+      "id": 11,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^ups\\.mean$/",
+          "values": false
+        },
+        "showPercentChange": true,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.2.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bel4x5olhc000d"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "ups",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"upsd\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"internal_temp\")\r\n  |> drop(columns: [\"serial\",\"host\",\"model\",\"driver_version\",\"driver_version_data\"])\r\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\r\n  |> yield(name: \"last\")",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "ups.temperature"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "timeFrom": "1d",
+      "title": "Temperatura",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "internal_temp {model=\"unknown 2000\", serial=\"<nil>\", status_OL=\"true\", ups_name=\"Eaton9E2000i\"}": "UPS Temp",
+              "internal_temp {serial=\"<nil>\", status_OL=\"true\", ups_name=\"Eaton9E2000i\"}": "UPS Temp",
+              "internal_temp {status_OL=\"true\", ups_name=\"Eaton9E2000i\"}": "UPS Temp",
+              "ups_temperature {device_mfr=\"Eaton\", device_model=\"unknown 2000\", device_type=\"ups\", driver_version=\"2.8.0\", driver_version_data=\"MGE HID 1.46\", ups_mfr=\"Eaton\", ups_model=\"unknown 2000\", ups_productid=\"ffff\", ups_vendorid=\"0463\"}": "UPS Temp °C",
+              "ups_temperature {device_mfr=\"Eaton\", device_model=\"unknown 2000\", device_type=\"ups\", ups_mfr=\"Eaton\", ups_model=\"unknown 2000\", ups_productid=\"ffff\", ups_vendorid=\"0463\"}": "UPS Temp"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bel4x5olhc000d"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "max": 90,
+          "min": 70,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "orange",
+                "value": 72
+              },
+              {
+                "color": "#009999",
+                "value": 75
+              }
+            ]
+          },
+          "unit": "volt"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 6,
+        "x": 18,
+        "y": 4
+      },
+      "id": 32,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^ups\\.mean$/",
+          "values": false
+        },
+        "showPercentChange": true,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.2.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bel4x5olhc000d"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "ups",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"upsd\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"battery_voltage\")\r\n  |> drop(columns: [\"serial\",\"host\",\"model\",\"driver_version\",\"driver_version_data\",\"status_OL\",\"status_OB\"])\r\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\r\n  |> yield(name: \"last\")",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "battery.voltage"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "timeFrom": "1d",
+      "title": "Voltagem Batéria",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "battery_capacity {device_mfr=\"Eaton\", device_model=\"unknown 2000\", device_type=\"ups\", driver_version=\"2.8.0\", driver_version_data=\"MGE HID 1.46\", ups_mfr=\"Eaton\", ups_model=\"unknown 2000\", ups_productid=\"ffff\", ups_vendorid=\"0463\"}": "Battery Capacity (Ah)",
+              "battery_capacity {device_mfr=\"Eaton\", device_model=\"unknown 2000\", device_type=\"ups\", ups_mfr=\"Eaton\", ups_model=\"unknown 2000\", ups_productid=\"ffff\", ups_vendorid=\"0463\"}": "Batt Capacity (Ah)",
+              "battery_capacity {model=\"unknown 2000\", serial=\"<nil>\", status_OL=\"true\", ups_name=\"Eaton9E2000i\"}": "Batt Capacity (Ah)",
+              "battery_protection {model=\"unknown 2000\", serial=\"<nil>\", status_OL=\"true\", ups_name=\"Eaton9E2000i\"}": "Batt Protected",
+              "battery_type {model=\"unknown 2000\", serial=\"<nil>\", status_OL=\"true\", ups_name=\"Eaton9E2000i\"}": "Battery Type",
+              "battery_voltage": "Battery Voltage",
+              "battery_voltage Eaton9E2000i": "Battery Voltage",
+              "battery_voltage {model=\"9E2000 (presumed)\", serial=\"<nil>\", status_OL=\"true\", ups_name=\"Eaton9E2000i\"}": "Battery Voltage",
+              "battery_voltage {serial=\"<nil>\", status_OL=\"true\", ups_name=\"Eaton9E2000i\"}": "Battery Voltage",
+              "battery_voltage {status_OL=\"true\", ups_name=\"Eaton9E2000i\"}": "Battery Voltage"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bel4x5olhc000d"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "orange",
+                "value": 20
+              },
+              {
+                "color": "green",
+                "value": 50
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 12,
+        "x": 0,
+        "y": 5
+      },
+      "id": 12,
+      "options": {
+        "displayMode": "gradient",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 300,
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "manual",
+        "valueMode": "color"
+      },
+      "pluginVersion": "12.2.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bel4x5olhc000d"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "ups",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"upsd\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"battery_charge_percent\")\r\n  |> drop(columns: [\"serial\",\"host\",\"model\",\"driver_version\",\"driver_version_data\",\"status_OL\",\"status_OB\"])\r\n  //|> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\r\n  |> last()\r\n  |> yield(name: \"last\")",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "battery.charge"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Nivel Bateria",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        }
+      ],
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bel4x5olhc000d"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": 0
+              },
+              {
+                "color": "dark-yellow",
+                "value": 75
+              },
+              {
+                "color": "dark-red",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "watt"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 4,
+        "x": 12,
+        "y": 6
+      },
+      "id": 13,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^ups\\.last$/",
+          "values": false
+        },
+        "showPercentChange": true,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.2.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bel4x5olhc000d"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "ups",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"upsd\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"real_power\" or r[\"_field\"] == \"nominal_power\")\r\n  |> drop(columns: [\"serial\",\"host\",\"model\",\"driver_version\",\"driver_version_data\"])\r\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\r\n  |> yield(name: \"last\")",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "output.power"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "timeFrom": "1d",
+      "title": "Carga Saida (W)",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "ups_load": false,
+              "ups_realpower_nominal": false
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "nominal_power": "Real Power Rating",
+              "real_power": "UPS Real Power",
+              "real_power {model=\"unknown 2000\", serial=\"<nil>\", status_OL=\"true\", ups_name=\"Eaton9E2000i\"}": "UPS Real Power",
+              "ups_load": "",
+              "ups_realpower {device_mfr=\"Eaton\", device_model=\"unknown 2000\", device_type=\"ups\", ups_mfr=\"Eaton\", ups_model=\"unknown 2000\", ups_productid=\"ffff\", ups_vendorid=\"0463\"}": "UPS Real Power",
+              "ups_realpower_nominal": "UPS Real Power",
+              "watts": "UPS Load",
+              "watts {device_mfr=\"Eaton\", device_model=\"unknown 2000\", device_type=\"ups\", driver_version=\"2.8.0\", driver_version_data=\"MGE HID 1.46\", ups_mfr=\"Eaton\", ups_model=\"unknown 2000\", ups_productid=\"ffff\", ups_vendorid=\"0463\"}": "UPS Load",
+              "watts {device_mfr=\"Eaton\", device_model=\"unknown 2000\", device_type=\"ups\", ups_mfr=\"Eaton\", ups_model=\"unknown 2000\", ups_productid=\"ffff\", ups_vendorid=\"0463\"}": "UPS Load"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bel4x5olhc000d"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": 0
+              },
+              {
+                "color": "dark-yellow",
+                "value": 75
+              },
+              {
+                "color": "dark-red",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "voltamp"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 4,
+        "x": 16,
+        "y": 6
+      },
+      "id": 23,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^ups\\.last$/",
+          "values": false
+        },
+        "showPercentChange": true,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.2.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bel4x5olhc000d"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "ups",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"upsd\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"ups_power\" or r[\"_field\"] == \"ups_power_nominal\")\r\n  |> drop(columns: [\"serial\",\"host\",\"model\",\"driver_version\",\"driver_version_data\"])\r\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\r\n  |> yield(name: \"last\")",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "output.apower"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "timeFrom": "1d",
+      "title": "Carga Saída (VA)",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "ups_load": false,
+              "ups_realpower_nominal": false
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Time": 0,
+              "ups_power": 2,
+              "ups_power_nominal": 1
+            },
+            "renameByName": {
+              "ups_load": "",
+              "ups_power": "UPS Power",
+              "ups_power {device_mfr=\"Eaton\", device_model=\"unknown 2000\", device_type=\"ups\", ups_mfr=\"Eaton\", ups_model=\"unknown 2000\", ups_productid=\"ffff\", ups_vendorid=\"0463\"}": "UPS Power",
+              "ups_power {model=\"unknown 2000\", serial=\"<nil>\", status_OL=\"true\", ups_name=\"Eaton9E2000i\"}": "UPS Power",
+              "ups_power_nominal": "Power Rating",
+              "ups_realpower_nominal": "UPS Real Power",
+              "watts": "UPS Load",
+              "watts {device_mfr=\"Eaton\", device_model=\"unknown 2000\", device_type=\"ups\", driver_version=\"2.8.0\", driver_version_data=\"MGE HID 1.46\", ups_mfr=\"Eaton\", ups_model=\"unknown 2000\", ups_productid=\"ffff\", ups_vendorid=\"0463\"}": "UPS Load",
+              "watts {device_mfr=\"Eaton\", device_model=\"unknown 2000\", device_type=\"ups\", ups_mfr=\"Eaton\", ups_model=\"unknown 2000\", ups_productid=\"ffff\", ups_vendorid=\"0463\"}": "UPS Load"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bel4x5olhc000d"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "max": 110,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": 0
+              },
+              {
+                "color": "dark-yellow",
+                "value": 80
+              },
+              {
+                "color": "dark-red",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 4,
+        "x": 20,
+        "y": 6
+      },
+      "id": 16,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^ups\\.last$/",
+          "values": false
+        },
+        "showPercentChange": true,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.2.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bel4x5olhc000d"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "ups",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"upsd\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"load_percent\")\r\n  |> drop(columns: [\"serial\",\"host\",\"model\",\"driver_version\",\"driver_version_data\"])\r\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\r\n  |> yield(name: \"last\")",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "ups.load"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "timeFrom": "1d",
+      "title": "Carga %",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "ups_load": false,
+              "ups_realpower_nominal": false
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "load_percent {model=\"unknown 2000\", serial=\"<nil>\", status_OL=\"true\", ups_name=\"Eaton9E2000i\"}": "UPS Load %",
+              "load_percent {serial=\"<nil>\", status_OL=\"true\", ups_name=\"Eaton9E2000i\"}": "UPS Load %",
+              "load_percent {status_OL=\"true\", ups_name=\"Eaton9E2000i\"}": "UPS Load %",
+              "ups_load": "",
+              "ups_load {device_mfr=\"Eaton\", device_model=\"unknown 2000\", device_type=\"ups\", driver_version=\"2.8.0\", driver_version_data=\"MGE HID 1.46\", ups_mfr=\"Eaton\", ups_model=\"unknown 2000\", ups_productid=\"ffff\", ups_vendorid=\"0463\"}": "UPS Load %",
+              "ups_load {device_mfr=\"Eaton\", device_model=\"unknown 2000\", device_type=\"ups\", ups_mfr=\"Eaton\", ups_model=\"unknown 2000\", ups_productid=\"ffff\", ups_vendorid=\"0463\"}": "UPS Load %",
+              "ups_realpower_nominal": "UPS Real Power",
+              "watts": "UPS Load",
+              "watts {device_mfr=\"Eaton\", device_model=\"unknown 2000\", device_type=\"ups\", driver_version=\"2.8.0\", driver_version_data=\"MGE HID 1.46\", ups_mfr=\"Eaton\", ups_model=\"unknown 2000\", ups_productid=\"ffff\", ups_vendorid=\"0463\"}": "UPS Load"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bel4x5olhc000d"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 59,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 3,
+            "pointSize": 3,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Watts"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "watt"
+              },
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              },
+              {
+                "id": "min",
+                "value": 0
+              },
+              {
+                "id": "max"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "ups.last"
+            },
+            "properties": [
+              {
+                "id": "custom.axisPlacement",
+                "value": "left"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "id": 5,
+      "options": {
+        "legend": {
+          "calcs": [
+            "last",
+            "min",
+            "max",
+            "mean"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "maxHeight": 600,
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.0",
+      "targets": [
+        {
+          "alias": "Carga %",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bel4x5olhc000d"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "ups",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"upsd\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"load_percent\" or r[\"_field\"] == \"nominal_power\")  \r\n  |> drop(columns: [\"host\",\"model\",\"driver_version\",\"driver_version_data\",\"status_OL\",\"status_OB\"])\r\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\r\n  |> map(fn: (r) => ({ r with _value: if r._field == \"nominal_power\" then r._value / 100 else r._value }))\r\n  |> yield(name: \"last\")\r\n",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "ups.load"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Carga % - Timeline",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bel4x5olhc000d"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 40,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 2,
+            "pointSize": 3,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "max": 10,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "amp"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Entrada"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Saida"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "id": 20,
+      "options": {
+        "legend": {
+          "calcs": [
+            "last",
+            "min",
+            "max",
+            "mean"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "maxHeight": 600,
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.0",
+      "targets": [
+        {
+          "alias": "Saida",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bel4x5olhc000d"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "ups",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"upsd\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"output_current\" or r[\"_field\"] == \"output_voltage\")\r\n  |> drop(columns: [\"host\",\"model\",\"driver_version\",\"driver_version_data\",\"status_OL\",\"status_OB\"])\r\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\r\n  |> yield(name: \"last\")",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "output.current"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Entrada",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bel4x5olhc000d"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "ups",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"upsd\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"output_current\" or r[\"_field\"] == \"output_voltage\")\r\n  |> drop(columns: [\"host\",\"model\",\"driver_version\",\"driver_version_data\",\"status_OL\",\"status_OB\"])\r\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\r\n  |> yield(name: \"last\")",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "input.current"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Carga Corrente (A)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bel4x5olhc000d"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 30,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 2,
+            "pointSize": 3,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "watt"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "UPS Power"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "voltamp"
+              },
+              {
+                "id": "min",
+                "value": 0
+              },
+              {
+                "id": "max"
+              },
+              {
+                "id": "custom.axisPlacement",
+                "value": "left"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#009999",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Real"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Nominal"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 17
+      },
+      "id": 22,
+      "options": {
+        "legend": {
+          "calcs": [
+            "min",
+            "max",
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "maxHeight": 600,
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.0",
+      "targets": [
+        {
+          "alias": "Real",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bel4x5olhc000d"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "ups",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"upsd\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"ups_power\" or r[\"_field\"] == \"real_power\")\r\n  |> drop(columns: [\"host\",\"model\",\"driver_version\",\"driver_version_data\",\"status_OL\",\"status_OB\"])\r\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\r\n  |> yield(name: \"last\")",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "output.apower"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Nominal",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bel4x5olhc000d"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "ups",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"upsd\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"ups_power\" or r[\"_field\"] == \"real_power\")\r\n  |> drop(columns: [\"host\",\"model\",\"driver_version\",\"driver_version_data\",\"status_OL\",\"status_OB\"])\r\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\r\n  |> yield(name: \"last\")",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "output.power"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Carga (W)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bel4x5olhc000d"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed"
+          },
+          "custom": {
+            "axisPlacement": "auto",
+            "fillOpacity": 70,
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineWidth": 0,
+            "spanNulls": false
+          },
+          "fieldMinMax": false,
+          "mappings": [
+            {
+              "options": {
+                "ALARM OB ECO": {
+                  "color": "semi-dark-orange",
+                  "index": 25,
+                  "text": "OnBatteryECO"
+                },
+                "ALARM OL BYPASS": {
+                  "color": "blue",
+                  "index": 17,
+                  "text": "OnBypass"
+                },
+                "ALARM OL ECO": {
+                  "color": "dark-blue",
+                  "index": 24,
+                  "text": "  OnECO  "
+                },
+                "BOOST": {
+                  "color": "purple",
+                  "index": 9,
+                  "text": "SmartBoost"
+                },
+                "BYPASS": {
+                  "color": "blue",
+                  "index": 11,
+                  "text": "OnBypass"
+                },
+                "CAL": {
+                  "color": "purple",
+                  "index": 4,
+                  "text": "Calibration"
+                },
+                "CHRG": {
+                  "color": "purple",
+                  "index": 12,
+                  "text": "Charging"
+                },
+                "DISCHRG": {
+                  "color": "purple",
+                  "index": 13,
+                  "text": "Discharging"
+                },
+                "ECO": {
+                  "color": "dark-blue",
+                  "index": 22,
+                  "text": "  OnECO  "
+                },
+                "FSD OB": {
+                  "color": "dark-yellow",
+                  "index": 14,
+                  "text": "ShutDownBatt"
+                },
+                "FSD OB ECO": {
+                  "color": "dark-yellow",
+                  "index": 15,
+                  "text": "ShutDownBattECO"
+                },
+                "FSD OL": {
+                  "color": "dark-yellow",
+                  "index": 21,
+                  "text": "OnShutDown"
+                },
+                "LB": {
+                  "color": "orange",
+                  "index": 6,
+                  "text": "LowBattery"
+                },
+                "OB": {
+                  "color": "semi-dark-orange",
+                  "index": 1,
+                  "text": "OnBattery"
+                },
+                "OB DISCHRG ECO": {
+                  "color": "semi-dark-orange",
+                  "index": 3,
+                  "text": "OnBattDischargeECO"
+                },
+                "OB ECO": {
+                  "color": "semi-dark-orange",
+                  "index": 2,
+                  "text": "OnBatteryECO"
+                },
+                "OFF": {
+                  "color": "dark-red",
+                  "index": 10,
+                  "text": "   Off    "
+                },
+                "OL": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "  OnLine  "
+                },
+                "OL BYPASS": {
+                  "color": "blue",
+                  "index": 16,
+                  "text": "OnBypass"
+                },
+                "OL CHRG": {
+                  "color": "dark-green",
+                  "index": 18,
+                  "text": "OnCharging"
+                },
+                "OL CHRG ECO": {
+                  "color": "dark-green",
+                  "index": 19,
+                  "text": "OnChargeECO"
+                },
+                "OL ECO": {
+                  "color": "dark-blue",
+                  "index": 23,
+                  "text": "  OnECO  "
+                },
+                "OVER": {
+                  "color": "yellow",
+                  "index": 5,
+                  "text": "Overload"
+                },
+                "OVER BYPASS": {
+                  "color": "super-light-yellow",
+                  "index": 20,
+                  "text": "OverBypass"
+                },
+                "RB": {
+                  "color": "red",
+                  "index": 7,
+                  "text": "ReplaceBatt"
+                },
+                "TRIM": {
+                  "color": "purple",
+                  "index": 8,
+                  "text": "SmartTrim"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 12,
+        "y": 17
+      },
+      "id": 24,
+      "interval": "10s",
+      "maxDataPoints": 2000,
+      "options": {
+        "alignValue": "center",
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "mergeValues": true,
+        "rowHeight": 0.9,
+        "showValue": "always",
+        "tooltip": {
+          "hideZeros": false,
+          "maxHeight": 600,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.0",
+      "targets": [
+        {
+          "alias": "Status",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bel4x5olhc000d"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "ups",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"upsd\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"ups_status\")\r\n  |> drop(columns: [\"serial\",\"host\",\"model\",\"driver_version\",\"driver_version_data\",\"status_OL\",\"status_OB\"])\r\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\r\n  |> yield(name: \"last\")",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "ups.status"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Timeline Status Rede Eletrica",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": false,
+              "ups_status": false
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Time": "",
+              "ups_status": "UPS Status",
+              "ups_status Eaton9E2000i": "UPS Status",
+              "ups_status {device_mfr=\"Eaton\", device_model=\"unknown 2000\", device_type=\"ups\", driver_version=\"2.7.4.1\", driver_version_data=\"MGE HID 1.43\", host=\"475c87924867\", ups_mfr=\"Eaton\", ups_model=\"unknown 2000\", ups_productid=\"ffff\", ups_vendorid=\"0463\"}": "Status",
+              "ups_status {device_mfr=\"Eaton\", device_model=\"unknown 2000\", device_type=\"ups\", driver_version=\"2.7.4.1\", driver_version_data=\"MGE HID 1.43\", host=\"ce43aa86d3ec\", ups_mfr=\"Eaton\", ups_model=\"unknown 2000\", ups_productid=\"ffff\", ups_vendorid=\"0463\"}": "Status",
+              "ups_status {device_mfr=\"Eaton\", device_model=\"unknown 2000\", device_type=\"ups\", driver_version=\"2.8.0\", driver_version_data=\"MGE HID 1.46\", host=\"475c87924867\", ups_mfr=\"Eaton\", ups_model=\"unknown 2000\", ups_productid=\"ffff\", ups_vendorid=\"0463\"}": "UPS Status",
+              "ups_status {device_mfr=\"Eaton\", device_model=\"unknown 2000\", device_type=\"ups\", driver_version=\"2.8.0\", driver_version_data=\"MGE HID 1.46\", host=\"ce43aa86d3ec\", ups_mfr=\"Eaton\", ups_model=\"unknown 2000\", ups_productid=\"ffff\", ups_vendorid=\"0463\"}": "Status",
+              "ups_status {device_mfr=\"Eaton\", device_model=\"unknown 2000\", device_type=\"ups\", ups_mfr=\"Eaton\", ups_model=\"unknown 2000\", ups_productid=\"ffff\", ups_vendorid=\"0463\"}": "UPS Status",
+              "ups_status {model=\"9E2000 (presumed)\", serial=\"<nil>\", ups_name=\"Eaton9E2000i\"}": "UPS Status",
+              "ups_status {model=\"9E2000i (presumed)\", serial=\"<nil>\", ups_name=\"Eaton9E2000i\"}": "UPS Status",
+              "ups_status {model=\"unknown 2000\", serial=\"<nil>\", status_OL=\"true\", ups_name=\"Eaton9E2000i\"}": "UPS Status",
+              "ups_status {model=\"unknown 2000\", serial=\"<nil>\", ups_name=\"Eaton9E2000i\"}": "UPS Status",
+              "ups_status {serial=\"<nil>\", ups_name=\"Eaton9E2000i\"}": "UPS Status"
+            }
+          }
+        }
+      ],
+      "type": "state-timeline"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bel4x5olhc000d"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 90,
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 40,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 3,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 1,
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": 0
+              },
+              {
+                "color": "orange",
+                "value": 20
+              },
+              {
+                "color": "green",
+                "value": 50
+              },
+              {
+                "color": "#009999",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "UPS Battery Voltage"
+            },
+            "properties": [
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              },
+              {
+                "id": "custom.axisSoftMax",
+                "value": 90
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "thresholds"
+                }
+              },
+              {
+                "id": "unit",
+                "value": "volt"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "red",
+                      "value": 0
+                    },
+                    {
+                      "color": "orange",
+                      "value": 72
+                    },
+                    {
+                      "color": "blue",
+                      "value": 75
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 12,
+        "x": 12,
+        "y": 22
+      },
+      "id": 25,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "maxHeight": 600,
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.0",
+      "targets": [
+        {
+          "alias": "Carga",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bel4x5olhc000d"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "ups",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"upsd\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"battery_charge_percent\" or r[\"_field\"] == \"battery_voltage\")\r\n  |> drop(columns: [\"serial\",\"host\",\"model\",\"driver_version\",\"driver_version_data\",\"status_OL\",\"status_OB\"])\r\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\r\n  |> yield(name: \"last\")",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "battery.charge"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Nivel Bateria - Timeline",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "battery_charge_percent": "UPS Battery Charge",
+              "battery_charge_percent Eaton9E2000i": "UPS Battery Charge",
+              "battery_charge_percent {model=\"9E2000 (presumed)\", serial=\"<nil>\", ups_name=\"Eaton9E2000i\"}": "UPS Battery Charge",
+              "battery_charge_percent {model=\"9E2000i (presumed)\", serial=\"<nil>\", ups_name=\"Eaton9E2000i\"}": "UPS Battery Charge",
+              "battery_charge_percent {model=\"unknown 2000\", serial=\"<nil>\", ups_name=\"Eaton9E2000i\"}": "UPS Battery Charge",
+              "battery_charge_percent {serial=\"<nil>\", ups_name=\"Eaton9E2000i\"}": "UPS Battery Charge",
+              "battery_voltage": "UPS Battery Voltage"
+            }
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bel4x5olhc000d"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/Custo*/"
+            },
+            "properties": [
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "unit",
+                "value": "currencyBRL"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#009999",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Consumo"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 12,
+        "x": 0,
+        "y": 26
+      },
+      "hideTimeOverride": false,
+      "id": 45,
+      "interval": "1h",
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": true,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.2.0",
+      "targets": [
+        {
+          "alias": "Consumo",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bel4x5olhc000d"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "ups",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  //|> range(start: -1d)  // Last day\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"upsd\")\r\n  |> filter(fn: (r) => r._field == \"real_power\")\r\n  |> drop(columns: [\"host\",\"serial\",\"model\",\"driver_version\",\"driver_version_data\",\"status_OL\",\"status_OB\"])\r\n  |> group(columns: [\"real_power\", \"_measurement\"], mode:\"by\")  \r\n  |> aggregateWindow(every: 1h, fn: mean, timeSrc:\"_start\")\r\n  |> map(fn: (r) => ({ r with _value: r._value / 1000.0}))  //needed if unit in kwh\r\n  |> yield(name: \"mean\")\r\n  \r\n",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "output.current"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  " / 10"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "timeFrom": "now/d",
+      "title": "Consumo/Custo Hoje",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {
+              "Time": 0,
+              "real_power": 2,
+              "ups_power": 1
+            },
+            "renameByName": {
+              "real_power": "UPS Real Power",
+              "real_power Eaton9E2000i": "Real Power",
+              "ups_load": "UPS Load",
+              "ups_power": "UPS Power",
+              "ups_realpower": "UPS Real Power",
+              "upsd": "Mean (kWh)",
+              "watts": "Watts"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Custo ($currency)",
+            "binary": {
+              "left": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Consumo"
+                }
+              },
+              "operator": "*",
+              "right": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "$kwhprice"
+                }
+              }
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false,
+            "unary": {
+              "fieldName": "$kwhprice",
+              "operator": "abs"
+            },
+            "window": {
+              "reducer": "mean",
+              "windowAlignment": "trailing",
+              "windowSize": 0.1,
+              "windowSizeMode": "percentage"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bel4x5olhc000d"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/Custo*/"
+            },
+            "properties": [
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "unit",
+                "value": "currencyBRL"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#009999",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Consumo"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 12,
+        "x": 12,
+        "y": 26
+      },
+      "hideTimeOverride": false,
+      "id": 49,
+      "interval": "1h",
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": true,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.2.0",
+      "targets": [
+        {
+          "alias": "Consumo",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bel4x5olhc000d"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "ups",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  //|> range(start: -1d)  // Last day\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"upsd\")\r\n  |> filter(fn: (r) => r._field == \"real_power\")\r\n  |> drop(columns: [\"host\",\"serial\",\"model\",\"driver_version\",\"driver_version_data\",\"status_OL\",\"status_OB\"])\r\n  |> group(columns: [\"real_power\", \"_measurement\"], mode:\"by\")  \r\n  |> aggregateWindow(every: 1h, fn: mean, timeSrc:\"_start\")\r\n  |> aggregateWindow(every: 1d, fn: sum, offset: -3h, timeSrc:\"_start\")\r\n  |> map(fn: (r) => ({ r with _value: r._value / 1000.0}))  //needed if unit in kwh\r\n  |> yield(name: \"mean\")",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "output.current"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "/10"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "timeFrom": "now/M",
+      "title": "Consumo/Custo Mês Atual",
+      "transformations": [
+        {
+          "disabled": true,
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {
+              "Time": 0,
+              "real_power": 2,
+              "ups_power": 1
+            },
+            "renameByName": {
+              "real_power": "UPS Real Power",
+              "real_power Eaton9E2000i": "Real Power",
+              "ups_load": "UPS Load",
+              "ups_power": "UPS Power",
+              "ups_realpower": "UPS Real Power",
+              "upsd": "Mean (kWh)",
+              "watts": "Watts"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Custo ($currency)",
+            "binary": {
+              "left": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Consumo"
+                }
+              },
+              "operator": "*",
+              "right": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "$kwhprice"
+                }
+              }
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bel4x5olhc000d"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/Custo*/"
+            },
+            "properties": [
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              },
+              {
+                "id": "unit",
+                "value": "currencyBRL"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#009999",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Consumo"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 30
+      },
+      "id": 43,
+      "interval": "1h",
+      "options": {
+        "barRadius": 0.15,
+        "barWidth": 0.97,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [
+            "min",
+            "max",
+            "lastNotNull",
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "never",
+        "stacking": "none",
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "multi",
+          "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "12.2.0",
+      "targets": [
+        {
+          "alias": "Consumo",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bel4x5olhc000d"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "ups",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  //|> range(start: -1d)  // Last day\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"upsd\")\r\n  |> filter(fn: (r) => r._field == \"real_power\")\r\n  |> drop(columns: [\"host\",\"serial\",\"model\",\"driver_version\",\"driver_version_data\",\"status_OL\",\"status_OB\"])\r\n  |> group(columns: [\"real_power\", \"_measurement\"], mode:\"by\")  \r\n  |> aggregateWindow(every: 1h, fn: mean, timeSrc:\"_start\")\r\n  |> map(fn: (r) => ({ r with _value: r._value / 1000.0}))  //needed if unit in kwh\r\n  |> yield(name: \"mean\")\r\n  \r\n",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "output.current"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  " / 10"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "timeFrom": "now/d",
+      "title": "Consumo/Custo Hoje Por Hora",
+      "transformations": [
+        {
+          "disabled": true,
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {
+              "Time": 0,
+              "real_power": 2,
+              "ups_power": 1
+            },
+            "renameByName": {
+              "Time": "",
+              "real_power": "UPS Real Power",
+              "real_power Eaton9E2000i": "Real Power",
+              "ups_load": "UPS Load",
+              "ups_power": "UPS Power",
+              "ups_realpower": "UPS Real Power",
+              "upsd": "Mean (kWh)",
+              "watts": "Watts"
+            }
+          }
+        },
+        {
+          "id": "formatTime",
+          "options": {
+            "outputFormat": "H:mm",
+            "timeField": "Time",
+            "timezone": "browser",
+            "useTimezone": true
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Custo ($currency)",
+            "binary": {
+              "left": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Consumo"
+                }
+              },
+              "operator": "*",
+              "right": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "$kwhprice"
+                }
+              }
+            },
+            "cumulative": {
+              "field": "Consumo",
+              "reducer": "sum"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        }
+      ],
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bel4x5olhc000d"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/Costs*/"
+            },
+            "properties": [
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "unit",
+                "value": "currencyBRL"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#009999",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Mean (kWh)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 37
+      },
+      "id": 47,
+      "interval": "1d",
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [
+            "min",
+            "max",
+            "lastNotNull",
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "12.2.0",
+      "targets": [
+        {
+          "alias": "Consumo",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bel4x5olhc000d"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "ups",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  //|> range(start: -1d)  // Last day\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"upsd\")\r\n  |> filter(fn: (r) => r._field == \"real_power\")\r\n  |> drop(columns: [\"host\",\"serial\",\"model\",\"driver_version\",\"driver_version_data\",\"status_OL\",\"status_OB\"])\r\n  |> group(columns: [\"real_power\", \"_measurement\"], mode:\"by\")  \r\n  |> aggregateWindow(every: 1h, fn: mean, timeSrc:\"_start\")\r\n  |> aggregateWindow(every: 1d, fn: sum, offset: -3h, timeSrc:\"_start\")\r\n  |> map(fn: (r) => ({ r with _value: r._value / 1000.0}))  //needed if unit in kwh\r\n  |> yield(name: \"mean\")",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "output.current"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "sum"
+              },
+              {
+                "params": [
+                  "/1440"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "timeFrom": "now/M",
+      "title": "Consumo/Custo Mensal Por Hora",
+      "transformations": [
+        {
+          "disabled": true,
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {
+              "Time": 0,
+              "real_power": 2,
+              "ups_power": 1
+            },
+            "renameByName": {
+              "real_power": "UPS Real Power",
+              "real_power Eaton9E2000i": "Real Power",
+              "ups_load": "UPS Load",
+              "ups_power": "UPS Power",
+              "ups_realpower": "UPS Real Power",
+              "upsd": "Mean (kWh)",
+              "watts": "Watts"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Costs ($currency)",
+            "binary": {
+              "left": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Consumo"
+                }
+              },
+              "operator": "*",
+              "right": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "$kwhprice"
+                }
+              }
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        }
+      ],
+      "type": "barchart"
+    }
+  ],
+  "preload": false,
+  "refresh": "15s",
+  "schemaVersion": 42,
+  "tags": [
+    "ups",
+    "ragtech",
+    "nut",
+    "solid",
+    "votorantim",
+    "python"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "text": "R$",
+          "value": "R$"
+        },
+        "includeAll": false,
+        "label": "Currency",
+        "name": "currency",
+        "options": [
+          {
+            "selected": true,
+            "text": "R$",
+            "value": "R$"
+          }
+        ],
+        "query": "R$",
+        "type": "custom"
+      },
+      {
+        "current": {
+          "text": "0.45",
+          "value": "0.45"
+        },
+        "label": "kWh Price",
+        "name": "kwhprice",
+        "options": [
+          {
+            "selected": true,
+            "text": "0.45",
+            "value": "0.45"
+          }
+        ],
+        "query": "0.45",
+        "type": "textbox"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "15s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
+  "timezone": "",
+  "title": "Ragtech Escritório",
+  "uid": "be91afa6vvk",
+  "version": 146
+}
