@@ -462,12 +462,11 @@ Um dashboard pré-configurado está incluído em `grafana-dashboard.json`.
 4. Importar
 
 ### Preview do Dashboard:
+*Painéis detalhados de bateria, potência e histórico*
 
 ![Dashboard - Visão Geral](dashboard01.png)
-*Painel principal mostrando métricas em tempo real do nobreak*
-
 ![Dashboard - Detalhes](dashboard02.png)
-*Painéis detalhados de bateria, potência e histórico*
+
 
 ### Painéis Incluídos:
 
