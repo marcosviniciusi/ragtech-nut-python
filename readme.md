@@ -63,8 +63,8 @@ O driver extrai as seguintes métricas do nobreak:
 ### 1. Instalar o Driver
 ```bash
 # Copiar script para /usr/local/bin/
-sudo cp ragtech-ups /usr/local/bin/
-sudo chmod +x /usr/local/bin/ragtech-ups
+sudo cp ragtech-ups.py /usr/local/bin/
+sudo chmod +x /usr/local/bin/ragtech-ups.py
 
 # Criar diretório de dados NUT
 sudo mkdir -p /var/lib/nut
@@ -83,7 +83,7 @@ Edite `/etc/nut/ups.conf`:
 ### 3. Executar Manualmente (Teste)
 ```bash
 # Teste único
-/usr/local/bin/ragtech-ups
+/usr/local/bin/ragtech-ups.py
 
 # Verificar saída NUT
 cat /var/lib/nut/ragtech-ups.data
@@ -102,8 +102,8 @@ Se você possui um **modelo diferente** de nobreak Ragtech (ou mesmo outras marc
 
 #### 1. Instalar o Script
 ```bash
-sudo cp ragtech-ups-dump /usr/local/bin/
-sudo chmod +x /usr/local/bin/ragtech-ups-dump
+sudo cp ragtech-ups-dump.py /usr/local/bin/
+sudo chmod +x /usr/local/bin/ragtech-ups-dump.py
 ```
 
 #### 2. Identificar o Dispositivo USB
@@ -425,8 +425,8 @@ Se você coletou dados mas não consegue decodificar:
 
 ### 1. Copiar Script de Conversão
 ```bash
-sudo cp ragtech-telegraf /usr/local/bin/
-sudo chmod +x /usr/local/bin/ragtech-telegraf
+sudo cp ragtech-telegraf.py /usr/local/bin/
+sudo chmod +x /usr/local/bin/ragtech-telegraf.py
 ```
 
 ### 2. Configurar Telegraf
@@ -435,7 +435,7 @@ Adicione ao `/etc/telegraf/telegraf.conf`:
 ```toml
 [[inputs.exec]]
   commands = [
-    "python3 /usr/local/bin/ragtech-telegraf ragtech@localhost"
+    "python3 /usr/local/bin/ragtech-telegraf.py ragtech@localhost"
   ]
   timeout = "5s"
   data_format = "influx"
@@ -480,9 +480,9 @@ Um dashboard pré-configurado está incluído em `grafana-dashboard.json`.
 ## 🔧 Estrutura de Arquivos
 ```
 .
-├── ragtech-ups              # Driver principal (Python)
-├── ragtech-ups-dump         # Script de análise/dump do protocolo
-├── ragtech-telegraf         # Conversor para InfluxDB (Python)
+├── ragtech-ups.py              # Driver principal (Python)
+├── ragtech-ups-dump.py         # Script de análise/dump do protocolo
+├── ragtech-telegraf.py         # Conversor para InfluxDB (Python)
 ├── grafana-dashboard.json   # Dashboard pré-configurado
 └── README.md               # Este arquivo
 ```
