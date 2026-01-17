@@ -75,9 +75,10 @@ sudo mkdir -p /var/lib/nut
 Edite `/etc/nut/ups.conf`:
 ```ini
 [ragtech]
-    driver = dummy-ups
-    port = ragtech-ups@localhost
-    desc = "Ragtech NitroUp 2000VA"
+  driver = dummy-ups
+  port = /var/lib/nut/ragtech-ups.data
+  desc = "Ragtech NitroUp 2000VA"
+
 ```
 
 ### 3. Executar Manualmente (Teste)
