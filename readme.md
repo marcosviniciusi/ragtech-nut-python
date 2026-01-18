@@ -81,6 +81,17 @@ Edite `/etc/nut/ups.conf`:
 
 ```
 
+Crie este Arquivo `/etc/udev/rules.d/99-ups-mge.rules` para que a permissao correta seja aplicada a cada bootup do sistema seja de 666: 
+***( Feito no Debian) podendo alterar dependendo da distribuição***
+```
+KERNEL=="ttyACM0", MODE="0666"
+```
+
+Aplique a permissao ao Dispositivo:
+```
+#chmod 666 /dev/ttyACM0
+```
+
 ### 3. Executar Manualmente (Teste)
 ```bash
 # Teste único
