@@ -685,11 +685,6 @@ Se você possui um **modelo diferente** de nobreak Ragtech e conseguir mapear o 
 4. Compartilhe os dados na Issue
 5. Ajude a criar/validar drivers para outros modelos
 
----
-
-## 📄 Licença
-
-MIT License - Livre para uso, modificação e distribuição.
 
 ---
 
