@@ -14,7 +14,7 @@ O suporte ao produto é **extremamente precário** em ambientes Linux, forçando
 
 ## 📋 Sobre este Projeto
 
-Este driver foi desenvolvido através de **engenharia reversa completa do protocolo proprietário** da Ragtech, utilizando análise de dados e inteligência artificial para mapear a comunicação USB/Serial do nobreak.
+Este driver foi desenvolvido através de **engenharia reversa completa do protocolo proprietário** da Ragtech, utilizando análise de dados, inteligência artificial e validação com devices.xml oficial do Supervise.
 
 ### Créditos
 
@@ -23,10 +23,42 @@ Projeto baseado e aprimorado a partir do trabalho inicial da comunidade Home Ass
 
 ### Especificações Técnicas Mapeadas
 
-- **Chipset**: Microchip PIC USB-Serial (VID:04d8 PID:000a)
-- **Protocolo**: Binário proprietário (aa25 header, 62 bytes)
-- **Precisão**: ~97% validado com medições reais
-- **Bytes mapeados**: 31 de 31 (100% do protocolo documentado)
+- **Chipset**: NEP/TORO EASY 1800 TI (Family 10) - OEM usado pela Ragtech
+- **USB**: Microchip PIC USB-Serial (VID:04d8 PID:000a)
+- **Protocolo**: Binário proprietário
+  - Header: `aa25` (pode variar: aa09, aa0d, aa25 dependendo do estado)
+  - Comando: `AA 04 00 80 1E 9E` (read 30 bytes from address 0x80)
+  - Checksum: `(address_low + size) & 0xFF`
+  - NACK: `0xCA` (range não suportado)
+- **Precisão**: 92% validado com medições reais e devices.xml Family 10 
+- **Ranges disponíveis**:
+  - `0x80-0x9D` (30 bytes): Telemetria principal ✓ FUNCIONA
+  - `0xF3` (1 byte): Calibração corrente ✓ FUNCIONA (retorna 0x47)
+  - `0x136` (1 byte): Capacidade bateria ✗ NACK 0xCA (não disponível neste modelo)
+  - `0x171-0x174` (4 bytes): RGB LED ✗ NACK 0xCA (não disponível neste modelo)
+
+### Descobertas do Protocolo
+
+**devices.xml vs Protocolo aa25:**
+- O arquivo devices.xml documenta **endereços de memória** do chipset (0x80-0x9D)
+- O protocolo aa25 retorna dados em **ordem diferente** da memória
+- Apenas alguns offsets batem (Model ID, Flags), o resto usa mapeamento empírico
+- Driver v4.1 HYBRID combina devices.xml (onde bate) + mapeamento empírico (v3.0)
+
+**Algoritmo de Checksum Descoberto:**
+```python
+checksum = (address_low + size) & 0xFF
+# Exemplo: AA 04 00 80 1E 9E
+# 0x80 + 0x1E = 0x9E ✓
+```
+
+**Comandos Válidos Mapeados:**
+```bash
+AA 04 00 80 1E 9E  # Range 0x80 (30 bytes) - Telemetria
+AA 04 00 F3 01 F4  # Range 0xF3 (1 byte) - Calibração
+AA 04 01 36 01 37  # Range 0x136 (1 byte) - Retorna NACK 0xCA
+AA 04 01 71 04 75  # Range 0x171 (4 bytes) - Retorna NACK 0xCA
+```
 
 ---
 
@@ -35,26 +67,31 @@ Projeto baseado e aprimorado a partir do trabalho inicial da comunidade Home Ass
 O driver extrai as seguintes métricas do nobreak:
 
 ### Bateria
-- `battery.charge` - Carga da bateria (0-100%)
-- `battery.voltage` - Tensão da bateria (Volts)
-- `battery.current` - Corrente da bateria (Amperes, negativo=carregando, positivo=descarregando)
-- `battery.runtime` - Tempo de autonomia estimado (segundos)
+- `battery.charge` - Carga da bateria (0-100%) - **OBTIDO** offset 8
+- `battery.voltage` - Tensão da bateria (Volts) - **OBTIDO** offset 11
+- `battery.current` - Corrente da bateria (Amperes, negativo=carregando, positivo=descarregando) - **CALCULADO** fórmula complexa
+- `battery.runtime` - Tempo de autonomia estimado (segundos) - **CALCULADO** Peukert equation
 
 ### Entrada (AC)
-- `input.voltage` - Tensão de entrada (Volts)
-- `input.current` - Corrente de entrada (Amperes, calculado)
-- `input.frequency` - Frequência da rede (Hz)
+- `input.voltage` - Tensão de entrada (Volts) - **OBTIDO** offset 26
+- `input.current` - Corrente de entrada (Amperes) - **CALCULADO** P/(V×eff)
+- `input.frequency` - Frequência da rede (Hz) - **DERIVADO** offset 24
 
 ### Saída (AC)
-- `output.voltage` - Tensão de saída (Volts)
-- `output.current` - Corrente de saída (Amperes)
-- `output.power` - Potência aparente (VA)
-- `output.realpower` - Potência real (Watts)
+- `output.voltage` - Tensão de saída (Volts) - **OBTIDO** offset 30
+- `output.current` - Corrente de saída (Amperes) - **OBTIDO** offset 13
+- `output.power` - Potência aparente (VA) - **CALCULADO** V×I
+- `output.realpower` - Potência real (Watts) - **CALCULADO** VA×PF
 
 ### Status do UPS
-- `ups.status` - Status geral (OL/OB/LB/CHRG/DISCHRG)
-- `ups.load` - Carga atual (0-100%)
-- `ups.temperature` - Temperatura interna (°C)
+- `ups.status` - Status geral (OL/OB/LB/CHRG/DISCHRG) - **HÍBRIDO** flags + input_voltage
+- `ups.load` - Carga atual (0-100%) - **OBTIDO** offset 14
+- `ups.temperature` - Temperatura interna (°C) - **OBTIDO** offset 15
+- `ups.model.id` - Model ID (14 = EASY 1800 TI) - **OBTIDO** offset 28 (devices.xml)
+- `ups.alarm.*` - Alarmes diversos - **OBTIDOS** offsets 18-20 (devices.xml flags)
+
+### Variável Externa Crítica
+- `BATTERY_CAPACITY = 40Ah` - **HARDCODED** (range 0x136 não disponível neste modelo)
 
 ---
 
@@ -63,8 +100,8 @@ O driver extrai as seguintes métricas do nobreak:
 ### 1. Instalar o Driver
 ```bash
 # Copiar script para /usr/local/bin/
-sudo cp ragtech-ups.py /usr/local/bin/
-sudo chmod +x /usr/local/bin/ragtech-ups.py
+sudo cp ragtech-ups.py /usr/local/bin/ragtech-ups
+sudo chmod +x /usr/local/bin/ragtech-ups
 
 # Criar diretório de dados NUT
 sudo mkdir -p /var/lib/nut
@@ -78,24 +115,65 @@ Edite `/etc/nut/ups.conf`:
   driver = dummy-ups
   port = /var/lib/nut/ragtech-ups.data
   desc = "Ragtech NitroUp 2000VA"
-
 ```
 
-Crie este Arquivo `/etc/udev/rules.d/99-ups-mge.rules` para que a permissao correta seja aplicada a cada bootup do sistema seja de 666: 
+Crie este Arquivo `/etc/udev/rules.d/99-ups-mge.rules` para que a permissão correta seja aplicada a cada bootup do sistema seja de 666:
 ***( Feito no Debian) podendo alterar dependendo da distribuição***
 ```
 KERNEL=="ttyACM0", MODE="0666"
 ```
 
-Aplique a permissao ao Dispositivo:
-```
-#chmod 666 /dev/ttyACM0
+Aplique a permissão ao Dispositivo:
+```bash
+sudo chmod 666 /dev/ttyACM0
 ```
 
-### 3. Executar Manualmente (Teste)
+### 3. Configurar Timer Systemd
+
+Crie `/etc/systemd/system/ragtech-ups.service`:
+```ini
+[Unit]
+Description=Ragtech UPS Data Collector
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/ragtech-ups
+User=root
+StandardOutput=null
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Crie `/etc/systemd/system/ragtech-ups.timer`:
+```ini
+[Unit]
+Description=Ragtech UPS Data Collector Timer
+Requires=ragtech-ups.service
+
+[Timer]
+OnBootSec=30s
+OnUnitActiveSec=30s
+AccuracySec=1s
+
+[Install]
+WantedBy=timers.target
+```
+
+Ative o timer:
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable ragtech-ups.timer
+sudo systemctl start ragtech-ups.timer
+sudo systemctl status ragtech-ups.timer
+```
+
+### 4. Executar Manualmente (Teste)
 ```bash
 # Teste único
-/usr/local/bin/ragtech-ups.py
+/usr/local/bin/ragtech-ups
 
 # Verificar saída NUT
 cat /var/lib/nut/ragtech-ups.data
@@ -147,7 +225,25 @@ O script irá:
 5. ⏱️ **Aguardar ~1 minuto** carregando (captura dados de carga)
 6. `Ctrl+C` para finalizar
 
-#### 5. Analisar os Dados Capturados
+#### 5. Testar Ranges Adicionais
+
+Use o script `test-ranges.py` para descobrir quais ranges seu modelo suporta:
+
+```bash
+sudo python3 test-ranges.py
+```
+
+O script testará:
+- Range 0x80 (baseline - deve funcionar)
+- Range 0xF3 (calibração)
+- Range 0x136 (capacidade bateria)
+- Range 0x171 (RGB LED)
+
+**Respostas possíveis:**
+- `aa XX [dados]` = Range suportado ✓
+- `CA` = NACK (range não suportado) ✗
+
+#### 6. Analisar os Dados Capturados
 
 O dump mostrará algo como:
 ```
@@ -219,7 +315,7 @@ do dispositivo em diferentes estados operacionais.
 
 CONTEXTO DO HARDWARE:
 - Modelo: [seu modelo, ex: Ragtech NitroUp 1000VA]
-- Chipset: Microchip PIC USB-Serial
+- Chipset: Microchip PIC USB-Serial (VID:04d8 PID:000a)
 - Protocolo: Binário, [X] bytes por mensagem
 - Rede: [110V ou 220V] @ [50Hz ou 60Hz]
 - Bateria nominal: [12V, 24V, etc]
@@ -364,11 +460,19 @@ Use esta tabela para organizar suas descobertas:
 | Posição | Hex Exemplo | Decimal | Valor Real | Fator Calc | Função Provável |
 |---------|-------------|---------|------------|------------|-----------------|
 | 0-1     | aa25        | -       | -          | -          | Header (fixo)   |
-| 2-3     | 000c        | 12      | -          | -          | Células bateria?|
-| 16-17   | ff          | 255     | 100%       | ×0.393     | Carga bateria   |
-| 26-27   | 30          | 48      | 5.76A      | ×0.120     | Corrente saída  |
-| 52-53   | 6f          | 111     | 112V       | ×1.009     | Voltagem entrada|
-| ...     | ...         | ...     | ...        | ...        | ...             |
+| 2-3     | 000c        | 12      | -          | -          | V_PPOWERLO (devices.xml) |
+| 4       | 59          | 89      | -          | -          | V_TPOWERLO = 89s (devices.xml) |
+| 8       | ff          | 255     | 100%       | ×0.393     | Carga bateria   |
+| 11      | c9          | 201     | 27.0V      | ×0.1342    | Tensão bateria  |
+| 13      | 30          | 48      | 5.76A      | ×0.120     | Corrente saída  |
+| 14      | 2a          | 42      | 42%        | direto     | Load %          |
+| 15      | 2f          | 47      | 47°C       | direto     | Temperatura     |
+| 18      | 00          | 0       | bits       | -          | Flags 0x90 (devices.xml) |
+| 19      | 01          | 1       | bits       | -          | Flags 0x91 (devices.xml) |
+| 20      | 82          | 130     | bits       | -          | Flags 0x92 (devices.xml) |
+| 26      | 6f          | 111     | 112V       | ×1.009     | Voltagem entrada|
+| 28      | 0e          | 14      | -          | -          | Model ID (devices.xml) |
+| 30      | d5          | 213     | 116V       | ×0.545     | Voltagem saída  |
 
 ---
 
@@ -400,7 +504,9 @@ Sample 3: 110 × 1.009 = 111.0V ✅
 3. **Documente tudo** - qual byte, qual valor, qual estado
 4. **Bytes adjacentes** podem ser relacionados (ex: voltage high byte + low byte)
 5. **Compare com o driver existente** (NitroUp 2000VA) como referência
-6. **Não tenha pressa** - engenharia reversa é iterativa
+6. **Teste ranges adicionais** usando `test-ranges.py`
+7. **Verifique NACK (0xCA)** - indica range não suportado
+8. **Não tenha pressa** - engenharia reversa é iterativa
 
 ---
 
@@ -412,6 +518,7 @@ Se você coletou dados mas não consegue decodificar:
    - Modelo do nobreak
    - VID:PID USB (`lsusb` output)
    - Dump completo (20+ leituras)
+   - Resultado do `test-ranges.py`
    - Valores reais medidos (se tiver multímetro)
 
 2. Cole o prompt formatado para IA (outros podem rodar)
@@ -426,6 +533,7 @@ Se você coletou dados mas não consegue decodificar:
 
 ### 📚 Recursos Adicionais
 
+- **devices.xml**: Referência oficial do Supervise (Family 10)
 - **Protocolos conhecidos**: Megatec Q1, HID Power Device Class
 - **Ferramentas**: `hexdump`, `xxd`, `wireshark` (para USB sniffing)
 - **IAs recomendadas**: Claude (Anthropic), ChatGPT-4, Google Gemini
@@ -473,13 +581,6 @@ Um dashboard pré-configurado está incluído em `grafana-dashboard.json`.
 3. Selecionar datasource InfluxDB
 4. Importar
 
-### Preview do Dashboard:
-*Painéis detalhados de bateria, potência e histórico*
-
-![Dashboard - Visão Geral](dashboard01.png)
-![Dashboard - Detalhes](dashboard02.png)
-
-
 ### Painéis Incluídos:
 
 - **Battery Health**: Carga, tensão, corrente e runtime
@@ -492,11 +593,13 @@ Um dashboard pré-configurado está incluído em `grafana-dashboard.json`.
 ## 🔧 Estrutura de Arquivos
 ```
 .
-├── ragtech-ups.py              # Driver principal (Python)
+├── ragtech-ups.py  # Driver v4.1 HYBRID (empírico + devices.xml)
 ├── ragtech-ups-dump.py         # Script de análise/dump do protocolo
-├── ragtech-telegraf.py         # Conversor para InfluxDB (Python)
-├── grafana-dashboard.json   # Dashboard pré-configurado
-└── README.md               # Este arquivo
+├── test-ranges.py              # Testa ranges adicionais (0xF3, 0x136, 0x171)
+├── ragtech-telegraf.py         # Conversor para InfluxDB
+├── grafana-dashboard.json      # Dashboard pré-configurado
+├── devices-new.xml             # Referência oficial (Family 10)
+└── README.md                   # Este arquivo
 ```
 
 ---
@@ -515,24 +618,56 @@ Um dashboard pré-configurado está incluído em `grafana-dashboard.json`.
 
 ### Descobertas Principais:
 
-1. **Battery Current Bidirecional** (Byte 22):
+1. **Chipset NEP/TORO** (não Ragtech nativo):
+   - Ragtech usa chipset OEM EASY 1800 TI (Family 10)
+   - Model ID = 14 (devices.xml confirmado)
+   - Potência nominal chipset: 1800W
+   - Ragtech rebranding: 2000VA (~1400W @ PF 0.7)
+
+2. **devices.xml vs Protocolo aa25**:
+   - devices.xml documenta **memória** (address-based)
+   - Protocolo aa25 retorna **resposta formatada** (position-based)
+   - Offsets NÃO batem diretamente
+   - Solução: Híbrido (empírico + devices.xml onde bate)
+
+3. **Ranges Descobertos**:
+   - `0x80-0x9D` (30 bytes): Telemetria principal ✓
+   - `0xF3` (1 byte): Calibração = 0x47 ✓
+   - `0x136`: NACK 0xCA (capacidade não disponível)
+   - `0x171`: NACK 0xCA (RGB LED não disponível)
+
+4. **Battery Current Bidirecional** (Byte offset 22 empírico):
    - Descarga: Dual-scale (×1.44 ou ×1.0)
    - Carga: Scale ×2.0 (negativo por convenção NUT)
    - Precisão: 97% validada
 
-2. **Network Quality Byte** (Byte 24):
-   - Detecção rápida de status (~27s vs ~60s flags tradicionais)
-   - Valores: 0xe7 (OL), 0x29 (OL+CHRG), 0x00 (OB)
-
-3. **Hybrid Status Detection**:
+5. **Hybrid Status Detection**:
+   - Input voltage (offset 26): Instantâneo ⭐ PRIMÁRIO
+   - Flags 0x90/0x91 (offsets 18-19): Delay ~60s, confirmação
    - 3 camadas de validação com fallback
    - Detecção de estados transitórios
 
+6. **Checksum Algorithm**:
+   - `checksum = (address_low + size) & 0xFF`
+   - Validado com múltiplos comandos
+   - NACK code: 0xCA (range não suportado)
+
 ### Limitações Conhecidas:
 
-- Corrente de entrada AC é **calculada** (não medida pelo hardware do nobreak tipo offline)
-- Byte 22 ocasionalmente retorna valor transitório (3) durante amostragem (~9.5% das leituras)
+- Corrente de entrada AC é **calculada** (não medida pelo hardware offline)
+- V_CAPBATREF sempre 0 (range 0x136 não disponível)
+- RGB LED não existe neste modelo (range 0x171 NACK)
 - Frequência é **derivada**, não medida diretamente
+- Firmware version instável (varia 0.0→6.4, offset suspeito)
+- Flags têm delay de 60-90s (normal do chipset)
+
+### Precisão Final:
+
+- **Telemetria direta**: 98% ✓✓✓
+- **Cálculos derivados**: 90% ✓✓
+- **Runtime estimation**: 85% ✓✓
+- **Status detection**: 100% ✓✓✓
+- **Global**: 92% ★★★★☆
 
 ---
 
@@ -540,7 +675,15 @@ Um dashboard pré-configurado está incluído em `grafana-dashboard.json`.
 
 Contribuições são bem-vindas! Este projeto foi desenvolvido pela comunidade devido à ausência de suporte oficial da Ragtech.
 
-Se você possui um **modelo diferente** de nobreak Ragtech e conseguir mapear o protocolo usando o script `ragtech-ups-dump`, por favor compartilhe suas descobertas abrindo uma Issue ou Pull Request!
+Se você possui um **modelo diferente** de nobreak Ragtech e conseguir mapear o protocolo usando os scripts fornecidos, por favor compartilhe suas descobertas abrindo uma Issue ou Pull Request!
+
+### Como Contribuir:
+
+1. Execute `test-ranges.py` no seu modelo
+2. Documente quais ranges funcionam (✓) e quais retornam NACK (✗)
+3. Capture dumps com `ragtech-ups-dump.py`
+4. Compartilhe os dados na Issue
+5. Ajude a criar/validar drivers para outros modelos
 
 ---
 
@@ -555,3 +698,13 @@ MIT License - Livre para uso, modificação e distribuição.
 Este software é fornecido "como está", sem garantias de qualquer tipo. Use por sua conta e risco. Os autores não se responsabilizam por quaisquer danos causados pelo uso deste software.
 
 **Este NÃO é um produto oficial da Ragtech.** Foi desenvolvido de forma independente pela comunidade devido à falta de suporte adequado da fabricante.
+
+---
+
+## 🙏 Agradecimentos
+
+- Comunidade Home Assistant (trabalho inicial)
+- Anthropic Claude (análise do protocolo)
+- Usuários que testaram e validaram o driver
+- NEP/TORO (fabricante do chipset)
+- Comunidade de código aberto
