@@ -1,0 +1,3840 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<supervise version="20201008">
+  <ports>
+    <usb class="hid" vid="0425" pid="0301"/>
+    <usb class="cdc" vid="04D8" pid="000A"/>
+    <serial baudrate="2560" databits="8" stopbits="1" parity="0" timeout="100"/>
+    <serial baudrate="2400" databits="8" stopbits="1" parity="0" timeout="100"/>
+    <serial baudrate="2048" databits="8" stopbits="1" parity="0" timeout="120"/>
+  </ports>
+  <devices>
+    <!-- =================================================================== -->
+    <!-- Familia 00 -->
+    <!-- =================================================================== -->
+    <device family="0" name="MICRON/INFINIUM">
+      <ranges>
+        <range start="0000" size="8"/>
+      </ranges>
+      <capabilities>
+        <cap name="hasFamily" value="0"/>
+        <cap name="hasModel" value="0"/>
+        <cap name="hasVInput" value="0"/>
+        <cap name="hasVOutput" value="0"/>
+        <cap name="hasIOutput" value="0"/>
+        <cap name="hasPOutput" value="0"/>
+        <cap name="hasFOutput" value="0"/>
+        <cap name="hasVBattery" value="0"/>
+        <cap name="hasCBattery" value="0"/>
+        <cap name="hasTemperature" value="0"/>
+        <cap name="hasVersion" value="0"/>
+        <cap name="hasICBattery" value="0"/>
+        <cap name="hasSetICBattery" value="0"/>
+        <cap name="hasShutdownTimer" value="0"/>
+        <cap name="hasManualShutdown" value="1"/>
+        <cap name="hasStandBy" value="0"/>
+        <cap name="hasWakeUp" value="0"/>
+        <cap name="hasNightOff" value="0"/>
+        <cap name="hasSampVInput" value="0"/>
+        <cap name="hasSampVOutput" value="0"/>
+        <cap name="hasSampIOutput" value="0"/>
+        <cap name="hasNominalVInput" value="0"/>
+        <cap name="hasNominalVOutput" value="0"/>
+        <cap name="hasNominalPOutput" value="0"/>
+        <cap name="hasNominalFOutput" value="0"/>
+        <cap name="hasNominalVBattery" value="0"/>
+        <cap name="hasSetDischargeBattery" value="0"/>
+        <cap name="hasChangeAutonomy" value="0"/>
+        <cap name="hasPowerLook" value="0"/>
+        <cap name="hasSetLineSens" value="0"/>
+        <cap name="hasRgbLed" value="0"/>
+      </capabilities>
+      <default>
+        <map>
+          <alias name="F_TXD" addr="0000" bit="0"/>
+          <alias name="F_CTS" addr="0002" bit="0"/>
+          <alias name="F_DSR" addr="0003" bit="0"/>
+          <alias name="F_RI" addr="0004" bit="0"/>
+          <alias name="F_CD" addr="0005" bit="0"/>
+          <alias name="F_DTR" addr="0006" bit="0"/>
+          <alias name="F_RTS" addr="0007" bit="0"/>
+        </map>
+        <consts>
+          <const name="C_FINNOMINAL" value="60.0000"/>
+          <const name="C_NOCONNDELAY" value="5000.0000"/>
+          <const name="C_SHUTDELAY" value="16000.0000"/>
+          <const name="C_VBATNOMINAL" value="12.0000"/>
+        </consts>
+        <flags>
+          <flag name="disconnected" value="!F_CTS&amp;&amp;!F_DSR&amp;&amp;!F_CD"/>
+          <flag name="opBattery" value="!F_CD"/>
+          <flag name="noVInput" value="!F_CD"/>
+          <flag name="loBattery" value="!F_DSR"/>
+          <flag name="remoteControlActive" value="!F_CTS"/>
+        </flags>
+        <vars>
+          <var name="nominalFOutput" value="C_FINNOMINAL"/>
+          <var name="nominalVBattery" value="C_VBATNOMINAL"/>
+        </vars>
+        <actions>
+          <action name="shutdown" value="F_DTR=1;delay(C_SHUTDELAY);F_DTR=0"/>
+        </actions>
+      </default>
+    </device>
+    <!-- =================================================================== -->
+    <!-- Familia 01 -->
+    <!-- =================================================================== -->
+    <device family="1" name="SENIUM">
+      <ranges>
+        <range start="0080" size="24"/>
+        <range start="00CB" size="1"/>
+      </ranges>
+      <capabilities>
+        <cap name="hasFamily" value="1"/>
+        <cap name="hasModel" value="1"/>
+        <cap name="hasVInput" value="1"/>
+        <cap name="hasVOutput" value="1"/>
+        <cap name="hasIOutput" value="1"/>
+        <cap name="hasPOutput" value="1"/>
+        <cap name="hasFOutput" value="1"/>
+        <cap name="hasVBattery" value="1"/>
+        <cap name="hasCBattery" value="1"/>
+        <cap name="hasTemperature" value="1"/>
+        <cap name="hasVersion" value="1"/>
+        <cap name="hasICBattery" value="1"/>
+        <cap name="hasSetICBattery" value="1"/>
+        <cap name="hasShutdownTimer" value="1"/>
+        <cap name="hasManualShutdown" value="1"/>
+        <cap name="hasStandBy" value="1"/>
+        <cap name="hasWakeUp" value="1"/>
+        <cap name="hasNightOff" value="1"/>
+        <cap name="hasSampVInput" value="1"/>
+        <cap name="hasSampVOutput" value="1"/>
+        <cap name="hasSampIOutput" value="1"/>
+        <cap name="hasNominalVInput" value="1"/>
+        <cap name="hasNominalVOutput" value="1"/>
+        <cap name="hasNominalPOutput" value="1"/>
+        <cap name="hasNominalFOutput" value="1"/>
+        <cap name="hasNominalVBattery" value="1"/>
+        <cap name="hasSetDischargeBattery" value="1"/>
+        <cap name="hasChangeAutonomy" value="0"/>
+        <cap name="hasPowerLook" value="0"/>
+        <cap name="hasSetLineSens" value="1"/>
+        <cap name="hasRgbLed" value="0"/>
+      </capabilities>
+      <default>
+        <map>
+          <alias name="V_WAKEUPLOW" addr="0080"/>
+          <alias name="V_WAKEUPMID" addr="0081"/>
+          <alias name="V_WAKEUPHI" addr="0082"/>
+          <alias name="V_ICBATTERY" addr="0083"/>
+          <alias name="V_MODEL" addr="0085"/>
+          <alias name="V_VINPUT" addr="0086"/>
+          <alias name="V_VOUTPUT" addr="0087"/>
+          <alias name="V_IOUTPUT" addr="0088"/>
+          <alias name="V_POUTPUT" addr="0089"/>
+          <alias name="V_FOUTPUT" addr="008A"/>
+          <alias name="V_VBATTERY" addr="008B"/>
+          <alias name="V_CBATTERY" addr="0092"/>
+          <alias name="V_VERSION" addr="0093"/>
+          <alias name="V_TEMPER" addr="0097"/>
+          <alias name="V_SAMPVIN" addr="00A4"/>
+          <alias name="V_SAMPVOUT" addr="00A8"/>
+          <alias name="V_SAMPIOUT" addr="00AC"/>
+          <alias name="V_LINESENS" addr="00B8"/>
+          <alias name="V_SHUTDOWNTIMER" addr="00CB"/>
+          <alias name="V_SUPERVIDX" addr="00E8"/>
+          <alias name="F_WAKEUPON" addr="0084" bit="0"/>
+          <alias name="F_WAKEUPNOVIN" addr="0084" bit="1"/>
+          <alias name="F_NIGHTOFFON" addr="0084" bit="4"/>
+          <alias name="F_SUPERVON" addr="0084" bit="6"/>
+          <alias name="F_FOVERTEMP" addr="008D" bit="0"/>
+          <alias name="F_FINTERNAL" addr="008D" bit="1"/>
+          <alias name="F_FENDBATTERY" addr="008D" bit="2"/>
+          <alias name="F_FOVERLOAD" addr="008D" bit="3"/>
+          <alias name="F_FSHORTCIRCUIT" addr="008D" bit="4"/>
+          <alias name="F_FABNORMALVOUT" addr="008D" bit="5"/>
+          <alias name="F_FABNORMALVBAT" addr="008D" bit="6"/>
+          <alias name="F_FINVERTER" addr="008D" bit="7"/>
+          <alias name="F_LOFINPUT" addr="008E" bit="0"/>
+          <alias name="F_HIFINPUT" addr="008E" bit="1"/>
+          <alias name="F_NOSYNCIN" addr="008E" bit="2"/>
+          <alias name="F_LOVINPUT" addr="008E" bit="3"/>
+          <alias name="F_HIVINPUT" addr="008E" bit="4"/>
+          <alias name="F_NOVINPUT" addr="008E" bit="5"/>
+          <alias name="F_LOBATTERY" addr="008E" bit="6"/>
+          <alias name="F_NOISEIN" addr="008E" bit="7"/>
+          <alias name="F_OPBATTERY" addr="008F" bit="3"/>
+          <alias name="F_OPSTANDBY" addr="008F" bit="4"/>
+          <alias name="F_OPWARNING" addr="008F" bit="5"/>
+          <alias name="F_OPSTARTUP" addr="008F" bit="6"/>
+          <alias name="F_OPCHECKUP" addr="008F" bit="7"/>
+          <alias name="F_SYNCIN" addr="0091" bit="0"/>
+          <alias name="F_MAXBATTERY" addr="0091" bit="1"/>
+          <alias name="F_SHUTDOWNTIMERON" addr="0091" bit="4"/>
+          <alias name="F_TRANSFINV" addr="0094" bit="5"/>
+          <alias name="F_RCTRLON" addr="0095" bit="3"/>
+          <alias name="F_VINSEL220" addr="0095" bit="5"/>
+        </map>
+        <consts>
+          <const name="C_FINNOMINAL" value="60.0000"/>
+          <const name="C_ICBATHI" value="70.0000"/>
+          <const name="C_ICBATLO" value="40.0000"/>
+          <const name="C_LSENSHI" value="33.0000"/>
+          <const name="C_LSENSLO" value="55.0000"/>
+          <const name="C_LSENSNORMAL" value="41.0000"/>
+          <const name="C_LSENSVHI" value="25.0000"/>
+          <const name="C_LSENSVLO" value="63.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+          <const name="C_VINMAX" value="145.0000"/>
+          <const name="C_VINMAX2" value="255.0000"/>
+          <const name="C_VINMIN" value="75.0000"/>
+          <const name="C_VINMIN2" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="115.0000"/>
+          <const name="C_VINNOMINAL2" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="115.0000"/>
+        </consts>
+        <flags>
+          <flag name="opStartup" value="F_OPSTARTUP"/>
+          <flag name="opBattery" value="F_OPBATTERY"/>
+          <flag name="opStandBy" value="F_OPSTANDBY"/>
+          <flag name="opCheckup" value="F_OPCHECKUP"/>
+          <flag name="opWarning" value="F_OPWARNING"/>
+          <flag name="noVInput" value="F_NOVINPUT"/>
+          <flag name="loVInput" value="(F_NOVINPUT)?0:F_LOVINPUT"/>
+          <flag name="hiVInput" value="F_HIVINPUT"/>
+          <flag name="loFInput" value="F_LOFINPUT"/>
+          <flag name="hiFInput" value="F_HIFINPUT"/>
+          <flag name="noSyncInput" value="F_NOSYNCIN"/>
+          <flag name="syncInput" value="F_SYNCIN"/>
+          <flag name="noiseInput" value="F_NOISEIN"/>
+          <flag name="loBattery" value="F_LOBATTERY"/>
+          <flag name="maxBattery" value="F_MAXBATTERY"/>
+          <flag name="shutdownTimerActive" value="F_SHUTDOWNTIMERON"/>
+          <flag name="remoteControlActive" value="F_RCTRLON"/>
+          <flag name="failOvertemp" value="F_FOVERTEMP"/>
+          <flag name="failInternal" value="F_FINTERNAL"/>
+          <flag name="failOverload" value="F_FOVERLOAD"/>
+          <flag name="failShortcircuit" value="F_FSHORTCIRCUIT"/>
+          <flag name="failInverter" value="F_FINVERTER"/>
+          <flag name="failEndBattery" value="F_FENDBATTERY"/>
+          <flag name="failAbnormalVOutput" value="F_FABNORMALVOUT"/>
+          <flag name="failAbnormalVBattery" value="F_FABNORMALVBAT"/>
+        </flags>
+        <vars>
+          <var name="model" value="V_MODEL"/>
+          <var name="version" value="V_VERSION*0.1000"/>
+          <var name="vInput" value="V_VINPUT"/>
+          <var name="vOutput" value="V_VOUTPUT*0.6000"/>
+          <var name="fOutput" value="V_FOUTPUT*0.2500"/>
+          <var name="iOutput" value="V_IOUTPUT*0.0510"/>
+          <var name="pOutput" value="V_POUTPUT"/>
+          <var name="vBattery" value="V_VBATTERY*0.1250"/>
+          <var name="cBattery" value="V_CBATTERY"/>
+          <var name="temperature" value="V_TEMPER"/>
+          <var name="sampVInput" value="V_SAMPVIN*0.5000"/>
+          <var name="sampVOutput" value="V_SAMPVOUT*0.5000"/>
+          <var name="sampIOutput" value="V_SAMPIOUT*0.5000"/>
+          <var name="shutdownTimer" value="(F_SHUTDOWNTIMERON)?V_SHUTDOWNTIMER:-1"/>
+          <var name="wakeupTimer" value="(F_WAKEUPON)?0x1000000-((V_WAKEUPLOW &amp; 0xFF)|((V_WAKEUPMID &amp; 0xFF)&lt;&lt;8)|((V_WAKEUPHI &amp; 0xFF)&lt;&lt;16)):-1"/>
+          <var name="nightoffTimer" value="(F_NIGHTOFFON)?0x1000000-((V_WAKEUPLOW &amp; 0xFF)|((V_WAKEUPMID &amp; 0xFF)&lt;&lt;8)|((V_WAKEUPHI &amp; 0xFF)&lt;&lt;16)):-1"/>
+          <var name="icBattery" value="(V_ICBATTERY==C_ICBATHI)?1:0"/>
+          <var name="nominalVInput" value="(F_VINSEL220)?C_VINNOMINAL2:C_VINNOMINAL"/>
+          <var name="nominalVOutput" value="C_VOUTNOMINAL"/>
+          <var name="nominalFOutput" value="C_FINNOMINAL"/>
+          <var name="nominalPOutput" value="C_POUTNOMINAL"/>
+          <var name="nominalVBattery" value="C_VBATNOMINAL"/>
+        </vars>
+        <actions>
+          <action name="superviseOn" value="F_SUPERVON=1"/>
+          <action name="superviseOff" value="F_SUPERVON=0"/>
+          <action name="shutdown" value="F_SUPERVON=0;V_SHUTDOWNTIMER=$counter;F_SHUTDOWNTIMERON=1"/>
+          <action name="standby" value="F_WAKEUPNOVIN=1;F_SUPERVON=1;V_SHUTDOWNTIMER=$counter;F_SHUTDOWNTIMERON=1"/>
+          <action name="nightOff" value="F_WAKEUPON=0;F_NIGHTOFFON=0;V_WAKEUPLOW=(0x1000000-$counter)&amp;0xFF;V_WAKEUPMID=((0x1000000-$counter)&amp;0xFF00)&gt;&gt;8;V_WAKEUPHI=((0x1000000-$counter)&amp;0xFF0000)&gt;&gt;16;F_NIGHTOFFON=1"/>
+          <action name="wakeUp" value="F_WAKEUPON=0;F_NIGHTOFFON=0;V_WAKEUPLOW=(0x1000000-$counter)&amp;0xFF;V_WAKEUPMID=((0x1000000-$counter)&amp;0xFF00)&gt;&gt;8;V_WAKEUPHI=((0x1000000-$counter)&amp;0xFF0000)&gt;&gt;16;F_WAKEUPNOVIN=$novin;F_WAKEUPON=1"/>
+          <action name="fullDischarge" value="F_OPCHECKUP=1;V_SUPERVIDX=0;F_TRANSFINV=1"/>
+          <action name="setICBattery" value="V_ICBATTERY=($value==1)?C_ICBATHI:C_ICBATLO"/>
+          <action name="setLineSens" value="V_LINESENS=($value==4)?C_LSENSVHI:(($value==3)?C_LSENSHI:(($value==1)?C_LSENSLO:(($value==0)?C_LSENSVLO:C_LSENSNORMAL)))"/>
+        </actions>
+      </default>
+      <model name="SENIUM 1400-BA TI" value="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1400.0000"/>
+        </consts>
+      </model>
+      <model name="SENIUM 1400-BA M2" value="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1400.0000"/>
+          <const name="C_VINMAX" value="255.0000"/>
+          <const name="C_VINMIN" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+        <vars>
+          <var name="vOutput" value="V_VOUTPUT*0.9900"/>
+        </vars>
+      </model>
+      <model name="SENIUM 1400 TI" value="2" from="0"/>
+      <model name="SENIUM 1400 M2" value="3" from="1"/>
+      <model name="SENIUM 1600 TI" value="4" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1600.0000"/>
+        </consts>
+      </model>
+      <model name="SENIUM 1600 M2" value="5" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1600.0000"/>
+          <const name="C_VINMAX" value="255.0000"/>
+          <const name="C_VINMIN" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+      </model>
+      <model name="SENIUM 1000 TI" value="6" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1000.0000"/>
+        </consts>
+      </model>
+      <model name="SENIUM 1000 M2" value="7" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1000.0000"/>
+          <const name="C_VINMAX" value="255.0000"/>
+          <const name="C_VINMIN" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+      </model>
+      <model name="SENIUM 1600-BA TI" value="8" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1600.0000"/>
+        </consts>
+      </model>
+      <model name="SENIUM 1600-BA M2" value="9" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1600.0000"/>
+          <const name="C_VINMAX" value="255.0000"/>
+          <const name="C_VINMIN" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+      </model>
+    </device>
+    <!-- =================================================================== -->
+    <!-- Familia 02 -->
+    <!-- =================================================================== -->
+    <device family="2" name="SENIUM">
+      <ranges>
+        <range start="0080" size="22"/>
+        <range start="00C9" size="1"/>
+      </ranges>
+      <capabilities>
+        <cap name="hasFamily" value="1"/>
+        <cap name="hasModel" value="1"/>
+        <cap name="hasVInput" value="1"/>
+        <cap name="hasVOutput" value="1"/>
+        <cap name="hasIOutput" value="1"/>
+        <cap name="hasPOutput" value="1"/>
+        <cap name="hasFOutput" value="1"/>
+        <cap name="hasVBattery" value="1"/>
+        <cap name="hasCBattery" value="1"/>
+        <cap name="hasTemperature" value="1"/>
+        <cap name="hasVersion" value="1"/>
+        <cap name="hasICBattery" value="0"/>
+        <cap name="hasSetICBattery" value="0"/>
+        <cap name="hasShutdownTimer" value="1"/>
+        <cap name="hasManualShutdown" value="1"/>
+        <cap name="hasStandBy" value="1"/>
+        <cap name="hasWakeUp" value="1"/>
+        <cap name="hasNightOff" value="1"/>
+        <cap name="hasSampVInput" value="1"/>
+        <cap name="hasSampVOutput" value="1"/>
+        <cap name="hasSampIOutput" value="1"/>
+        <cap name="hasNominalVInput" value="1"/>
+        <cap name="hasNominalVOutput" value="1"/>
+        <cap name="hasNominalPOutput" value="1"/>
+        <cap name="hasNominalFOutput" value="1"/>
+        <cap name="hasNominalVBattery" value="1"/>
+        <cap name="hasSetDischargeBattery" value="1"/>
+        <cap name="hasChangeAutonomy" value="0"/>
+        <cap name="hasPowerLook" value="0"/>
+        <cap name="hasSetLineSens" value="1"/>
+        <cap name="hasRgbLed" value="0"/>
+      </capabilities>
+      <default>
+        <map>
+          <alias name="V_WAKEUPLOW" addr="0080"/>
+          <alias name="V_WAKEUPMID" addr="0081"/>
+          <alias name="V_WAKEUPHI" addr="0082"/>
+          <alias name="V_MODEL" addr="0085"/>
+          <alias name="V_VINPUT" addr="0086"/>
+          <alias name="V_VOUTPUT" addr="0087"/>
+          <alias name="V_IOUTPUT" addr="0088"/>
+          <alias name="V_POUTPUT" addr="0089"/>
+          <alias name="V_FOUTPUT" addr="008A"/>
+          <alias name="V_VBATTERY" addr="008B"/>
+          <alias name="V_TEMPER" addr="0090"/>
+          <alias name="V_CBATTERY" addr="0092"/>
+          <alias name="V_VERSION" addr="0093"/>
+          <alias name="V_SAMPVIN" addr="00A4"/>
+          <alias name="V_SAMPVOUT" addr="00A8"/>
+          <alias name="V_SAMPIOUT" addr="00AC"/>
+          <alias name="V_LINESENS" addr="00B8"/>
+          <alias name="V_SHUTDOWNTIMER" addr="00C9"/>
+          <alias name="V_SUPERVIDX" addr="00E8"/>
+          <alias name="F_WAKEUPON" addr="0084" bit="0"/>
+          <alias name="F_WAKEUPNOVIN" addr="0084" bit="1"/>
+          <alias name="F_NIGHTOFFON" addr="0084" bit="4"/>
+          <alias name="F_SUPERVON" addr="0084" bit="6"/>
+          <alias name="F_FOVERTEMP" addr="008D" bit="0"/>
+          <alias name="F_FINTERNAL" addr="008D" bit="1"/>
+          <alias name="F_FENDBATTERY" addr="008D" bit="2"/>
+          <alias name="F_FOVERLOAD" addr="008D" bit="3"/>
+          <alias name="F_FSHORTCIRCUIT" addr="008D" bit="4"/>
+          <alias name="F_FABNORMALVOUT" addr="008D" bit="5"/>
+          <alias name="F_FABNORMALVBAT" addr="008D" bit="6"/>
+          <alias name="F_FINVERTER" addr="008D" bit="7"/>
+          <alias name="F_LOFINPUT" addr="008E" bit="0"/>
+          <alias name="F_FFAN" addr="008E" bit="1"/>
+          <alias name="F_NOSYNCIN" addr="008E" bit="2"/>
+          <alias name="F_LOVINPUT" addr="008E" bit="3"/>
+          <alias name="F_HIVINPUT" addr="008E" bit="4"/>
+          <alias name="F_NOVINPUT" addr="008E" bit="5"/>
+          <alias name="F_LOBATTERY" addr="008E" bit="6"/>
+          <alias name="F_NOISEIN" addr="008E" bit="7"/>
+          <alias name="F_OPBATTERY" addr="008F" bit="3"/>
+          <alias name="F_OPSTANDBY" addr="008F" bit="4"/>
+          <alias name="F_OPWARNING" addr="008F" bit="5"/>
+          <alias name="F_OPSTARTUP" addr="008F" bit="6"/>
+          <alias name="F_OPCHECKUP" addr="008F" bit="7"/>
+          <alias name="F_SYNCIN" addr="0091" bit="0"/>
+          <alias name="F_MAXBATTERY" addr="0091" bit="1"/>
+          <alias name="F_VBAT48V" addr="0091" bit="3"/>
+          <alias name="F_SHUTDOWNTIMERON" addr="0091" bit="4"/>
+          <alias name="F_TRANSFINV" addr="0094" bit="5"/>
+          <alias name="F_RCTRLON" addr="0095" bit="3"/>
+          <alias name="F_VINSEL220" addr="0095" bit="5"/>
+        </map>
+        <consts>
+          <const name="C_FINNOMINAL" value="60.0000"/>
+          <const name="C_LSENSHI" value="33.0000"/>
+          <const name="C_LSENSLO" value="55.0000"/>
+          <const name="C_LSENSNORMAL" value="41.0000"/>
+          <const name="C_LSENSVHI" value="25.0000"/>
+          <const name="C_LSENSVLO" value="63.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+          <const name="C_VINMAX" value="145.0000"/>
+          <const name="C_VINMAX2" value="255.0000"/>
+          <const name="C_VINMIN" value="75.0000"/>
+          <const name="C_VINMIN2" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="115.0000"/>
+          <const name="C_VINNOMINAL2" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="115.0000"/>
+        </consts>
+        <flags>
+          <flag name="opStartup" value="F_OPSTARTUP"/>
+          <flag name="opBattery" value="F_OPBATTERY"/>
+          <flag name="opStandBy" value="F_OPSTANDBY"/>
+          <flag name="opCheckup" value="F_OPCHECKUP"/>
+          <flag name="opWarning" value="F_OPWARNING"/>
+          <flag name="noVInput" value="F_NOVINPUT"/>
+          <flag name="loVInput" value="(F_NOVINPUT)?0:F_LOVINPUT"/>
+          <flag name="hiVInput" value="F_HIVINPUT"/>
+          <flag name="loFInput" value="F_LOFINPUT"/>
+          <flag name="noSyncInput" value="F_NOSYNCIN"/>
+          <flag name="syncInput" value="F_SYNCIN"/>
+          <flag name="noiseInput" value="F_NOISEIN"/>
+          <flag name="loBattery" value="F_LOBATTERY"/>
+          <flag name="maxBattery" value="F_MAXBATTERY"/>
+          <flag name="shutdownTimerActive" value="F_SHUTDOWNTIMERON"/>
+          <flag name="remoteControlActive" value="F_RCTRLON"/>
+          <flag name="failOvertemp" value="F_FOVERTEMP"/>
+          <flag name="failInternal" value="F_FINTERNAL"/>
+          <flag name="failOverload" value="F_FOVERLOAD"/>
+          <flag name="failShortcircuit" value="F_FSHORTCIRCUIT"/>
+          <flag name="failInverter" value="F_FINVERTER"/>
+          <flag name="failFan" value="F_FFAN"/>
+          <flag name="failEndBattery" value="F_FENDBATTERY"/>
+          <flag name="failAbnormalVOutput" value="F_FABNORMALVOUT"/>
+          <flag name="failAbnormalVBattery" value="F_FABNORMALVBAT"/>
+        </flags>
+        <vars>
+          <var name="model" value="V_MODEL"/>
+          <var name="version" value="V_VERSION*0.1000"/>
+          <var name="vInput" value="V_VINPUT"/>
+          <var name="vOutput" value="V_VOUTPUT*0.6000"/>
+          <var name="fOutput" value="V_FOUTPUT*0.2500"/>
+          <var name="iOutput" value="V_IOUTPUT*0.1090"/>
+          <var name="pOutput" value="V_POUTPUT"/>
+          <var name="vBattery" value="V_VBATTERY*0.1250"/>
+          <var name="cBattery" value="V_CBATTERY"/>
+          <var name="temperature" value="V_TEMPER"/>
+          <var name="sampVInput" value="V_SAMPVIN*0.5000"/>
+          <var name="sampVOutput" value="V_SAMPVOUT*0.5000"/>
+          <var name="sampIOutput" value="V_SAMPIOUT*0.5000"/>
+          <var name="shutdownTimer" value="(F_SHUTDOWNTIMERON)?V_SHUTDOWNTIMER:-1"/>
+          <var name="wakeupTimer" value="(F_WAKEUPON)?0x1000000-((V_WAKEUPLOW &amp; 0xFF)|((V_WAKEUPMID &amp; 0xFF)&lt;&lt;8)|((V_WAKEUPHI &amp; 0xFF)&lt;&lt;16)):-1"/>
+          <var name="nightoffTimer" value="(F_NIGHTOFFON)?0x1000000-((V_WAKEUPLOW &amp; 0xFF)|((V_WAKEUPMID &amp; 0xFF)&lt;&lt;8)|((V_WAKEUPHI &amp; 0xFF)&lt;&lt;16)):-1"/>
+          <var name="nominalVInput" value="(F_VINSEL220)?C_VINNOMINAL2:C_VINNOMINAL"/>
+          <var name="nominalVOutput" value="C_VOUTNOMINAL"/>
+          <var name="nominalFOutput" value="C_FINNOMINAL"/>
+          <var name="nominalPOutput" value="C_POUTNOMINAL"/>
+          <var name="nominalVBattery" value="C_VBATNOMINAL"/>
+        </vars>
+        <actions>
+          <action name="superviseOn" value="F_SUPERVON=1"/>
+          <action name="superviseOff" value="F_SUPERVON=0"/>
+          <action name="shutdown" value="F_SUPERVON=0;V_SHUTDOWNTIMER=$counter;F_SHUTDOWNTIMERON=1"/>
+          <action name="standby" value="F_WAKEUPNOVIN=1;F_SUPERVON=1;V_SHUTDOWNTIMER=$counter;F_SHUTDOWNTIMERON=1"/>
+          <action name="nightOff" value="F_WAKEUPON=0;F_NIGHTOFFON=0;V_WAKEUPLOW=(0x1000000-$counter)&amp;0xFF;V_WAKEUPMID=((0x1000000-$counter)&amp;0xFF00)&gt;&gt;8;V_WAKEUPHI=((0x1000000-$counter)&amp;0xFF0000)&gt;&gt;16;F_NIGHTOFFON=1"/>
+          <action name="wakeUp" value="F_WAKEUPON=0;F_NIGHTOFFON=0;V_WAKEUPLOW=(0x1000000-$counter)&amp;0xFF;V_WAKEUPMID=((0x1000000-$counter)&amp;0xFF00)&gt;&gt;8;V_WAKEUPHI=((0x1000000-$counter)&amp;0xFF0000)&gt;&gt;16;F_WAKEUPNOVIN=$novin;F_WAKEUPON=1"/>
+          <action name="fullDischarge" value="F_OPCHECKUP=1;V_SUPERVIDX=0;F_TRANSFINV=1"/>
+          <action name="setLineSens" value="V_LINESENS=($value==4)?C_LSENSVHI:(($value==3)?C_LSENSHI:(($value==1)?C_LSENSLO:(($value==0)?C_LSENSVLO:C_LSENSNORMAL)))"/>
+        </actions>
+      </default>
+      <model name="SENIUM 2200/2400 TI" value="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="2200.0000"/>
+          </consts>
+      </model>
+      <model name="SENIUM 2200/2400 M2" value="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="2200.0000"/>
+          <const name="C_VINMAX" value="255.0000"/>
+          <const name="C_VINMIN" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+        <vars>
+          <var name="vOutput" value="V_VOUTPUT*0.9900"/>
+          <var name="iOutput" value="V_IOUTPUT*0.0510"/>
+        </vars>
+      </model>
+      <model name="SENIUM 3000/3200 TI" value="2" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="3000.0000"/>
+          <const name="C_VBATNOMINAL" value="48.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*0.0510"/>
+          <var name="vBattery" value="V_VBATTERY*0.2500"/>
+        </vars>
+      </model>
+      <model name="SENIUM 3000/3200 M2" value="3" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="3000.0000"/>
+          <const name="C_VBATNOMINAL" value="48.0000"/>
+          <const name="C_VINMAX" value="255.0000"/>
+          <const name="C_VINMIN" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+        <vars>
+          <var name="vBattery" value="V_VBATTERY*0.2500"/>
+        </vars>
+      </model>
+      <model name="SENIUM 3200 TI" value="4" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="3000.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*0.0510"/>
+        </vars>
+      </model>
+      <model name="SENIUM 3200 M2" value="5" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="3000.0000"/>
+          <const name="C_VINMAX" value="255.0000"/>
+          <const name="C_VINMIN" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+        <vars>
+          <var name="vOutput" value="V_VOUTPUT*0.9900"/>
+          <var name="iOutput" value="V_IOUTPUT*0.0510"/>
+        </vars>
+      </model>
+      <model name="SENIUM 2200 TI" value="6" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="5000.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*0.0510"/>
+        </vars>
+      </model>
+      <model name="SENIUM 2200 M2" value="7" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="5000.0000"/>
+          <const name="C_VINMAX" value="255.0000"/>
+          <const name="C_VINMIN" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+        <vars>
+          <var name="vOutput" value="V_VOUTPUT*0.9900"/>
+          <var name="iOutput" value="V_IOUTPUT*0.0510"/>
+        </vars>
+      </model>
+    </device>
+    <!-- =================================================================== -->
+    <!-- Familia 03 -->
+    <!-- =================================================================== -->
+    <device family="3" name="MICRON II/IF HOME">
+      <ranges>
+        <range start="0000" size="25"/>
+      </ranges>
+      <capabilities>
+        <cap name="hasFamily" value="1"/>
+        <cap name="hasModel" value="1"/>
+        <cap name="hasVInput" value="1"/>
+        <cap name="hasVOutput" value="1"/>
+        <cap name="hasIOutput" value="0"/>
+        <cap name="hasPOutput" value="1"/>
+        <cap name="hasFOutput" value="1"/>
+        <cap name="hasVBattery" value="1"/>
+        <cap name="hasCBattery" value="1"/>
+        <cap name="hasTemperature" value="0"/>
+        <cap name="hasVersion" value="1"/>
+        <cap name="hasICBattery" value="0"/>
+        <cap name="hasSetICBattery" value="0"/>
+        <cap name="hasShutdownTimer" value="1"/>
+        <cap name="hasManualShutdown" value="0"/>
+        <cap name="hasStandBy" value="0"/>
+        <cap name="hasWakeUp" value="0"/>
+        <cap name="hasNightOff" value="0"/>
+        <cap name="hasSampVInput" value="0"/>
+        <cap name="hasSampVOutput" value="0"/>
+        <cap name="hasSampIOutput" value="0"/>
+        <cap name="hasNominalVInput" value="1"/>
+        <cap name="hasNominalVOutput" value="1"/>
+        <cap name="hasNominalPOutput" value="0"/>
+        <cap name="hasNominalFOutput" value="1"/>
+        <cap name="hasNominalVBattery" value="1"/>
+        <cap name="hasSetDischargeBattery" value="0"/>
+        <cap name="hasChangeAutonomy" value="0"/>
+        <cap name="hasPowerLook" value="0"/>
+        <cap name="hasSetLineSens" value="0"/>
+        <cap name="hasRgbLed" value="0"/>
+      </capabilities>
+      <default>
+        <map>
+          <alias name="V_MODEL" addr="0000"/>
+          <alias name="V_VERSION" addr="0001"/>
+          <alias name="V_CALIB" addr="0002"/>
+          <alias name="V_FOUTCALIB" addr="0003"/>
+          <alias name="V_VBATCALIB" addr="0004"/>
+          <alias name="V_VINCALIB" addr="0005"/>
+          <alias name="V_VOUTCALIB" addr="0006"/>
+          <alias name="V_IOUTCALIB" addr="0008"/>
+          <alias name="V_ACTUALTAP" addr="0010"/>
+          <alias name="V_VINPUT" addr="0011"/>
+          <alias name="V_VOUTPUT" addr="0012"/>
+          <alias name="V_IOUTPUT" addr="0013"/>
+          <alias name="V_VBATTERY" addr="0014"/>
+          <alias name="V_SHUTDOWNTIMER" addr="0015"/>
+          <alias name="V_FOUTPUT" addr="0016"/>
+          <alias name="F_VINSEL220" addr="0009" bit="3"/>
+          <alias name="F_SYNCIN" addr="000B" bit="0"/>
+          <alias name="F_SHUTDOWNTIMERON" addr="000B" bit="4"/>
+          <alias name="F_MAXBATTERY" addr="000B" bit="7"/>
+          <alias name="F_NOVINPUT" addr="000C" bit="0"/>
+          <alias name="F_FENDBATTERY" addr="000D" bit="1"/>
+          <alias name="F_FOVERLOAD" addr="000D" bit="2"/>
+          <alias name="F_FSHORTCIRCUIT" addr="000D" bit="4"/>
+          <alias name="F_FABNORMALVOUT" addr="000D" bit="5"/>
+          <alias name="F_FABNORMALVBAT" addr="000D" bit="6"/>
+          <alias name="F_FINVERTER" addr="000D" bit="7"/>
+          <alias name="F_LOFINPUT" addr="000E" bit="1"/>
+          <alias name="F_HIFINPUT" addr="000E" bit="2"/>
+          <alias name="F_NOSYNCIN" addr="000E" bit="3"/>
+          <alias name="F_LOVINPUT" addr="000E" bit="4"/>
+          <alias name="F_HIVINPUT" addr="000E" bit="5"/>
+          <alias name="F_LOBATTERY" addr="000E" bit="6"/>
+          <alias name="F_NOISEIN" addr="000E" bit="7"/>
+          <alias name="F_OPBATTERY" addr="000F" bit="3"/>
+          <alias name="F_OPSTANDBY" addr="000F" bit="4"/>
+          <alias name="F_OPWARNING" addr="000F" bit="5"/>
+          <alias name="F_OPSTARTUP" addr="000F" bit="6"/>
+        </map>
+        <consts>
+          <const name="C_BATFACTOR" value="0.7250"/>
+          <const name="C_FINNOMINAL" value="60.0000"/>
+          <const name="C_FVOUTTAP0" value="1.2898"/>
+          <const name="C_FVOUTTAP1" value="1.1558"/>
+          <const name="C_FVOUTTAP2" value="1.0172"/>
+          <const name="C_FVOUTTAP3" value="0.8812"/>
+          <const name="C_OSTRIMF" value="720.0000"/>
+          <const name="C_VBATNOMINAL" value="12.0000"/>
+          <const name="C_VECFACTOR" value="0.0500"/>
+          <const name="C_VINMAX" value="142.0000"/>
+          <const name="C_VINMAX2" value="284.0000"/>
+          <const name="C_VINMIN" value="84.0000"/>
+          <const name="C_VINMIN2" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="115.0000"/>
+          <const name="C_VINNOMINAL2" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="115.0000"/>
+        </consts>
+        <flags>
+          <flag name="opStartup" value="F_OPSTARTUP"/>
+          <flag name="opBattery" value="F_OPBATTERY"/>
+          <flag name="opStandBy" value="F_OPSTANDBY"/>
+          <flag name="opWarning" value="F_OPWARNING"/>
+          <flag name="noVInput" value="F_NOVINPUT"/>
+          <flag name="loVInput" value="(F_NOVINPUT)?0:F_LOVINPUT"/>
+          <flag name="hiVInput" value="F_HIVINPUT"/>
+          <flag name="loFInput" value="F_LOFINPUT"/>
+          <flag name="hiFInput" value="F_HIFINPUT"/>
+          <flag name="noSyncInput" value="F_NOSYNCIN"/>
+          <flag name="syncInput" value="F_SYNCIN"/>
+          <flag name="noiseInput" value="F_NOISEIN"/>
+          <flag name="loBattery" value="F_LOBATTERY"/>
+          <flag name="maxBattery" value="F_MAXBATTERY"/>
+          <flag name="shutdownTimerActive" value="F_SHUTDOWNTIMERON"/>
+          <flag name="noCalibrated" value="V_CALIB!=0xFF"/>
+          <flag name="failOverload" value="F_FOVERLOAD"/>
+          <flag name="failShortcircuit" value="F_FSHORTCIRCUIT"/>
+          <flag name="failInverter" value="F_FINVERTER"/>
+          <flag name="failEndBattery" value="F_FENDBATTERY"/>
+          <flag name="failAbnormalVOutput" value="F_FABNORMALVOUT"/>
+          <flag name="failAbnormalVBattery" value="F_FABNORMALVBAT"/>
+        </flags>
+        <vars>
+          <var name="model" value="V_MODEL"/>
+          <var name="version" value="V_VERSION*0.1000"/>
+          <var name="vInput" value="(!F_VINSEL220||F_OPBATTERY)?((F_NOVINPUT||!V_VINPUT||!V_VINCALIB)?0:(V_VINPUT/V_VINCALIB*115)):((F_NOVINPUT||!V_VINPUT||!V_VINCALIB||!V_IOUTCALIB)?0:(V_VINPUT/V_VINCALIB*230*(V_IOUTPUT/V_IOUTCALIB*C_VECFACTOR+1)))"/>
+          <var name="vOutput" value="(!V_VOUTCALIB||F_OPSTANDBY)?0:((V_VOUTPUT/V_VOUTCALIB)*((V_ACTUALTAP==0)?C_FVOUTTAP0:((V_ACTUALTAP==1)?C_FVOUTTAP1:((V_ACTUALTAP==2)?C_FVOUTTAP2:((V_ACTUALTAP==3)?C_FVOUTTAP3:0))))*115)"/>
+          <var name="fOutput" value="(!C_OSTRIMF)?0:(((V_FOUTCALIB-V_FOUTPUT)/C_OSTRIMF+1)*C_FINNOMINAL)"/>
+          <var name="pOutput" value="(!V_IOUTCALIB)?0:(V_IOUTPUT/V_IOUTCALIB*100)"/>
+          <var name="vBattery" value="(!V_VBATCALIB)?0:(V_VBATTERY/V_VBATCALIB*(C_VBATNOMINAL*13.8/12))"/>
+          <var name="cBattery" value="(((V_VBATTERY/V_VBATCALIB-C_BATFACTOR)/(1-C_BATFACTOR)*100)&lt;0)?0:((V_VBATTERY/V_VBATCALIB-C_BATFACTOR)/(1-C_BATFACTOR)*100)"/>
+          <var name="shutdownTimer" value="(F_SHUTDOWNTIMERON)?V_SHUTDOWNTIMER:-1"/>
+          <var name="nominalVInput" value="(F_VINSEL220)?C_VINNOMINAL2:C_VINNOMINAL"/>
+          <var name="nominalVOutput" value="C_VOUTNOMINAL"/>
+          <var name="nominalFOutput" value="C_FINNOMINAL"/>
+          <var name="nominalVBattery" value="C_VBATNOMINAL"/>
+        </vars>
+      </default>
+      <model name="MICRON II/IF HOME-TI" value="0"/>
+      <model name="MICRON II/IF HOME-M2" value="1">
+        <consts>
+          <const name="C_FVOUTTAP0" value="1.2460"/>
+          <const name="C_FVOUTTAP1" value="1.1620"/>
+          <const name="C_FVOUTTAP2" value="1.0705"/>
+          <const name="C_FVOUTTAP3" value="0.9998"/>
+          <const name="C_VINMAX" value="252.0000"/>
+          <const name="C_VINMAX2" value="252.0000"/>
+          <const name="C_VINMIN" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+        <vars>
+          <var name="vInput" value="(F_NOVINPUT||!V_VINPUT||!V_VINCALIB)?0:(V_VINPUT/V_VINCALIB*115)"/>
+          <var name="vOutput" value="(!V_VOUTCALIB||F_OPSTANDBY)?0:((V_VOUTPUT/V_VOUTCALIB)*((V_ACTUALTAP==0)?C_FVOUTTAP0:((V_ACTUALTAP==1)?C_FVOUTTAP1:((V_ACTUALTAP==2)?C_FVOUTTAP2:((V_ACTUALTAP==3)?C_FVOUTTAP3:0))))*220)"/>
+          <var name="nominalVInput" value="C_VINNOMINAL"/>
+        </vars>
+      </model>
+      <model name="MICRON II/IF HOME-TI" value="2" from="0"/>
+      <model name="MICRON II/IF HOME-M2" value="3" from="1"/>
+      <model name="MICRON II-TI 50Hz" value="8" from="0">
+        <consts>
+          <const name="C_FINNOMINAL" value="50.0000"/>
+        </consts>
+      </model>
+      <model name="MICRON II-M2 50Hz" value="9" from="1">
+        <consts>
+          <const name="C_FINNOMINAL" value="50.0000"/>
+        </consts>
+      </model>
+      <model name="MICRON II-TI 50Hz" value="10" from="0">
+        <consts>
+          <const name="C_FINNOMINAL" value="50.0000"/>
+        </consts>
+      </model>
+      <model name="MICRON II-M2 50Hz" value="11" from="1">
+        <consts>
+          <const name="C_FINNOMINAL" value="50.0000"/>
+        </consts>
+      </model>
+    </device>
+    <!-- =================================================================== -->
+    <!-- Familia 04 -->
+    <!-- =================================================================== -->
+    <device family="4" name="INFINIUM DIGITAL">
+      <ranges>
+        <range start="0080" size="23"/>
+        <range start="00C9" size="1"/>
+      </ranges>
+      <capabilities>
+        <cap name="hasFamily" value="1"/>
+        <cap name="hasModel" value="1"/>
+        <cap name="hasVInput" value="1"/>
+        <cap name="hasVOutput" value="1"/>
+        <cap name="hasIOutput" value="1"/>
+        <cap name="hasPOutput" value="1"/>
+        <cap name="hasFOutput" value="1"/>
+        <cap name="hasVBattery" value="1"/>
+        <cap name="hasCBattery" value="1"/>
+        <cap name="hasTemperature" value="1"/>
+        <cap name="hasVersion" value="1"/>
+        <cap name="hasICBattery" value="0"/>
+        <cap name="hasSetICBattery" value="0"/>
+        <cap name="hasShutdownTimer" value="1"/>
+        <cap name="hasManualShutdown" value="1"/>
+        <cap name="hasStandBy" value="1"/>
+        <cap name="hasWakeUp" value="1"/>
+        <cap name="hasNightOff" value="1"/>
+        <cap name="hasSampVInput" value="1"/>
+        <cap name="hasSampVOutput" value="1"/>
+        <cap name="hasSampIOutput" value="1"/>
+        <cap name="hasNominalVInput" value="1"/>
+        <cap name="hasNominalVOutput" value="1"/>
+        <cap name="hasNominalPOutput" value="1"/>
+        <cap name="hasNominalFOutput" value="1"/>
+        <cap name="hasNominalVBattery" value="1"/>
+        <cap name="hasSetDischargeBattery" value="1"/>
+        <cap name="hasChangeAutonomy" value="0"/>
+        <cap name="hasPowerLook" value="0"/>
+        <cap name="hasSetLineSens" value="1"/>
+        <cap name="hasRgbLed" value="0"/>
+      </capabilities>
+      <default>
+        <map>
+          <alias name="V_WAKEUPLOW" addr="0080"/>
+          <alias name="V_WAKEUPMID" addr="0081"/>
+          <alias name="V_WAKEUPHI" addr="0082"/>
+          <alias name="V_MODEL" addr="0085"/>
+          <alias name="V_VINPUT" addr="0086"/>
+          <alias name="V_VOUTPUT" addr="0087"/>
+          <alias name="V_IOUTPUT" addr="0088"/>
+          <alias name="V_POUTPUT" addr="0089"/>
+          <alias name="V_FOUTPUT" addr="008A"/>
+          <alias name="V_VBATTERY" addr="008B"/>
+          <alias name="V_TEMPER" addr="0090"/>
+          <alias name="V_CBATTERY" addr="0092"/>
+          <alias name="V_VERSION" addr="0093"/>
+          <alias name="V_SAMPVIN" addr="00A4"/>
+          <alias name="V_SAMPVOUT" addr="00A8"/>
+          <alias name="V_SAMPIOUT" addr="00AC"/>
+          <alias name="V_LINESENS" addr="00B8"/>
+          <alias name="V_SHUTDOWNTIMER" addr="00C9"/>
+          <alias name="V_SUPERVIDX" addr="00E8"/>
+          <alias name="F_FOVERTEMP" addr="008D" bit="0"/>
+          <alias name="F_FINTERNAL" addr="008D" bit="1"/>
+          <alias name="F_FSHORTCIRCUIT" addr="008D" bit="2"/>
+          <alias name="F_FOVERLOAD" addr="008D" bit="3"/>
+          <alias name="F_FENDBATTERY" addr="008D" bit="4"/>
+          <alias name="F_FABNORMALVOUT" addr="008D" bit="5"/>
+          <alias name="F_FABNORMALVBAT" addr="008D" bit="6"/>
+          <alias name="F_FINVERTER" addr="008D" bit="7"/>
+          <alias name="F_LOFINPUT" addr="008E" bit="0"/>
+          <alias name="F_FFAN" addr="008E" bit="1"/>
+          <alias name="F_NOSYNCIN" addr="008E" bit="2"/>
+          <alias name="F_LOVINPUT" addr="008E" bit="3"/>
+          <alias name="F_HIVINPUT" addr="008E" bit="4"/>
+          <alias name="F_NOVINPUT" addr="008E" bit="5"/>
+          <alias name="F_LOBATTERY" addr="008E" bit="6"/>
+          <alias name="F_NOISEIN" addr="008E" bit="7"/>
+          <alias name="F_OPBATTERY" addr="008F" bit="3"/>
+          <alias name="F_OPSTANDBY" addr="008F" bit="4"/>
+          <alias name="F_OPWARNING" addr="008F" bit="5"/>
+          <alias name="F_OPSTARTUP" addr="008F" bit="6"/>
+          <alias name="F_OPCHECKUP" addr="008F" bit="7"/>
+          <alias name="F_NIGHTOFFON" addr="0091" bit="0"/>
+          <alias name="F_MAXBATTERY" addr="0091" bit="1"/>
+          <alias name="F_SHUTDOWNTIMERON" addr="0091" bit="4"/>
+          <alias name="F_WAKEUPNOVIN" addr="0091" bit="5"/>
+          <alias name="F_WAKEUPON" addr="0091" bit="7"/>
+          <alias name="F_TRANSFINV" addr="0094" bit="5"/>
+          <alias name="F_RCTRLON" addr="0095" bit="3"/>
+          <alias name="F_VINSEL220" addr="0095" bit="5"/>
+          <alias name="F_SUPERVON" addr="0096" bit="3"/>
+        </map>
+        <consts>
+          <const name="C_FINNOMINAL" value="60.0000"/>
+          <const name="C_LSENSHI" value="33.0000"/>
+          <const name="C_LSENSLO" value="55.0000"/>
+          <const name="C_LSENSNORMAL" value="41.0000"/>
+          <const name="C_LSENSVHI" value="25.0000"/>
+          <const name="C_LSENSVLO" value="63.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+          <const name="C_VINMAX" value="145.0000"/>
+          <const name="C_VINMAX2" value="255.0000"/>
+          <const name="C_VINMIN" value="82.0000"/>
+          <const name="C_VINMIN2" value="180.0000"/>
+          <const name="C_VINNOMINAL" value="115.0000"/>
+          <const name="C_VINNOMINAL2" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="115.0000"/>
+        </consts>
+        <flags>
+          <flag name="opStartup" value="F_OPSTARTUP"/>
+          <flag name="opBattery" value="F_OPBATTERY"/>
+          <flag name="opStandBy" value="F_OPSTANDBY"/>
+          <flag name="opCheckup" value="F_OPCHECKUP"/>
+          <flag name="opWarning" value="F_OPWARNING"/>
+          <flag name="noVInput" value="F_NOVINPUT"/>
+          <flag name="loVInput" value="(F_NOVINPUT)?0:F_LOVINPUT"/>
+          <flag name="hiVInput" value="F_HIVINPUT"/>
+          <flag name="loFInput" value="F_LOFINPUT"/>
+          <flag name="noSyncInput" value="F_NOSYNCIN"/>
+          <flag name="noiseInput" value="F_NOISEIN"/>
+          <flag name="loBattery" value="F_LOBATTERY"/>
+          <flag name="maxBattery" value="F_MAXBATTERY"/>
+          <flag name="shutdownTimerActive" value="F_SHUTDOWNTIMERON"/>
+          <flag name="remoteControlActive" value="F_RCTRLON"/>
+          <flag name="failOvertemp" value="F_FOVERTEMP"/>
+          <flag name="failInternal" value="F_FINTERNAL"/>
+          <flag name="failOverload" value="F_FOVERLOAD"/>
+          <flag name="failShortcircuit" value="F_FSHORTCIRCUIT"/>
+          <flag name="failInverter" value="F_FINVERTER"/>
+          <flag name="failFan" value="F_FFAN"/>
+          <flag name="failEndBattery" value="F_FENDBATTERY"/>
+          <flag name="failAbnormalVOutput" value="F_FABNORMALVOUT"/>
+          <flag name="failAbnormalVBattery" value="F_FABNORMALVBAT"/>
+        </flags>
+        <vars>
+          <var name="model" value="V_MODEL"/>
+          <var name="version" value="V_VERSION*0.1000"/>
+          <var name="vInput" value="V_VINPUT"/>
+          <var name="vOutput" value="V_VOUTPUT*0.6090"/>
+          <var name="fOutput" value="V_FOUTPUT*0.2500"/>
+          <var name="iOutput" value="V_IOUTPUT*0.0625"/>
+          <var name="pOutput" value="V_POUTPUT"/>
+          <var name="vBattery" value="V_VBATTERY*0.1250"/>
+          <var name="cBattery" value="V_CBATTERY"/>
+          <var name="temperature" value="V_TEMPER"/>
+          <var name="sampVInput" value="V_SAMPVIN*0.5000"/>
+          <var name="sampVOutput" value="V_SAMPVOUT*0.5000"/>
+          <var name="sampIOutput" value="V_SAMPIOUT*0.5000"/>
+          <var name="shutdownTimer" value="(F_SHUTDOWNTIMERON)?V_SHUTDOWNTIMER:-1"/>
+          <var name="wakeupTimer" value="(F_WAKEUPON)?0x1000000-((V_WAKEUPLOW &amp; 0xFF)|((V_WAKEUPMID &amp; 0xFF)&lt;&lt;8)|((V_WAKEUPHI &amp; 0xFF)&lt;&lt;16)):-1"/>
+          <var name="nightoffTimer" value="(F_NIGHTOFFON)?0x1000000-((V_WAKEUPLOW &amp; 0xFF)|((V_WAKEUPMID &amp; 0xFF)&lt;&lt;8)|((V_WAKEUPHI &amp; 0xFF)&lt;&lt;16)):-1"/>
+          <var name="nominalVInput" value="(F_VINSEL220)?C_VINNOMINAL2:C_VINNOMINAL"/>
+          <var name="nominalVOutput" value="C_VOUTNOMINAL"/>
+          <var name="nominalFOutput" value="C_FINNOMINAL"/>
+          <var name="nominalPOutput" value="C_POUTNOMINAL"/>
+          <var name="nominalVBattery" value="C_VBATNOMINAL"/>
+        </vars>
+        <actions>
+          <action name="superviseOn" value="F_SUPERVON=1"/>
+          <action name="superviseOff" value="F_SUPERVON=0"/>
+          <action name="shutdown" value="F_SUPERVON=0;V_SHUTDOWNTIMER=$counter;F_SHUTDOWNTIMERON=1"/>
+          <action name="standby" value="F_WAKEUPNOVIN=1;F_SUPERVON=1;V_SHUTDOWNTIMER=$counter;F_SHUTDOWNTIMERON=1"/>
+          <action name="nightOff" value="F_WAKEUPON=0;F_NIGHTOFFON=0;V_WAKEUPLOW=(0x1000000-$counter)&amp;0xFF;V_WAKEUPMID=((0x1000000-$counter)&amp;0xFF00)&gt;&gt;8;V_WAKEUPHI=((0x1000000-$counter)&amp;0xFF0000)&gt;&gt;16;F_NIGHTOFFON=1"/>
+          <action name="wakeUp" value="F_WAKEUPON=0;F_NIGHTOFFON=0;V_WAKEUPLOW=(0x1000000-$counter)&amp;0xFF;V_WAKEUPMID=((0x1000000-$counter)&amp;0xFF00)&gt;&gt;8;V_WAKEUPHI=((0x1000000-$counter)&amp;0xFF0000)&gt;&gt;16;F_WAKEUPNOVIN=$novin;F_WAKEUPON=1"/>
+          <action name="fullDischarge" value="F_OPCHECKUP=1;V_SUPERVIDX=0;F_TRANSFINV=1"/>
+          <action name="setLineSens" value="V_LINESENS=($value==4)?C_LSENSVHI:(($value==3)?C_LSENSHI:(($value==1)?C_LSENSLO:(($value==0)?C_LSENSVLO:C_LSENSNORMAL)))"/>
+        </actions>
+      </default>
+      <model name="INFINIUM 1400 TI" value="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1400.0000"/>
+        </consts>
+      </model>
+      <model name="INFINIUM 1400 M2" value="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1400.0000"/>
+          <const name="C_VINMAX" value="255.0000"/>
+          <const name="C_VINMIN" value="180.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+        <vars>
+          <var name="vOutput" value="V_VOUTPUT*1.1250"/>
+          <var name="iOutput" value="V_IOUTPUT*0.0390"/>
+        </vars>
+      </model>
+      <model name="INFINIUM 1600 TI" value="2" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1600.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*0.1050"/>
+        </vars>
+      </model>
+      <model name="INFINIUM 1600 M2" value="3" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1600.0000"/>
+          <const name="C_VINMAX" value="255.0000"/>
+          <const name="C_VINMIN" value="180.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*0.0508"/>
+        </vars>
+      </model>
+      <model name="INFINIUM 2200 TI" value="4" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="2200.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*0.1050"/>
+        </vars>
+      </model>
+      <model name="INFINIUM 2200 M2" value="5" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="2200.0000"/>
+          <const name="C_VINMAX" value="255.0000"/>
+          <const name="C_VINMIN" value="180.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*0.0508"/>
+        </vars>
+      </model>
+      <model name="INFINIUM 1400 M1" value="6" from="0">
+        <consts>
+          <const name="C_VINMAX2" value="145.0000"/>
+          <const name="C_VINMIN2" value="82.0000"/>
+          <const name="C_VINNOMINAL2" value="115.0000"/>
+        </consts>
+      </model>
+      <model name="INFINIUM 1200 M2" value="7" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1200.0000"/>
+          <const name="C_VINMAX" value="255.0000"/>
+          <const name="C_VINMIN" value="180.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+      </model>
+    </device>
+    <!-- =================================================================== -->
+    <!-- Familia 05 -->
+    <!-- =================================================================== -->
+    <device family="5" name="INFINIUM DIGITAL">
+      <ranges>
+        <range start="0080" size="23"/>
+        <range start="00C9" size="1"/>
+      </ranges>
+      <capabilities>
+        <cap name="hasFamily" value="1"/>
+        <cap name="hasModel" value="1"/>
+        <cap name="hasVInput" value="1"/>
+        <cap name="hasVOutput" value="1"/>
+        <cap name="hasIOutput" value="1"/>
+        <cap name="hasPOutput" value="1"/>
+        <cap name="hasFOutput" value="1"/>
+        <cap name="hasVBattery" value="1"/>
+        <cap name="hasCBattery" value="1"/>
+        <cap name="hasTemperature" value="1"/>
+        <cap name="hasVersion" value="1"/>
+        <cap name="hasICBattery" value="0"/>
+        <cap name="hasSetICBattery" value="0"/>
+        <cap name="hasShutdownTimer" value="1"/>
+        <cap name="hasManualShutdown" value="1"/>
+        <cap name="hasStandBy" value="1"/>
+        <cap name="hasWakeUp" value="1"/>
+        <cap name="hasNightOff" value="1"/>
+        <cap name="hasSampVInput" value="1"/>
+        <cap name="hasSampVOutput" value="1"/>
+        <cap name="hasSampIOutput" value="1"/>
+        <cap name="hasNominalVInput" value="1"/>
+        <cap name="hasNominalVOutput" value="1"/>
+        <cap name="hasNominalPOutput" value="1"/>
+        <cap name="hasNominalFOutput" value="1"/>
+        <cap name="hasNominalVBattery" value="1"/>
+        <cap name="hasSetDischargeBattery" value="1"/>
+        <cap name="hasChangeAutonomy" value="0"/>
+        <cap name="hasPowerLook" value="0"/>
+        <cap name="hasSetLineSens" value="1"/>
+        <cap name="hasRgbLed" value="0"/>
+      </capabilities>
+      <default>
+        <map>
+          <alias name="V_WAKEUPLOW" addr="0080"/>
+          <alias name="V_WAKEUPMID" addr="0081"/>
+          <alias name="V_WAKEUPHI" addr="0082"/>
+          <alias name="V_MODEL" addr="0085"/>
+          <alias name="V_VINPUT" addr="0086"/>
+          <alias name="V_VOUTPUT" addr="0087"/>
+          <alias name="V_IOUTPUT" addr="0088"/>
+          <alias name="V_POUTPUT" addr="0089"/>
+          <alias name="V_FOUTPUT" addr="008A"/>
+          <alias name="V_VBATTERY" addr="008B"/>
+          <alias name="V_TEMPER" addr="0090"/>
+          <alias name="V_CBATTERY" addr="0092"/>
+          <alias name="V_VERSION" addr="0093"/>
+          <alias name="V_SAMPVIN" addr="00A4"/>
+          <alias name="V_SAMPVOUT" addr="00A8"/>
+          <alias name="V_SAMPIOUT" addr="00AC"/>
+          <alias name="V_LINESENS" addr="00B8"/>
+          <alias name="V_SHUTDOWNTIMER" addr="00C9"/>
+          <alias name="V_SUPERVIDX" addr="00E8"/>
+          <alias name="F_FOVERTEMP" addr="008D" bit="0"/>
+          <alias name="F_FINTERNAL" addr="008D" bit="1"/>
+          <alias name="F_FSHORTCIRCUIT" addr="008D" bit="2"/>
+          <alias name="F_FOVERLOAD" addr="008D" bit="3"/>
+          <alias name="F_FENDBATTERY" addr="008D" bit="4"/>
+          <alias name="F_FABNORMALVOUT" addr="008D" bit="5"/>
+          <alias name="F_FABNORMALVBAT" addr="008D" bit="6"/>
+          <alias name="F_FINVERTER" addr="008D" bit="7"/>
+          <alias name="F_LOFINPUT" addr="008E" bit="0"/>
+          <alias name="F_FFAN" addr="008E" bit="1"/>
+          <alias name="F_NOSYNCIN" addr="008E" bit="2"/>
+          <alias name="F_LOVINPUT" addr="008E" bit="3"/>
+          <alias name="F_HIVINPUT" addr="008E" bit="4"/>
+          <alias name="F_NOVINPUT" addr="008E" bit="5"/>
+          <alias name="F_LOBATTERY" addr="008E" bit="6"/>
+          <alias name="F_NOISEIN" addr="008E" bit="7"/>
+          <alias name="F_OPBATTERY" addr="008F" bit="3"/>
+          <alias name="F_OPSTANDBY" addr="008F" bit="4"/>
+          <alias name="F_OPWARNING" addr="008F" bit="5"/>
+          <alias name="F_OPSTARTUP" addr="008F" bit="6"/>
+          <alias name="F_OPCHECKUP" addr="008F" bit="7"/>
+          <alias name="F_NIGHTOFFON" addr="0091" bit="0"/>
+          <alias name="F_MAXBATTERY" addr="0091" bit="1"/>
+          <alias name="F_SHUTDOWNTIMERON" addr="0091" bit="4"/>
+          <alias name="F_WAKEUPNOVIN" addr="0091" bit="5"/>
+          <alias name="F_WAKEUPON" addr="0091" bit="7"/>
+          <alias name="F_TRANSFINV" addr="0094" bit="5"/>
+          <alias name="F_RCTRLON" addr="0095" bit="3"/>
+          <alias name="F_VINSEL220" addr="0095" bit="5"/>
+          <alias name="F_SUPERVON" addr="0096" bit="3"/>
+        </map>
+        <consts>
+          <const name="C_FINNOMINAL" value="60.0000"/>
+          <const name="C_LSENSHI" value="33.0000"/>
+          <const name="C_LSENSLO" value="55.0000"/>
+          <const name="C_LSENSNORMAL" value="41.0000"/>
+          <const name="C_LSENSVHI" value="25.0000"/>
+          <const name="C_LSENSVLO" value="63.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+          <const name="C_VINMAX" value="145.0000"/>
+          <const name="C_VINMAX2" value="255.0000"/>
+          <const name="C_VINMIN" value="82.0000"/>
+          <const name="C_VINMIN2" value="180.0000"/>
+          <const name="C_VINNOMINAL" value="115.0000"/>
+          <const name="C_VINNOMINAL2" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="115.0000"/>
+        </consts>
+        <flags>
+          <flag name="opStartup" value="F_OPSTARTUP"/>
+          <flag name="opBattery" value="F_OPBATTERY"/>
+          <flag name="opStandBy" value="F_OPSTANDBY"/>
+          <flag name="opCheckup" value="F_OPCHECKUP"/>
+          <flag name="opWarning" value="F_OPWARNING"/>
+          <flag name="noVInput" value="F_NOVINPUT"/>
+          <flag name="loVInput" value="(F_NOVINPUT)?0:F_LOVINPUT"/>
+          <flag name="hiVInput" value="F_HIVINPUT"/>
+          <flag name="loFInput" value="F_LOFINPUT"/>
+          <flag name="noSyncInput" value="F_NOSYNCIN"/>
+          <flag name="noiseInput" value="F_NOISEIN"/>
+          <flag name="loBattery" value="F_LOBATTERY"/>
+          <flag name="maxBattery" value="F_MAXBATTERY"/>
+          <flag name="shutdownTimerActive" value="F_SHUTDOWNTIMERON"/>
+          <flag name="remoteControlActive" value="F_RCTRLON"/>
+          <flag name="failOvertemp" value="F_FOVERTEMP"/>
+          <flag name="failInternal" value="F_FINTERNAL"/>
+          <flag name="failOverload" value="F_FOVERLOAD"/>
+          <flag name="failShortcircuit" value="F_FSHORTCIRCUIT"/>
+          <flag name="failInverter" value="F_FINVERTER"/>
+          <flag name="failFan" value="F_FFAN"/>
+          <flag name="failEndBattery" value="F_FENDBATTERY"/>
+          <flag name="failAbnormalVOutput" value="F_FABNORMALVOUT"/>
+          <flag name="failAbnormalVBattery" value="F_FABNORMALVBAT"/>
+        </flags>
+        <vars>
+          <var name="model" value="V_MODEL"/>
+          <var name="version" value="V_VERSION*0.1000"/>
+          <var name="vInput" value="V_VINPUT"/>
+          <var name="vOutput" value="V_VOUTPUT*0.6090"/>
+          <var name="fOutput" value="V_FOUTPUT*0.2500"/>
+          <var name="iOutput" value="V_IOUTPUT*0.0625"/>
+          <var name="pOutput" value="V_POUTPUT"/>
+          <var name="vBattery" value="V_VBATTERY*0.1250"/>
+          <var name="cBattery" value="V_CBATTERY"/>
+          <var name="temperature" value="V_TEMPER"/>
+          <var name="sampVInput" value="V_SAMPVIN*0.5000"/>
+          <var name="sampVOutput" value="V_SAMPVOUT*0.5000"/>
+          <var name="sampIOutput" value="V_SAMPIOUT*0.5000"/>
+          <var name="shutdownTimer" value="(F_SHUTDOWNTIMERON)?V_SHUTDOWNTIMER:-1"/>
+          <var name="wakeupTimer" value="(F_WAKEUPON)?0x1000000-((V_WAKEUPLOW &amp; 0xFF)|((V_WAKEUPMID &amp; 0xFF)&lt;&lt;8)|((V_WAKEUPHI &amp; 0xFF)&lt;&lt;16)):-1"/>
+          <var name="nightoffTimer" value="(F_NIGHTOFFON)?0x1000000-((V_WAKEUPLOW &amp; 0xFF)|((V_WAKEUPMID &amp; 0xFF)&lt;&lt;8)|((V_WAKEUPHI &amp; 0xFF)&lt;&lt;16)):-1"/>
+          <var name="nominalVInput" value="(F_VINSEL220)?C_VINNOMINAL2:C_VINNOMINAL"/>
+          <var name="nominalVOutput" value="C_VOUTNOMINAL"/>
+          <var name="nominalFOutput" value="C_FINNOMINAL"/>
+          <var name="nominalPOutput" value="C_POUTNOMINAL"/>
+          <var name="nominalVBattery" value="C_VBATNOMINAL"/>
+        </vars>
+        <actions>
+          <action name="superviseOn" value="F_SUPERVON=1"/>
+          <action name="superviseOff" value="F_SUPERVON=0"/>
+          <action name="shutdown" value="F_SUPERVON=0;V_SHUTDOWNTIMER=$counter;F_SHUTDOWNTIMERON=1"/>
+          <action name="standby" value="F_WAKEUPNOVIN=1;F_SUPERVON=1;V_SHUTDOWNTIMER=$counter;F_SHUTDOWNTIMERON=1"/>
+          <action name="nightOff" value="F_WAKEUPON=0;F_NIGHTOFFON=0;V_WAKEUPLOW=(0x1000000-$counter)&amp;0xFF;V_WAKEUPMID=((0x1000000-$counter)&amp;0xFF00)&gt;&gt;8;V_WAKEUPHI=((0x1000000-$counter)&amp;0xFF0000)&gt;&gt;16;F_NIGHTOFFON=1"/>
+          <action name="wakeUp" value="F_WAKEUPON=0;F_NIGHTOFFON=0;V_WAKEUPLOW=(0x1000000-$counter)&amp;0xFF;V_WAKEUPMID=((0x1000000-$counter)&amp;0xFF00)&gt;&gt;8;V_WAKEUPHI=((0x1000000-$counter)&amp;0xFF0000)&gt;&gt;16;F_WAKEUPNOVIN=$novin;F_WAKEUPON=1"/>
+          <action name="fullDischarge" value="F_OPCHECKUP=1;V_SUPERVIDX=0;F_TRANSFINV=1"/>
+          <action name="setLineSens" value="V_LINESENS=($value==4)?C_LSENSVHI:(($value==3)?C_LSENSHI:(($value==1)?C_LSENSLO:(($value==0)?C_LSENSVLO:C_LSENSNORMAL)))"/>
+        </actions>
+      </default>
+      <model name="INFINIUM 2200 TI" value="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="2200.0000"/>
+        </consts>
+      </model>
+      <model name="INFINIUM 2200 M2" value="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="2200.0000"/>
+          <const name="C_VINMAX" value="255.0000"/>
+          <const name="C_VINMIN" value="180.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+        <vars>
+          <var name="vOutput" value="V_VOUTPUT*1.1250"/>
+          <var name="iOutput" value="V_IOUTPUT*0.0940"/>
+        </vars>
+      </model>
+      <model name="INFINIUM 3000 TI" value="2" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="3000.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*0.1910"/>
+        </vars>
+      </model>
+      <model name="INFINIUM 3000 M2" value="3" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="3000.0000"/>
+          <const name="C_VINMAX" value="255.0000"/>
+          <const name="C_VINMIN" value="180.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+        <vars>
+          <var name="vOutput" value="V_VOUTPUT*1.1210"/>
+        </vars>
+      </model>
+      <model name="INFINIUM 5000 TI" value="4" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="5000.0000"/>
+        </consts>
+      </model>
+      <model name="INFINIUM 5000 M2" value="5" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="5000.0000"/>
+          <const name="C_VINMAX" value="255.0000"/>
+          <const name="C_VINMIN" value="180.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+      </model>
+    </device>
+    <!-- =================================================================== -->
+    <!-- Familia 06 -->
+    <!-- =================================================================== -->
+    <device family="6" name="PRECISION">
+      <ranges>
+        <range start="0080" size="22"/>
+        <range start="00D0" size="1"/>
+      </ranges>
+      <capabilities>
+        <cap name="hasFamily" value="1"/>
+        <cap name="hasModel" value="1"/>
+        <cap name="hasVInput" value="1"/>
+        <cap name="hasVOutput" value="1"/>
+        <cap name="hasIOutput" value="0"/>
+        <cap name="hasPOutput" value="1"/>
+        <cap name="hasFOutput" value="1"/>
+        <cap name="hasVBattery" value="0"/>
+        <cap name="hasCBattery" value="0"/>
+        <cap name="hasTemperature" value="1"/>
+        <cap name="hasVersion" value="1"/>
+        <cap name="hasICBattery" value="0"/>
+        <cap name="hasSetICBattery" value="0"/>
+        <cap name="hasShutdownTimer" value="1"/>
+        <cap name="hasManualShutdown" value="1"/>
+        <cap name="hasStandBy" value="1"/>
+        <cap name="hasWakeUp" value="1"/>
+        <cap name="hasNightOff" value="1"/>
+        <cap name="hasSampVInput" value="1"/>
+        <cap name="hasSampVOutput" value="1"/>
+        <cap name="hasSampIOutput" value="1"/>
+        <cap name="hasNominalVInput" value="1"/>
+        <cap name="hasNominalVOutput" value="1"/>
+        <cap name="hasNominalPOutput" value="1"/>
+        <cap name="hasNominalFOutput" value="1"/>
+        <cap name="hasNominalVBattery" value="0"/>
+        <cap name="hasSetDischargeBattery" value="0"/>
+        <cap name="hasChangeAutonomy" value="0"/>
+        <cap name="hasPowerLook" value="0"/>
+        <cap name="hasSetLineSens" value="0"/>
+        <cap name="hasRgbLed" value="0"/>
+      </capabilities>
+      <default>
+        <map>
+          <alias name="V_WAKEUPLOW" addr="0080"/>
+          <alias name="V_WAKEUPMID" addr="0081"/>
+          <alias name="V_WAKEUPHI" addr="0082"/>
+          <alias name="V_VOUTPUT" addr="0083"/>
+          <alias name="V_ACTUALTAP" addr="0084"/>
+          <alias name="V_MODEL" addr="0085"/>
+          <alias name="V_VINPUT" addr="0086"/>
+          <alias name="V_IINPUT" addr="0088"/>
+          <alias name="V_POUTPUT" addr="0089"/>
+          <alias name="V_FOUTPUT" addr="008A"/>
+          <alias name="V_TEMPER" addr="0090"/>
+          <alias name="V_VERSION" addr="0093"/>
+          <alias name="V_SAMPVIN" addr="00A4"/>
+          <alias name="V_SAMPVOUT" addr="00A8"/>
+          <alias name="V_SAMPIOUT" addr="00AC"/>
+          <alias name="V_SHUTDOWNTIMER" addr="00D0"/>
+          <alias name="F_FOVERTEMP" addr="008D" bit="1"/>
+          <alias name="F_FLOVINPUT" addr="008D" bit="2"/>
+          <alias name="F_FOVERLOAD" addr="008D" bit="3"/>
+          <alias name="F_FHIPOUTPUT" addr="008D" bit="4"/>
+          <alias name="F_FABNORMALVOUT" addr="008D" bit="5"/>
+          <alias name="F_FTIRISTOR" addr="008D" bit="6"/>
+          <alias name="F_FINTERNAL" addr="008D" bit="7"/>
+          <alias name="F_LOFINPUT" addr="008E" bit="0"/>
+          <alias name="F_FFAN" addr="008E" bit="1"/>
+          <alias name="F_NOSYNCIN" addr="008E" bit="1"/>
+          <alias name="F_LOVINPUT" addr="008E" bit="2"/>
+          <alias name="F_HIVINPUT" addr="008E" bit="3"/>
+          <alias name="F_HIFINPUT" addr="008E" bit="7"/>
+          <alias name="F_OPSTANDBY" addr="008F" bit="4"/>
+          <alias name="F_OPSTARTUP" addr="008F" bit="6"/>
+          <alias name="F_NIGHTOFFON" addr="0091" bit="0"/>
+          <alias name="F_SHUTDOWNTIMERON" addr="0091" bit="4"/>
+          <alias name="F_WAKEUPON" addr="0091" bit="7"/>
+          <alias name="F_RCTRLON" addr="0095" bit="3"/>
+          <alias name="F_VINSEL220" addr="0095" bit="5"/>
+          <alias name="F_SUPERVON" addr="0096" bit="3"/>
+        </map>
+        <consts>
+          <const name="C_FINNOMINAL" value="60.0000"/>
+          <const name="C_VINMAX" value="145.0000"/>
+          <const name="C_VINMAX2" value="255.0000"/>
+          <const name="C_VINMIN" value="75.0000"/>
+          <const name="C_VINMIN2" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="115.0000"/>
+          <const name="C_VINNOMINAL2" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="115.0000"/>
+        </consts>
+        <flags>
+          <flag name="opStartup" value="F_OPSTARTUP"/>
+          <flag name="opStandBy" value="F_OPSTANDBY"/>
+          <flag name="loVInput" value="F_LOVINPUT"/>
+          <flag name="hiVInput" value="F_HIVINPUT"/>
+          <flag name="hiFInput" value="F_HIFINPUT"/>
+          <flag name="noSyncInput" value="F_NOSYNCIN"/>
+          <flag name="shutdownTimerActive" value="F_SHUTDOWNTIMERON"/>
+          <flag name="remoteControlActive" value="F_RCTRLON"/>
+          <flag name="failOvertemp" value="F_FOVERTEMP"/>
+          <flag name="failInternal" value="F_FINTERNAL"/>
+          <flag name="failOverload" value="F_FOVERLOAD"/>
+          <flag name="failFan" value="F_FFAN"/>
+          <flag name="failTiristor" value="F_FTIRISTOR"/>
+          <flag name="failLoVInput" value="F_FLOVINPUT"/>
+          <flag name="failAbnormalVOutput" value="F_FABNORMALVOUT"/>
+          <flag name="failHiPOutput" value="F_FHIPOUTPUT"/>
+        </flags>
+        <vars>
+          <var name="model" value="V_MODEL"/>
+          <var name="version" value="V_VERSION*0.1000"/>
+          <var name="vInput" value="(F_VINSEL220)?((V_VINPUT*0.6050)*1.148):((V_VINPUT*0.6050)*0.605)"/>
+          <var name="vOutput" value="V_VOUTPUT*0.6050"/>
+          <var name="fOutput" value="V_FOUTPUT*0.2500"/>
+          <var name="pOutput" value="V_POUTPUT"/>
+          <var name="temperature" value="V_TEMPER"/>
+          <var name="sampVInput" value="V_SAMPVIN*0.5000"/>
+          <var name="sampVOutput" value="V_SAMPVOUT*0.5000"/>
+          <var name="sampIOutput" value="V_SAMPIOUT*0.5000"/>
+          <var name="shutdownTimer" value="(F_SHUTDOWNTIMERON)?V_SHUTDOWNTIMER:-1"/>
+          <var name="wakeupTimer" value="(F_WAKEUPON)?0x1000000-((V_WAKEUPLOW &amp; 0xFF)|((V_WAKEUPMID &amp; 0xFF)&lt;&lt;8)|((V_WAKEUPHI &amp; 0xFF)&lt;&lt;16)):-1"/>
+          <var name="nightoffTimer" value="(F_NIGHTOFFON)?0x1000000-((V_WAKEUPLOW &amp; 0xFF)|((V_WAKEUPMID &amp; 0xFF)&lt;&lt;8)|((V_WAKEUPHI &amp; 0xFF)&lt;&lt;16)):-1"/>
+          <var name="nominalVInput" value="(F_VINSEL220)?C_VINNOMINAL2:C_VINNOMINAL"/>
+          <var name="nominalVOutput" value="C_VOUTNOMINAL"/>
+          <var name="nominalFOutput" value="C_FINNOMINAL"/>
+          <var name="nominalPOutput" value="C_POUTNOMINAL"/>
+        </vars>
+        <actions>
+          <action name="superviseOn" value="F_SUPERVON=1"/>
+          <action name="superviseOff" value="F_SUPERVON=0"/>
+          <action name="shutdown" value="F_SUPERVON=0;V_SHUTDOWNTIMER=$counter;F_SHUTDOWNTIMERON=1"/>
+          <action name="standby" value="F_WAKEUPNOVIN=1;F_SUPERVON=1;V_SHUTDOWNTIMER=$counter;F_SHUTDOWNTIMERON=1"/>
+          <action name="nightOff" value="F_WAKEUPON=0;F_NIGHTOFFON=0;V_WAKEUPLOW=(0x1000000-$counter)&amp;0xFF;V_WAKEUPMID=((0x1000000-$counter)&amp;0xFF00)&gt;&gt;8;V_WAKEUPHI=((0x1000000-$counter)&amp;0xFF0000)&gt;&gt;16;F_NIGHTOFFON=1"/>
+          <action name="wakeUp" value="F_WAKEUPON=0;F_NIGHTOFFON=0;V_WAKEUPLOW=(0x1000000-$counter)&amp;0xFF;V_WAKEUPMID=((0x1000000-$counter)&amp;0xFF00)&gt;&gt;8;V_WAKEUPHI=((0x1000000-$counter)&amp;0xFF0000)&gt;&gt;16;F_WAKEUPON=1"/>
+        </actions>
+      </default>
+      <model name="PRECISION 1000 M1" value="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1000.0000"/>
+          <const name="C_VINMAX2" value="145.0000"/>
+          <const name="C_VINMIN2" value="75.0000"/>
+          <const name="C_VINNOMINAL2" value="115.0000"/>
+        </consts>
+      </model>
+      <model name="PRECISION 1000 M2" value="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1000.0000"/>
+          <const name="C_VINMAX" value="255.0000"/>
+          <const name="C_VINMIN" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+        <vars>
+          <var name="vInput" value="(F_VINSEL220)?((V_VINPUT*1.1330)*1.148):((V_VINPUT*1.1330)*0.605)"/>
+          <var name="vOutput" value="V_VOUTPUT*1.1330"/>
+          <var name="nominalVInput" value="C_VINNOMINAL"/>
+        </vars>
+      </model>
+      <model name="PRECISION 1500 M1" value="2" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1500.0000"/>
+        </consts>
+      </model>
+      <model name="PRECISION 1500 M2" value="3" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1500.0000"/>
+          <const name="C_VINMAX" value="255.0000"/>
+          <const name="C_VINMIN" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+      </model>
+      <model name="PRECISION 2200 M1" value="4" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="2200.0000"/>
+        </consts>
+      </model>
+      <model name="PRECISION 2200 M2" value="5" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="2200.0000"/>
+          <const name="C_VINMAX" value="255.0000"/>
+          <const name="C_VINMIN" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+      </model>
+      <model name="PRECISION 3200 M1" value="6" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="3200.0000"/>
+        </consts>
+      </model>
+      <model name="PRECISION 3200 M2" value="7" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="3200.0000"/>
+          <const name="C_VINMAX" value="255.0000"/>
+          <const name="C_VINMIN" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+      </model>
+      <model name="PRECISION 1000 BI/M1" value="16" from="0">
+        <vars>
+          <var name="vInput" value="(F_VINSEL220)?((V_VINPUT)*1.148):((V_VINPUT)*0.605)"/>
+        </vars>
+      </model>
+      <model name="PRECISION 1000 BI/M2" value="17" from="1">
+        <vars>
+          <var name="vInput" value="(F_VINSEL220)?((V_VINPUT)*1.148):((V_VINPUT)*0.605)"/>
+        </vars>
+      </model>
+      <model name="PRECISION 1500 BI/M1" value="18" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1500.0000"/>
+        </consts>
+        <vars>
+          <var name="vInput" value="(F_VINSEL220)?((V_VINPUT)*1.148):((V_VINPUT)*0.605)"/>
+        </vars>
+      </model>
+      <model name="PRECISION 1500 BI/M2" value="19" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1500.0000"/>
+        </consts>
+        <vars>
+          <var name="vInput" value="(F_VINSEL220)?((V_VINPUT)*1.148):((V_VINPUT)*0.605)"/>
+        </vars>
+      </model>
+      <model name="PRECISION 2200 BI/M1" value="20" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="2200.0000"/>
+        </consts>
+        <vars>
+          <var name="vInput" value="(F_VINSEL220)?((V_VINPUT)*1.148):((V_VINPUT)*0.605)"/>
+        </vars>
+      </model>
+      <model name="PRECISION 2200 BI/M2" value="21" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="2200.0000"/>
+        </consts>
+        <vars>
+          <var name="vInput" value="(F_VINSEL220)?((V_VINPUT)*1.148):((V_VINPUT)*0.605)"/>
+        </vars>
+      </model>
+      <model name="PRECISION 3200 BI/M1" value="22" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="3200.0000"/>
+        </consts>
+        <vars>
+          <var name="vInput" value="(F_VINSEL220)?((V_VINPUT)*1.148):((V_VINPUT)*0.605)"/>
+        </vars>
+      </model>
+      <model name="PRECISION 3200 BI/M2" value="23" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="3200.0000"/>
+        </consts>
+        <vars>
+          <var name="vInput" value="(F_VINSEL220)?((V_VINPUT)*1.148):((V_VINPUT)*0.605)"/>
+        </vars>
+      </model>
+    </device>
+    <!-- =================================================================== -->
+    <!-- Familia 07 -->
+    <!-- =================================================================== -->
+    <device family="7" name="SENIUM/ONEUP">
+      <ranges>
+        <range start="0080" size="22"/>
+        <range start="00C9" size="1"/>
+        <range start="004B" size="4"/>
+      </ranges>
+      <capabilities>
+        <cap name="hasFamily" value="1"/>
+        <cap name="hasModel" value="1"/>
+        <cap name="hasVInput" value="1"/>
+        <cap name="hasVOutput" value="1"/>
+        <cap name="hasIOutput" value="1"/>
+        <cap name="hasPOutput" value="1"/>
+        <cap name="hasFOutput" value="1"/>
+        <cap name="hasVBattery" value="1"/>
+        <cap name="hasCBattery" value="1"/>
+        <cap name="hasTemperature" value="1"/>
+        <cap name="hasVersion" value="1"/>
+        <cap name="hasICBattery" value="0"/>
+        <cap name="hasSetICBattery" value="0"/>
+        <cap name="hasShutdownTimer" value="1"/>
+        <cap name="hasManualShutdown" value="1"/>
+        <cap name="hasStandBy" value="1"/>
+        <cap name="hasWakeUp" value="1"/>
+        <cap name="hasNightOff" value="1"/>
+        <cap name="hasSampVInput" value="1"/>
+        <cap name="hasSampVOutput" value="1"/>
+        <cap name="hasSampIOutput" value="1"/>
+        <cap name="hasNominalVInput" value="1"/>
+        <cap name="hasNominalVOutput" value="1"/>
+        <cap name="hasNominalPOutput" value="1"/>
+        <cap name="hasNominalFOutput" value="1"/>
+        <cap name="hasNominalVBattery" value="1"/>
+        <cap name="hasSetDischargeBattery" value="1"/>
+        <cap name="hasChangeAutonomy" value="0"/>
+        <cap name="hasPowerLook" value="0"/>
+        <cap name="hasSetLineSens" value="1"/>
+        <cap name="hasRgbLed" value="1"/>
+      </capabilities>
+      <default>
+        <map>
+          <alias name="V_WAKEUPLOW" addr="0080"/>
+          <alias name="V_WAKEUPMID" addr="0081"/>
+          <alias name="V_WAKEUPHI" addr="0082"/>
+          <alias name="V_MODEL" addr="0085"/>
+          <alias name="V_VINPUT" addr="0086"/>
+          <alias name="V_VOUTPUT" addr="0087"/>
+          <alias name="V_IOUTPUT" addr="0088"/>
+          <alias name="V_POUTPUT" addr="0089"/>
+          <alias name="V_FOUTPUT" addr="008A"/>
+          <alias name="V_VBATTERY" addr="008B"/>
+          <alias name="V_TEMPER" addr="0090"/>
+          <alias name="V_CBATTERY" addr="0092"/>
+          <alias name="V_VERSION" addr="0093"/>
+          <alias name="V_SAMPVIN" addr="00A4"/>
+          <alias name="V_SAMPVOUT" addr="00A8"/>
+          <alias name="V_SAMPIOUT" addr="00AC"/>
+          <alias name="V_LINESENS" addr="00B8"/>
+          <alias name="V_SHUTDOWNTIMER" addr="00C9"/>
+          <alias name="V_SUPERVIDX" addr="00E8"/>
+          <alias name="V_LEDRED" addr="004B"/>
+          <alias name="V_LEDGREEN" addr="004C"/>
+          <alias name="V_LEDBLUE" addr="004D"/>
+          <alias name="V_RANDOM" addr="004E"/>
+          <alias name="F_WAKEUPON" addr="0084" bit="0"/>
+          <alias name="F_WAKEUPNOVIN" addr="0084" bit="1"/>
+          <alias name="F_NIGHTOFFON" addr="0084" bit="4"/>
+          <alias name="F_SUPERVON" addr="0084" bit="6"/>
+          <alias name="F_FOVERTEMP" addr="008D" bit="0"/>
+          <alias name="F_FINTERNAL" addr="008D" bit="1"/>
+          <alias name="F_FENDBATTERY" addr="008D" bit="2"/>
+          <alias name="F_FOVERLOAD" addr="008D" bit="3"/>
+          <alias name="F_FSHORTCIRCUIT" addr="008D" bit="4"/>
+          <alias name="F_FABNORMALVOUT" addr="008D" bit="5"/>
+          <alias name="F_FABNORMALVBAT" addr="008D" bit="6"/>
+          <alias name="F_FINVERTER" addr="008D" bit="7"/>
+          <alias name="F_LOFINPUT" addr="008E" bit="0"/>
+          <alias name="F_HIFINPUT" addr="008E" bit="1"/>
+          <alias name="F_NOSYNCIN" addr="008E" bit="2"/>
+          <alias name="F_LOVINPUT" addr="008E" bit="3"/>
+          <alias name="F_HIVINPUT" addr="008E" bit="4"/>
+          <alias name="F_NOVINPUT" addr="008E" bit="5"/>
+          <alias name="F_LOBATTERY" addr="008E" bit="6"/>
+          <alias name="F_NOISEIN" addr="008E" bit="7"/>
+          <alias name="F_OPBATTERY" addr="008F" bit="3"/>
+          <alias name="F_OPSTANDBY" addr="008F" bit="4"/>
+          <alias name="F_OPWARNING" addr="008F" bit="5"/>
+          <alias name="F_OPSTARTUP" addr="008F" bit="6"/>
+          <alias name="F_OPCHECKUP" addr="008F" bit="7"/>
+          <alias name="F_SYNCIN" addr="0091" bit="0"/>
+          <alias name="F_MAXBATTERY" addr="0091" bit="1"/>
+          <alias name="F_VBAT48V" addr="0091" bit="3"/>
+          <alias name="F_SHUTDOWNTIMERON" addr="0091" bit="4"/>
+          <alias name="F_TRANSFINV" addr="0094" bit="5"/>
+          <alias name="F_RCTRLON" addr="0095" bit="3"/>
+          <alias name="F_VINSEL220" addr="0095" bit="5"/>
+        </map>
+        <consts>
+          <const name="C_FINNOMINAL" value="60.0000"/>
+          <const name="C_LSENSHI" value="33.0000"/>
+          <const name="C_LSENSLO" value="55.0000"/>
+          <const name="C_LSENSNORMAL" value="41.0000"/>
+          <const name="C_LSENSVHI" value="25.0000"/>
+          <const name="C_LSENSVLO" value="63.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+          <const name="C_VINMAX" value="145.0000"/>
+          <const name="C_VINMAX2" value="255.0000"/>
+          <const name="C_VINMIN" value="75.0000"/>
+          <const name="C_VINMIN2" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="115.0000"/>
+          <const name="C_VINNOMINAL2" value="220.0000"/>
+        </consts>
+        <flags>
+          <flag name="opStartup" value="F_OPSTARTUP"/>
+          <flag name="opBattery" value="F_OPBATTERY"/>
+          <flag name="opStandBy" value="F_OPSTANDBY"/>
+          <flag name="opCheckup" value="F_OPCHECKUP"/>
+          <flag name="opWarning" value="F_OPWARNING"/>
+          <flag name="noVInput" value="F_NOVINPUT"/>
+          <flag name="loVInput" value="(F_NOVINPUT)?0:F_LOVINPUT"/>
+          <flag name="hiVInput" value="F_HIVINPUT"/>
+          <flag name="loFInput" value="F_LOFINPUT"/>
+          <flag name="hiFInput" value="F_HIFINPUT"/>
+          <flag name="noSyncInput" value="F_NOSYNCIN"/>
+          <flag name="syncInput" value="F_SYNCIN"/>
+          <flag name="noiseInput" value="F_NOISEIN"/>
+          <flag name="loBattery" value="F_LOBATTERY"/>
+          <flag name="maxBattery" value="F_MAXBATTERY"/>
+          <flag name="shutdownTimerActive" value="F_SHUTDOWNTIMERON"/>
+          <flag name="remoteControlActive" value="F_RCTRLON"/>
+          <flag name="failOvertemp" value="F_FOVERTEMP"/>
+          <flag name="failInternal" value="F_FINTERNAL"/>
+          <flag name="failOverload" value="F_FOVERLOAD"/>
+          <flag name="failShortcircuit" value="F_FSHORTCIRCUIT"/>
+          <flag name="failInverter" value="F_FINVERTER"/>
+          <flag name="failEndBattery" value="F_FENDBATTERY"/>
+          <flag name="failAbnormalVOutput" value="F_FABNORMALVOUT"/>
+          <flag name="failAbnormalVBattery" value="F_FABNORMALVBAT"/>
+        </flags>
+        <vars>
+          <var name="model" value="V_MODEL"/>
+          <var name="version" value="V_VERSION*0.1000"/>
+          <var name="vInput" value="V_VINPUT"/>
+          <var name="vOutput" value="V_VOUTPUT*0.9920"/>
+          <var name="fOutput" value="V_FOUTPUT*0.2500"/>
+          <var name="iOutput" value="V_IOUTPUT*0.1170"/>
+          <var name="pOutput" value="V_POUTPUT"/>
+          <var name="vBattery" value="V_VBATTERY*0.1250"/>
+          <var name="cBattery" value="V_CBATTERY"/>
+          <var name="temperature" value="V_TEMPER"/>
+          <var name="sampVInput" value="V_SAMPVIN*0.5000"/>
+          <var name="sampVOutput" value="V_SAMPVOUT*0.5000"/>
+          <var name="sampIOutput" value="V_SAMPIOUT*0.5000"/>
+          <var name="shutdownTimer" value="(F_SHUTDOWNTIMERON)?V_SHUTDOWNTIMER:-1"/>
+          <var name="wakeupTimer" value="(F_WAKEUPON)?0x1000000-((V_WAKEUPLOW &amp; 0xFF)|((V_WAKEUPMID &amp; 0xFF)&lt;&lt;8)|((V_WAKEUPHI &amp; 0xFF)&lt;&lt;16)):-1"/>
+          <var name="nightoffTimer" value="(F_NIGHTOFFON)?0x1000000-((V_WAKEUPLOW &amp; 0xFF)|((V_WAKEUPMID &amp; 0xFF)&lt;&lt;8)|((V_WAKEUPHI &amp; 0xFF)&lt;&lt;16)):-1"/>
+          <var name="nominalVInput" value="(F_VINSEL220)?C_VINNOMINAL2:C_VINNOMINAL"/>
+          <var name="nominalVOutput" value="C_VOUTNOMINAL"/>
+          <var name="nominalFOutput" value="C_FINNOMINAL"/>
+          <var name="nominalPOutput" value="C_POUTNOMINAL"/>
+          <var name="nominalVBattery" value="C_VBATNOMINAL"/>
+          <var name="ledRed" value="V_LEDRED"/>
+          <var name="ledGreen" value="V_LEDGREEN"/>
+          <var name="ledBlue" value="V_LEDBLUE"/>
+          <var name="random" value="V_RANDOM"/>
+        </vars>
+        <actions>
+          <action name="superviseOn" value="F_SUPERVON=1"/>
+          <action name="superviseOff" value="F_SUPERVON=0"/>
+          <action name="shutdown" value="F_SUPERVON=0;V_SHUTDOWNTIMER=$counter;F_SHUTDOWNTIMERON=1"/>
+          <action name="standby" value="F_WAKEUPNOVIN=1;F_SUPERVON=1;V_SHUTDOWNTIMER=$counter;F_SHUTDOWNTIMERON=1"/>
+          <action name="nightOff" value="F_WAKEUPON=0;F_NIGHTOFFON=0;V_WAKEUPLOW=(0x1000000-$counter)&amp;0xFF;V_WAKEUPMID=((0x1000000-$counter)&amp;0xFF00)&gt;&gt;8;V_WAKEUPHI=((0x1000000-$counter)&amp;0xFF0000)&gt;&gt;16;F_NIGHTOFFON=1"/>
+          <action name="wakeUp" value="F_WAKEUPON=0;F_NIGHTOFFON=0;V_WAKEUPLOW=(0x1000000-$counter)&amp;0xFF;V_WAKEUPMID=((0x1000000-$counter)&amp;0xFF00)&gt;&gt;8;V_WAKEUPHI=((0x1000000-$counter)&amp;0xFF0000)&gt;&gt;16;F_WAKEUPNOVIN=$novin;F_WAKEUPON=1"/>
+          <action name="fullDischarge" value="F_OPCHECKUP=1;V_SUPERVIDX=0;F_TRANSFINV=1"/>
+          <action name="setLineSens" value="V_LINESENS=($value==4)?C_LSENSVHI:(($value==3)?C_LSENSHI:(($value==1)?C_LSENSLO:(($value==0)?C_LSENSVLO:C_LSENSNORMAL)))"/>
+          <action name="changeColor" value="V_LEDRED=$red;V_LEDGREEN=$green;V_LEDBLUE=$blue;V_RANDOM=$random"/>
+        </actions>
+      </default>
+      <model name="Senium 1000 Flex Volt XT" value="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1000.0000"/>
+          <const name="C_VOUTNOMINAL" value="115.0000"/>
+        </consts>
+      </model>
+      <model name="Senium 1000 Flex Volt GT" value="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1000.0000"/>
+          <const name="C_VINMAX" value="255.0000"/>
+          <const name="C_VINMIN" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+      </model>
+      <model name="Senium 1500 Flex Volt XT" value="2" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1500.0000"/>
+        </consts>
+      </model>
+      <model name="Senium 1500 Flex Volt GT" value="3" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1500.0000"/>
+        </consts>
+      </model>
+      <model name="Senium 2400 Flex Volt XT" value="4" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="2400.0000"/>
+        </consts>
+      </model>
+      <model name="Senium 2400 Flex Volt GT" value="5" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="2400.0000"/>
+        </consts>
+      </model>
+      <model name="Senium 3200 Flex Volt XT" value="6" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="3200.0000"/>
+        </consts>
+      </model>
+      <model name="Senium 3200 Flex Volt GT" value="7" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="3200.0000"/>
+        </consts>
+      </model>
+    </device>
+    <!-- =================================================================== -->
+    <!-- Familia 08 -->
+    <!-- =================================================================== -->
+    <device family="8" name="SENIUM">
+      <ranges>
+        <range start="0080" size="24"/>
+        <range start="00CB" size="1"/>
+      </ranges>
+      <capabilities>
+        <cap name="hasFamily" value="1"/>
+        <cap name="hasModel" value="1"/>
+        <cap name="hasVInput" value="1"/>
+        <cap name="hasVOutput" value="1"/>
+        <cap name="hasIOutput" value="1"/>
+        <cap name="hasPOutput" value="1"/>
+        <cap name="hasFOutput" value="1"/>
+        <cap name="hasVBattery" value="1"/>
+        <cap name="hasCBattery" value="1"/>
+        <cap name="hasTemperature" value="1"/>
+        <cap name="hasVersion" value="1"/>
+        <cap name="hasICBattery" value="1"/>
+        <cap name="hasSetICBattery" value="1"/>
+        <cap name="hasShutdownTimer" value="1"/>
+        <cap name="hasManualShutdown" value="1"/>
+        <cap name="hasStandBy" value="1"/>
+        <cap name="hasWakeUp" value="1"/>
+        <cap name="hasNightOff" value="1"/>
+        <cap name="hasSampVInput" value="1"/>
+        <cap name="hasSampVOutput" value="1"/>
+        <cap name="hasSampIOutput" value="1"/>
+        <cap name="hasNominalVInput" value="1"/>
+        <cap name="hasNominalVOutput" value="1"/>
+        <cap name="hasNominalPOutput" value="1"/>
+        <cap name="hasNominalFOutput" value="1"/>
+        <cap name="hasNominalVBattery" value="1"/>
+        <cap name="hasSetDischargeBattery" value="1"/>
+        <cap name="hasChangeAutonomy" value="0"/>
+        <cap name="hasPowerLook" value="0"/>
+        <cap name="hasSetLineSens" value="1"/>
+        <cap name="hasRgbLed" value="0"/>
+      </capabilities>
+      <default>
+        <map>
+          <alias name="V_WAKEUPLOW" addr="0080"/>
+          <alias name="V_WAKEUPMID" addr="0081"/>
+          <alias name="V_WAKEUPHI" addr="0082"/>
+          <alias name="V_ICBATTERY" addr="0083"/>
+          <alias name="V_MODEL" addr="0085"/>
+          <alias name="V_VINPUT" addr="0086"/>
+          <alias name="V_VOUTPUT" addr="0087"/>
+          <alias name="V_IOUTPUT" addr="0088"/>
+          <alias name="V_POUTPUT" addr="0089"/>
+          <alias name="V_FOUTPUT" addr="008A"/>
+          <alias name="V_VBATTERY" addr="008B"/>
+          <alias name="V_CBATTERY" addr="0092"/>
+          <alias name="V_VERSION" addr="0093"/>
+          <alias name="V_TEMPER" addr="0097"/>
+          <alias name="V_SAMPVIN" addr="00A4"/>
+          <alias name="V_SAMPVOUT" addr="00A8"/>
+          <alias name="V_SAMPIOUT" addr="00AC"/>
+          <alias name="V_LINESENS" addr="00B8"/>
+          <alias name="V_SHUTDOWNTIMER" addr="00CB"/>
+          <alias name="V_SUPERVIDX" addr="00E8"/>
+          <alias name="F_WAKEUPON" addr="0084" bit="0"/>
+          <alias name="F_WAKEUPNOVIN" addr="0084" bit="1"/>
+          <alias name="F_NIGHTOFFON" addr="0084" bit="4"/>
+          <alias name="F_SUPERVON" addr="0084" bit="6"/>
+          <alias name="F_FOVERTEMP" addr="008D" bit="0"/>
+          <alias name="F_FINTERNAL" addr="008D" bit="1"/>
+          <alias name="F_FENDBATTERY" addr="008D" bit="2"/>
+          <alias name="F_FOVERLOAD" addr="008D" bit="3"/>
+          <alias name="F_FSHORTCIRCUIT" addr="008D" bit="4"/>
+          <alias name="F_FABNORMALVOUT" addr="008D" bit="5"/>
+          <alias name="F_FABNORMALVBAT" addr="008D" bit="6"/>
+          <alias name="F_FINVERTER" addr="008D" bit="7"/>
+          <alias name="F_LOFINPUT" addr="008E" bit="0"/>
+          <alias name="F_HIFINPUT" addr="008E" bit="1"/>
+          <alias name="F_NOSYNCIN" addr="008E" bit="2"/>
+          <alias name="F_LOVINPUT" addr="008E" bit="3"/>
+          <alias name="F_HIVINPUT" addr="008E" bit="4"/>
+          <alias name="F_NOVINPUT" addr="008E" bit="5"/>
+          <alias name="F_LOBATTERY" addr="008E" bit="6"/>
+          <alias name="F_NOISEIN" addr="008E" bit="7"/>
+          <alias name="F_OPBATTERY" addr="008F" bit="3"/>
+          <alias name="F_OPSTANDBY" addr="008F" bit="4"/>
+          <alias name="F_OPWARNING" addr="008F" bit="5"/>
+          <alias name="F_OPSTARTUP" addr="008F" bit="6"/>
+          <alias name="F_OPCHECKUP" addr="008F" bit="7"/>
+          <alias name="F_SYNCIN" addr="0091" bit="0"/>
+          <alias name="F_MAXBATTERY" addr="0091" bit="1"/>
+          <alias name="F_SHUTDOWNTIMERON" addr="0091" bit="4"/>
+          <alias name="F_TRANSFINV" addr="0094" bit="5"/>
+          <alias name="F_RCTRLON" addr="0095" bit="3"/>
+          <alias name="F_VINSEL220" addr="0095" bit="5"/>
+        </map>
+        <consts>
+          <const name="C_FINNOMINAL" value="60.0000"/>
+          <const name="C_ICBATHI" value="70.0000"/>
+          <const name="C_ICBATLO" value="40.0000"/>
+          <const name="C_LSENSHI" value="33.0000"/>
+          <const name="C_LSENSLO" value="55.0000"/>
+          <const name="C_LSENSNORMAL" value="41.0000"/>
+          <const name="C_LSENSVHI" value="25.0000"/>
+          <const name="C_LSENSVLO" value="63.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+          <const name="C_VINMAX" value="145.0000"/>
+          <const name="C_VINMAX2" value="255.0000"/>
+          <const name="C_VINMIN" value="75.0000"/>
+          <const name="C_VINMIN2" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="115.0000"/>
+          <const name="C_VINNOMINAL2" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="115.0000"/>
+        </consts>
+        <flags>
+          <flag name="opStartup" value="F_OPSTARTUP"/>
+          <flag name="opBattery" value="F_OPBATTERY"/>
+          <flag name="opStandBy" value="F_OPSTANDBY"/>
+          <flag name="opCheckup" value="F_OPCHECKUP"/>
+          <flag name="opWarning" value="F_OPWARNING"/>
+          <flag name="noVInput" value="F_NOVINPUT"/>
+          <flag name="loVInput" value="(F_NOVINPUT)?0:F_LOVINPUT"/>
+          <flag name="hiVInput" value="F_HIVINPUT"/>
+          <flag name="loFInput" value="F_LOFINPUT"/>
+          <flag name="hiFInput" value="F_HIFINPUT"/>
+          <flag name="noSyncInput" value="F_NOSYNCIN"/>
+          <flag name="syncInput" value="F_SYNCIN"/>
+          <flag name="noiseInput" value="F_NOISEIN"/>
+          <flag name="loBattery" value="F_LOBATTERY"/>
+          <flag name="maxBattery" value="F_MAXBATTERY"/>
+          <flag name="shutdownTimerActive" value="F_SHUTDOWNTIMERON"/>
+          <flag name="remoteControlActive" value="F_RCTRLON"/>
+          <flag name="failOvertemp" value="F_FOVERTEMP"/>
+          <flag name="failInternal" value="F_FINTERNAL"/>
+          <flag name="failOverload" value="F_FOVERLOAD"/>
+          <flag name="failShortcircuit" value="F_FSHORTCIRCUIT"/>
+          <flag name="failInverter" value="F_FINVERTER"/>
+          <flag name="failEndBattery" value="F_FENDBATTERY"/>
+          <flag name="failAbnormalVOutput" value="F_FABNORMALVOUT"/>
+          <flag name="failAbnormalVBattery" value="F_FABNORMALVBAT"/>
+        </flags>
+        <vars>
+          <var name="model" value="V_MODEL"/>
+          <var name="version" value="V_VERSION*0.1000"/>
+          <var name="vInput" value="V_VINPUT"/>
+          <var name="vOutput" value="V_VOUTPUT*0.6000"/>
+          <var name="fOutput" value="V_FOUTPUT*0.2500"/>
+          <var name="iOutput" value="V_IOUTPUT*0.0510"/>
+          <var name="pOutput" value="V_POUTPUT"/>
+          <var name="vBattery" value="V_VBATTERY*0.1250"/>
+          <var name="cBattery" value="V_CBATTERY"/>
+          <var name="temperature" value="V_TEMPER"/>
+          <var name="sampVInput" value="V_SAMPVIN*0.5000"/>
+          <var name="sampVOutput" value="V_SAMPVOUT*0.5000"/>
+          <var name="sampIOutput" value="V_SAMPIOUT*0.5000"/>
+          <var name="shutdownTimer" value="(F_SHUTDOWNTIMERON)?V_SHUTDOWNTIMER:-1"/>
+          <var name="wakeupTimer" value="(F_WAKEUPON)?0x1000000-((V_WAKEUPLOW &amp; 0xFF)|((V_WAKEUPMID &amp; 0xFF)&lt;&lt;8)|((V_WAKEUPHI &amp; 0xFF)&lt;&lt;16)):-1"/>
+          <var name="nightoffTimer" value="(F_NIGHTOFFON)?0x1000000-((V_WAKEUPLOW &amp; 0xFF)|((V_WAKEUPMID &amp; 0xFF)&lt;&lt;8)|((V_WAKEUPHI &amp; 0xFF)&lt;&lt;16)):-1"/>
+          <var name="icBattery" value="(V_ICBATTERY==C_ICBATHI)?1:0"/>
+          <var name="nominalVInput" value="(F_VINSEL220)?C_VINNOMINAL2:C_VINNOMINAL"/>
+          <var name="nominalVOutput" value="C_VOUTNOMINAL"/>
+          <var name="nominalFOutput" value="C_FINNOMINAL"/>
+          <var name="nominalPOutput" value="C_POUTNOMINAL"/>
+          <var name="nominalVBattery" value="C_VBATNOMINAL"/>
+        </vars>
+        <actions>
+          <action name="superviseOn" value="F_SUPERVON=1"/>
+          <action name="superviseOff" value="F_SUPERVON=0"/>
+          <action name="shutdown" value="F_SUPERVON=0;V_SHUTDOWNTIMER=$counter;F_SHUTDOWNTIMERON=1"/>
+          <action name="standby" value="F_WAKEUPNOVIN=1;F_SUPERVON=1;V_SHUTDOWNTIMER=$counter;F_SHUTDOWNTIMERON=1"/>
+          <action name="nightOff" value="F_WAKEUPON=0;F_NIGHTOFFON=0;V_WAKEUPLOW=(0x1000000-$counter)&amp;0xFF;V_WAKEUPMID=((0x1000000-$counter)&amp;0xFF00)&gt;&gt;8;V_WAKEUPHI=((0x1000000-$counter)&amp;0xFF0000)&gt;&gt;16;F_NIGHTOFFON=1"/>
+          <action name="wakeUp" value="F_WAKEUPON=0;F_NIGHTOFFON=0;V_WAKEUPLOW=(0x1000000-$counter)&amp;0xFF;V_WAKEUPMID=((0x1000000-$counter)&amp;0xFF00)&gt;&gt;8;V_WAKEUPHI=((0x1000000-$counter)&amp;0xFF0000)&gt;&gt;16;F_WAKEUPNOVIN=$novin;F_WAKEUPON=1"/>
+          <action name="fullDischarge" value="F_OPCHECKUP=1;V_SUPERVIDX=0;F_TRANSFINV=1"/>
+          <action name="setICBattery" value="V_ICBATTERY=($value==1)?C_ICBATHI:C_ICBATLO"/>
+          <action name="setLineSens" value="V_LINESENS=($value==4)?C_LSENSVHI:(($value==3)?C_LSENSHI:(($value==1)?C_LSENSLO:(($value==0)?C_LSENSVLO:C_LSENSNORMAL)))"/>
+        </actions>
+      </default>
+      <model name="SENIUM 800-BA TI" value="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="800.0000"/>
+        </consts>
+      </model>
+      <model name="SENIUM 800-BA M2" value="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="800.0000"/>
+          <const name="C_VINMAX" value="255.0000"/>
+          <const name="C_VINMIN" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+        <vars>
+          <var name="vOutput" value="V_VOUTPUT*0.9900"/>
+        </vars>
+      </model>
+      <model name="SENIUM 800 TI" value="2" from="0"/>
+      <model name="SENIUM 800 M2" value="3" from="1"/>
+      <model name="SENIUM 1600 TI" value="4" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1600.0000"/>
+        </consts>
+      </model>
+      <model name="SENIUM 1600 M2" value="5" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1600.0000"/>
+          <const name="C_VINMAX" value="255.0000"/>
+          <const name="C_VINMIN" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+      </model>
+      <model name="SENIUM 1000 TI" value="6" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1000.0000"/>
+        </consts>
+      </model>
+      <model name="SENIUM 1000 M2" value="7" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1000.0000"/>
+          <const name="C_VINMAX" value="255.0000"/>
+          <const name="C_VINMIN" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+      </model>
+      <model name="SENIUM 1600-BA TI" value="8" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1600.0000"/>
+        </consts>
+      </model>
+      <model name="SENIUM 1600-BA M2" value="9" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1600.0000"/>
+          <const name="C_VINMAX" value="255.0000"/>
+          <const name="C_VINMIN" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+      </model>
+    </device>
+    <!-- =================================================================== -->
+    <!-- Familia 09 -->
+    <!-- =================================================================== -->
+    <device family="9" name="SENIUM ATM">
+      <ranges>
+        <range start="0080" size="24"/>
+        <range start="00DA" size="1"/>
+      </ranges>
+      <capabilities>
+        <cap name="hasFamily" value="1"/>
+        <cap name="hasModel" value="1"/>
+        <cap name="hasVInput" value="1"/>
+        <cap name="hasVOutput" value="1"/>
+        <cap name="hasIOutput" value="1"/>
+        <cap name="hasPOutput" value="1"/>
+        <cap name="hasFOutput" value="1"/>
+        <cap name="hasVBattery" value="1"/>
+        <cap name="hasCBattery" value="1"/>
+        <cap name="hasTemperature" value="1"/>
+        <cap name="hasVersion" value="1"/>
+        <cap name="hasICBattery" value="0"/>
+        <cap name="hasSetICBattery" value="0"/>
+        <cap name="hasShutdownTimer" value="1"/>
+        <cap name="hasManualShutdown" value="1"/>
+        <cap name="hasStandBy" value="1"/>
+        <cap name="hasWakeUp" value="1"/>
+        <cap name="hasNightOff" value="1"/>
+        <cap name="hasSampVInput" value="1"/>
+        <cap name="hasSampVOutput" value="1"/>
+        <cap name="hasSampIOutput" value="1"/>
+        <cap name="hasNominalVInput" value="1"/>
+        <cap name="hasNominalVOutput" value="1"/>
+        <cap name="hasNominalPOutput" value="1"/>
+        <cap name="hasNominalFOutput" value="1"/>
+        <cap name="hasNominalVBattery" value="1"/>
+        <cap name="hasSetDischargeBattery" value="1"/>
+        <cap name="hasChangeAutonomy" value="0"/>
+        <cap name="hasPowerLook" value="0"/>
+        <cap name="hasSetLineSens" value="1"/>
+        <cap name="hasRgbLed" value="0"/>
+      </capabilities>
+      <default>
+        <map>
+          <alias name="V_WAKEUPLOW" addr="0080"/>
+          <alias name="V_WAKEUPMID" addr="0081"/>
+          <alias name="V_WAKEUPHI" addr="0082"/>
+          <alias name="V_MODEL" addr="0085"/>
+          <alias name="V_VINPUT" addr="0086"/>
+          <alias name="V_VOUTPUT" addr="0087"/>
+          <alias name="V_IOUTPUT" addr="0088"/>
+          <alias name="V_POUTPUT" addr="0089"/>
+          <alias name="V_FOUTPUT" addr="008A"/>
+          <alias name="V_VBATTERY" addr="008B"/>
+          <alias name="V_TEMPER" addr="0090"/>
+          <alias name="V_CBATTERY" addr="0092"/>
+          <alias name="V_VERSION" addr="0093"/>
+          <alias name="V_GERAIS5" addr="0097"/>
+          <alias name="V_SAMPVIN" addr="00A4"/>
+          <alias name="V_SAMPVOUT" addr="00A8"/>
+          <alias name="V_SAMPIOUT" addr="00AC"/>
+          <alias name="V_LINESENS" addr="00B8"/>
+          <alias name="V_SHUTDOWNTIMER" addr="00DA"/>
+          <alias name="V_SUPERVIDX" addr="00E6"/>
+          <alias name="F_FOVERTEMP" addr="008D" bit="0"/>
+          <alias name="F_FINTERNAL" addr="008D" bit="1"/>
+          <alias name="F_FSHORTCIRCUIT" addr="008D" bit="2"/>
+          <alias name="F_FOVERLOAD" addr="008D" bit="3"/>
+          <alias name="F_FENDBATTERY" addr="008D" bit="4"/>
+          <alias name="F_FABNORMALVOUT" addr="008D" bit="5"/>
+          <alias name="F_FABNORMALVBAT" addr="008D" bit="6"/>
+          <alias name="F_FINVERTER" addr="008D" bit="7"/>
+          <alias name="F_LOFINPUT" addr="008E" bit="0"/>
+          <alias name="F_FFAN" addr="008E" bit="1"/>
+          <alias name="F_NOSYNCIN" addr="008E" bit="2"/>
+          <alias name="F_LOVINPUT" addr="008E" bit="3"/>
+          <alias name="F_HIVINPUT" addr="008E" bit="4"/>
+          <alias name="F_NOVINPUT" addr="008E" bit="5"/>
+          <alias name="F_LOBATTERY" addr="008E" bit="6"/>
+          <alias name="F_NOISEIN" addr="008E" bit="7"/>
+          <alias name="F_OPBATTERY" addr="008F" bit="3"/>
+          <alias name="F_OPSTANDBY" addr="008F" bit="4"/>
+          <alias name="F_OPWARNING" addr="008F" bit="5"/>
+          <alias name="F_OPSTARTUP" addr="008F" bit="6"/>
+          <alias name="F_OPCHECKUP" addr="008F" bit="7"/>
+          <alias name="F_NIGHTOFFON" addr="0091" bit="0"/>
+          <alias name="F_MAXBATTERY" addr="0091" bit="1"/>
+          <alias name="F_SHUTDOWNTIMERON" addr="0091" bit="4"/>
+          <alias name="F_WAKEUPNOVIN" addr="0091" bit="5"/>
+          <alias name="F_WAKEUPON" addr="0091" bit="7"/>
+          <alias name="F_VINSEL220" addr="0094" bit="4"/>
+          <alias name="F_TRANSFINV" addr="0094" bit="5"/>
+          <alias name="F_SUPERVON" addr="0096" bit="3"/>
+        </map>
+        <consts>
+          <const name="C_FINNOMINAL" value="60.0000"/>
+          <const name="C_LSENSHI" value="33.0000"/>
+          <const name="C_LSENSLO" value="55.0000"/>
+          <const name="C_LSENSNORMAL" value="41.0000"/>
+          <const name="C_LSENSVHI" value="25.0000"/>
+          <const name="C_LSENSVLO" value="63.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+          <const name="C_VINMAX" value="145.0000"/>
+          <const name="C_VINMAX2" value="255.0000"/>
+          <const name="C_VINMIN" value="75.0000"/>
+          <const name="C_VINMIN2" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="115.0000"/>
+          <const name="C_VINNOMINAL2" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="115.0000"/>
+        </consts>
+        <flags>
+          <flag name="opStartup" value="F_OPSTARTUP"/>
+          <flag name="opBattery" value="F_OPBATTERY"/>
+          <flag name="opStandBy" value="F_OPSTANDBY"/>
+          <flag name="opCheckup" value="F_OPCHECKUP"/>
+          <flag name="opWarning" value="F_OPWARNING"/>
+          <flag name="noVInput" value="F_NOVINPUT"/>
+          <flag name="loVInput" value="(F_NOVINPUT)?0:F_LOVINPUT"/>
+          <flag name="hiVInput" value="F_HIVINPUT"/>
+          <flag name="loFInput" value="F_LOFINPUT"/>
+          <flag name="noSyncInput" value="F_NOSYNCIN"/>
+          <flag name="noiseInput" value="F_NOISEIN"/>
+          <flag name="loBattery" value="F_LOBATTERY"/>
+          <flag name="maxBattery" value="F_MAXBATTERY"/>
+          <flag name="shutdownTimerActive" value="F_SHUTDOWNTIMERON"/>
+          <flag name="remoteControlActive" value="F_RCTRLON"/>
+          <flag name="failOvertemp" value="F_FOVERTEMP"/>
+          <flag name="failInternal" value="F_FINTERNAL"/>
+          <flag name="failOverload" value="F_FOVERLOAD"/>
+          <flag name="failShortcircuit" value="F_FSHORTCIRCUIT"/>
+          <flag name="failInverter" value="F_FINVERTER"/>
+          <flag name="failFan" value="F_FFAN"/>
+          <flag name="failEndBattery" value="F_FENDBATTERY"/>
+          <flag name="failAbnormalVOutput" value="F_FABNORMALVOUT"/>
+          <flag name="failAbnormalVBattery" value="F_FABNORMALVBAT"/>
+        </flags>
+        <vars>
+          <var name="model" value="V_MODEL"/>
+          <var name="version" value="V_VERSION*0.1000"/>
+          <var name="vInput" value="V_VINPUT"/>
+          <var name="vOutput" value="V_VOUTPUT*0.6000"/>
+          <var name="fOutput" value="V_FOUTPUT*0.2500"/>
+          <var name="iOutput" value="V_IOUTPUT*0.0510"/>
+          <var name="pOutput" value="V_POUTPUT"/>
+          <var name="vBattery" value="V_VBATTERY*0.1250"/>
+          <var name="cBattery" value="V_CBATTERY"/>
+          <var name="temperature" value="V_TEMPER"/>
+          <var name="sampVInput" value="V_SAMPVIN*0.5000"/>
+          <var name="sampVOutput" value="V_SAMPVOUT*0.5000"/>
+          <var name="sampIOutput" value="V_SAMPIOUT*0.5000"/>
+          <var name="shutdownTimer" value="(F_SHUTDOWNTIMERON)?V_SHUTDOWNTIMER:-1"/>
+          <var name="wakeupTimer" value="(F_WAKEUPON)?0x1000000-((V_WAKEUPLOW &amp; 0xFF)|((V_WAKEUPMID &amp; 0xFF)&lt;&lt;8)|((V_WAKEUPHI &amp; 0xFF)&lt;&lt;16)):-1"/>
+          <var name="nightoffTimer" value="(F_NIGHTOFFON)?0x1000000-((V_WAKEUPLOW &amp; 0xFF)|((V_WAKEUPMID &amp; 0xFF)&lt;&lt;8)|((V_WAKEUPHI &amp; 0xFF)&lt;&lt;16)):-1"/>
+          <var name="nominalVInput" value="(F_VINSEL220)?C_VINNOMINAL2:C_VINNOMINAL"/>
+          <var name="nominalVOutput" value="C_VOUTNOMINAL"/>
+          <var name="nominalFOutput" value="C_FINNOMINAL"/>
+          <var name="nominalPOutput" value="C_POUTNOMINAL"/>
+          <var name="nominalVBattery" value="C_VBATNOMINAL"/>
+        </vars>
+        <actions>
+          <action name="superviseOn" value="F_SUPERVON=1"/>
+          <action name="superviseOff" value="F_SUPERVON=0"/>
+          <action name="shutdown" value="F_SUPERVON=0;V_SHUTDOWNTIMER=$counter;F_SHUTDOWNTIMERON=1"/>
+          <action name="standby" value="F_WAKEUPNOVIN=1;F_SUPERVON=1;V_SHUTDOWNTIMER=$counter;F_SHUTDOWNTIMERON=1"/>
+          <action name="nightOff" value="F_WAKEUPON=0;F_NIGHTOFFON=0;V_WAKEUPLOW=(0x1000000-$counter)&amp;0xFF;V_WAKEUPMID=((0x1000000-$counter)&amp;0xFF00)&gt;&gt;8;V_WAKEUPHI=((0x1000000-$counter)&amp;0xFF0000)&gt;&gt;16;F_NIGHTOFFON=1"/>
+          <action name="wakeUp" value="F_WAKEUPON=0;F_NIGHTOFFON=0;V_WAKEUPLOW=(0x1000000-$counter)&amp;0xFF;V_WAKEUPMID=((0x1000000-$counter)&amp;0xFF00)&gt;&gt;8;V_WAKEUPHI=((0x1000000-$counter)&amp;0xFF0000)&gt;&gt;16;F_WAKEUPNOVIN=$novin;F_WAKEUPON=1"/>
+          <action name="fullDischarge" value="F_OPCHECKUP=1;V_SUPERVIDX=0;F_TRANSFINV=1"/>
+          <action name="setLineSens" value="V_LINESENS=($value==4)?C_LSENSVHI:(($value==3)?C_LSENSHI:(($value==1)?C_LSENSLO:(($value==0)?C_LSENSVLO:C_LSENSNORMAL)))"/>
+        </actions>
+      </default>
+      <model name="SENIUM TI ATM2" value="0"/>
+      <model name="SENIUM M2 ATM2" value="1">
+        <consts>
+          <const name="C_VINMAX" value="255.0000"/>
+          <const name="C_VINMIN" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+      </model>
+      <model name="SENIUM TI ATM3" value="2" from="0"/>
+      <model name="SENIUM M2 ATM3" value="3" from="1">
+        <vars>
+          <var name="vOutput" value="V_VOUTPUT*0.9900"/>
+        </vars>
+      </model>
+      <model name="SENIUM TI ATM5" value="4" from="0"/>
+      <model name="SENIUM M2 ATM5" value="5" from="1">
+        <vars>
+          <var name="vOutput" value="V_VOUTPUT*0.9900"/>
+        </vars>
+      </model>
+      <model name="SENIUM TI ATMx" value="6" from="0"/>
+      <model name="SENIUM M2 ATMx" value="7" from="1">
+        <vars>
+          <var name="vOutput" value="V_VOUTPUT*0.9900"/>
+        </vars>
+      </model>
+      <model name="SENIUM ATM-2 BB" value="8" from="0"/>
+      <model name="SENIUM ATM-2 BB" value="9" from="1"/>
+      <model name="SENIUM ATM-3 BB" value="10" from="0">
+        <map>
+          <alias name="V_SHUTDOWNTIMER" addr="00C9"/>
+          <alias name="V_SUPERVIDX" addr="00E8"/>
+        </map>
+        <vars>
+          <var name="vOutput" value="V_VOUTPUT*0.9920"/>
+        </vars>
+      </model>
+      <model name="SENIUM ATM-3 BB" value="11" from="1">
+        <vars>
+          <var name="vOutput" value="V_VOUTPUT*0.9920"/>
+        </vars>
+      </model>
+      <model name="SENIUM ATM-5 BB" value="12" from="0"/>
+      <model name="SENIUM ATM-5 BB" value="13" from="1">
+        <vars>
+          <var name="vOutput" value="V_VOUTPUT*0.9900"/>
+        </vars>
+      </model>
+      <model name="SENIUM ATM BB 1400" value="14" from="0">
+        <map>
+          <alias name="V_SHUTDOWNTIMER" addr="00C9"/>
+          <alias name="V_SUPERVIDX" addr="00E8"/>
+        </map>
+        <consts>
+          <const name="C_POUTNOMINAL" value="1400.0000"/>
+        </consts>
+        <vars>
+          <var name="vOutput" value="V_VOUTPUT*0.9900"/>
+        </vars>
+      </model>
+      <model name="SENIUM ATM BB 1400" value="15" from="1">
+        <map>
+          <alias name="V_SHUTDOWNTIMER" addr="00C9"/>
+          <alias name="V_SUPERVIDX" addr="00E8"/>
+        </map>
+        <consts>
+          <const name="C_POUTNOMINAL" value="1400.0000"/>
+        </consts>
+        <vars>
+          <var name="vOutput" value="V_VOUTPUT*0.9900"/>
+        </vars>
+      </model>
+    </device>
+    <!-- =================================================================== -->
+    <!-- Familia 10 -->
+    <!-- =================================================================== -->
+    <device family="10" name="NEP/TORO/INNERGIE/ONEUP">
+      <ranges>
+        <range start="0080" size="30"/>
+        <range start="00F3" size="1"/>
+        <range start="0136" size="1"/>
+        <range start="0171" size="4"/>
+        <range start="0202" size="2"/>
+      </ranges>
+      <capabilities>
+        <cap name="hasFamily" value="1"/>
+        <cap name="hasModel" value="1"/>
+        <cap name="hasVInput" value="1"/>
+        <cap name="hasVOutput" value="1"/>
+        <cap name="hasIOutput" value="1"/>
+        <cap name="hasPOutput" value="1"/>
+        <cap name="hasFOutput" value="1"/>
+        <cap name="hasVBattery" value="1"/>
+        <cap name="hasCBattery" value="1"/>
+        <cap name="hasTemperature" value="1"/>
+        <cap name="hasVersion" value="1"/>
+        <cap name="hasICBattery" value="1"/>
+        <cap name="hasSetICBattery" value="1"/>
+        <cap name="hasShutdownTimer" value="1"/>
+        <cap name="hasManualShutdown" value="1"/>
+        <cap name="hasStandBy" value="0"/>
+        <cap name="hasWakeUp" value="1"/>
+        <cap name="hasNightOff" value="1"/>
+        <cap name="hasSampVInput" value="1"/>
+        <cap name="hasSampVOutput" value="1"/>
+        <cap name="hasSampIOutput" value="1"/>
+        <cap name="hasNominalVInput" value="1"/>
+        <cap name="hasNominalVOutput" value="1"/>
+        <cap name="hasNominalPOutput" value="1"/>
+        <cap name="hasNominalFOutput" value="1"/>
+        <cap name="hasNominalVBattery" value="1"/>
+        <cap name="hasSetDischargeBattery" value="1"/>
+        <cap name="hasChangeAutonomy" value="1"/>
+        <cap name="hasPowerLook" value="1"/>
+        <cap name="hasSetLineSens" value="1"/>
+        <cap name="hasRgbLed" value="1"/>
+      </capabilities>
+      <default>
+        <map>
+          <alias name="V_PPOWERLO" addr="0081"/>
+          <alias name="V_TPOWERLO" addr="0082"/>
+          <alias name="V_CAPBATREF" addr="0083"/>
+          <alias name="V_WAKEUPHI" addr="0084"/>
+          <alias name="V_WAKEUPMID" addr="0085"/>
+          <alias name="V_WAKEUPLOW" addr="0086"/>
+          <alias name="V_CBATTERY" addr="0087"/>
+          <alias name="V_VBATTERY" addr="008A"/>
+          <alias name="V_VINPUT" addr="008B"/>
+          <alias name="V_IOUTPUT" addr="008C"/>
+          <alias name="V_POUTPUT" addr="008D"/>
+          <alias name="V_TEMPER" addr="008E"/>
+          <alias name="V_FOUTPUT" addr="0097"/>
+          <alias name="V_SHUTDOWNTIMER" addr="0098"/>
+          <alias name="V_MODEL" addr="009A"/>
+          <alias name="V_VERSION" addr="009B"/>
+          <alias name="V_VOUTPUT" addr="009D"/>
+          <alias name="V_IOUTCALIB" addr="00F3"/>
+          <alias name="V_SAMPIOUT" addr="0110"/>
+          <alias name="V_SAMPVIN" addr="0111"/>
+          <alias name="V_SAMPVOUT" addr="0112"/>
+          <alias name="V_CAPBATNEW" addr="0136"/>
+          <alias name="V_LEDRED" addr="0171"/>
+          <alias name="V_LEDGREEN" addr="0172"/>
+          <alias name="V_LEDBLUE" addr="0173"/>
+          <alias name="V_RANDOM" addr="0174"/>
+          <alias name="V_OSC53" addr="0202"/>
+          <alias name="V_OSC57" addr="0203"/>
+          <alias name="F_AUTOSTART" addr="0080" bit="0"/>
+          <alias name="F_ICBATTERY" addr="0080" bit="2"/>
+          <alias name="F_LINESENS" addr="0080" bit="7"/>
+          <alias name="F_NOBAT" addr="0090" bit="0"/>
+          <alias name="F_OLDBAT" addr="0090" bit="1"/>
+          <alias name="F_OPCHECKUP" addr="0090" bit="2"/>
+          <alias name="F_NOVINPUT" addr="0090" bit="3"/>
+          <alias name="F_LOVINPUT" addr="0090" bit="4"/>
+          <alias name="F_HIVINPUT" addr="0090" bit="5"/>
+          <alias name="F_OPBATTERY" addr="0090" bit="6"/>
+          <alias name="F_HIPOUTPUT" addr="0090" bit="7"/>
+          <alias name="F_LOBATTERY" addr="0091" bit="0"/>
+          <alias name="F_FOVERTEMP" addr="0091" bit="1"/>
+          <alias name="F_FENDBATTERY" addr="0091" bit="2"/>
+          <alias name="F_FOVERLOAD" addr="0091" bit="3"/>
+          <alias name="F_FABNORMALVOUT" addr="0091" bit="4"/>
+          <alias name="F_FABNORMALVBAT" addr="0091" bit="5"/>
+          <alias name="F_FINVERTER" addr="0091" bit="6"/>
+          <alias name="F_FSHORTCIRCUIT" addr="0091" bit="7"/>
+          <alias name="F_SYNCIN" addr="0092" bit="0"/>
+          <alias name="F_SUPERVON" addr="0092" bit="1"/>
+          <alias name="F_MOREBAT" addr="0092" bit="2"/>
+          <alias name="F_LESSBAT" addr="0092" bit="3"/>
+          <alias name="F_RCTRLON" addr="0092" bit="5"/>
+          <alias name="F_POWERLOON" addr="0092" bit="6"/>
+          <alias name="F_NIGHTOFFON" addr="0092" bit="7"/>
+          <alias name="F_TRANSFINV" addr="0095" bit="7"/>
+        </map>
+        <consts>
+          <const name="C_FINNOMINAL" value="60.0000"/>
+          <const name="C_VBATNOMINAL" value="12.0000"/>
+          <const name="C_VINMAX" value="266.0000"/>
+          <const name="C_VINMAX2" value="266.0000"/>
+          <const name="C_VINMIN" value="80.0000"/>
+          <const name="C_VINMIN2" value="80.0000"/>
+          <const name="C_VINNOMINAL" value="115.0000"/>
+          <const name="C_VINNOMINAL2" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="115.0000"/>
+        </consts>
+        <flags>
+          <flag name="opBattery" value="F_OPBATTERY"/>
+          <flag name="opCheckup" value="F_OPCHECKUP"/>
+          <flag name="noVInput" value="F_NOVINPUT"/>
+          <flag name="loVInput" value="(F_NOVINPUT)?0:F_LOVINPUT"/>
+          <flag name="hiVInput" value="F_HIVINPUT"/>
+          <flag name="syncInput" value="F_SYNCIN"/>
+          <flag name="hiPOutput" value="F_HIPOUTPUT"/>
+          <flag name="loBattery" value="F_LOBATTERY"/>
+          <flag name="noBattery" value="F_NOBAT"/>
+          <flag name="oldBattery" value="F_OLDBAT"/>
+          <flag name="moreBattery" value="F_MOREBAT"/>
+          <flag name="lessBattery" value="F_LESSBAT"/>
+          <flag name="remoteControlActive" value="F_RCTRLON"/>
+          <flag name="failOvertemp" value="F_FOVERTEMP"/>
+          <flag name="failOverload" value="F_FOVERLOAD"/>
+          <flag name="failShortcircuit" value="F_FSHORTCIRCUIT"/>
+          <flag name="failInverter" value="F_FINVERTER"/>
+          <flag name="failEndBattery" value="F_FENDBATTERY"/>
+          <flag name="failAbnormalVOutput" value="F_FABNORMALVOUT"/>
+          <flag name="failAbnormalVBattery" value="F_FABNORMALVBAT"/>
+        </flags>
+        <vars>
+          <var name="model" value="V_MODEL"/>
+          <var name="version" value="V_VERSION*0.1000"/>
+          <var name="vInput" value="V_VINPUT*1.0600"/>
+          <var name="vOutput" value="V_VOUTPUT*0.5550"/>
+          <var name="fOutput" value="(V_OSC57-V_OSC53)?((53.0+(4.0*((V_FOUTPUT)-V_OSC53)/(V_OSC57-V_OSC53)))*0.9806+1.46):0"/>
+          <var name="iOutput" value="V_IOUTPUT*4.3000/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+          <var name="pOutput" value="V_POUTPUT"/>
+          <var name="vBattery" value="V_VBATTERY*0.0670"/>
+          <var name="cBattery" value="V_CBATTERY*0.3930"/>
+          <var name="temperature" value="V_TEMPER"/>
+          <var name="sampVInput" value="V_SAMPVIN*0.5000"/>
+          <var name="sampVOutput" value="V_SAMPVOUT*0.5000"/>
+          <var name="sampIOutput" value="V_SAMPIOUT*0.5000"/>
+          <var name="shutdownTimer" value="(V_SHUTDOWNTIMER)?V_SHUTDOWNTIMER:-1"/>
+          <var name="wakeupTimer" value="(F_NIGHTOFFON)?((0x1000000-((V_WAKEUPLOW &amp; 0xFF)|((V_WAKEUPMID &amp; 0xFF)&lt;&lt;8)|((V_WAKEUPHI &amp; 0xFF)&lt;&lt;16)))*5.904144):-1"/>
+          <var name="nightoffTimer" value="(F_NIGHTOFFON)?(((0x1000000-((V_WAKEUPLOW &amp; 0xFF)|((V_WAKEUPMID &amp; 0xFF)&lt;&lt;8)|((V_WAKEUPHI &amp; 0xFF)&lt;&lt;16)))*5.904144)/(((fOutput/59.4)&gt;0.0)?(fOutput/59.4):1.0)):-1"/>
+          <var name="icBattery" value="(F_ICBATTERY)?1:0"/>
+          <var name="nominalVInput" value="(vInput&gt;150.0)?C_VINNOMINAL2:C_VINNOMINAL"/>
+          <var name="nominalVOutput" value="C_VOUTNOMINAL"/>
+          <var name="nominalFOutput" value="C_FINNOMINAL"/>
+          <var name="nominalPOutput" value="C_POUTNOMINAL"/>
+          <var name="nominalVBattery" value="C_VBATNOMINAL"/>
+          <var name="ledRed" value="V_LEDRED"/>
+          <var name="ledGreen" value="V_LEDGREEN"/>
+          <var name="ledBlue" value="V_LEDBLUE"/>
+          <var name="random" value="V_RANDOM"/>
+        </vars>
+        <actions>
+          <action name="superviseOn" value="F_SUPERVON=1"/>
+          <action name="superviseOff" value="F_SUPERVON=0"/>
+          <action name="shutdown" value="F_AUTOSTART=$notmanual;V_SHUTDOWNTIMER=$counter"/>
+          <action name="nightOff" value="F_WAKEUPON=0;F_NIGHTOFFON=0;V_WAKEUPLOW=(0x1000000-$counter/5.904144*(fOutput/59.4))&amp;0xFF;V_WAKEUPMID=((0x1000000-$counter/5.904144*(fOutput/59.4))&amp;0xFF00)&gt;&gt;8;V_WAKEUPHI=((0x1000000-$counter/5.904144*(fOutput/59.4))&amp;0xFF0000)&gt;&gt;16;F_NIGHTOFFON=1"/>
+          <action name="wakeUp" value="F_WAKEUPON=0;F_NIGHTOFFON=0;V_WAKEUPLOW=(0x1000000-$counter/5.904144)&amp;0xFF;V_WAKEUPMID=((0x1000000-$counter/5.904144)&amp;0xFF00)&gt;&gt;8;V_WAKEUPHI=((0x1000000-$counter/5.904144)&amp;0xFF0000)&gt;&gt;16;F_WAKEUPON=1"/>
+          <action name="fullDischarge" value="F_OLDBAT=0;F_OPCHECKUP=1;F_TRANSFINV=1"/>
+          <action name="setICBattery" value="F_ICBATTERY=($value==1)?1:0"/>
+          <action name="setLineSens" value="F_LINESENS=($value&lt;=1)?1:0"/>
+          <action name="moreBat" value="F_MOREBAT=0"/>
+          <action name="lessBat" value="V_CAPBATREF=V_CAPBATNEW;F_LESSBAT=0"/>
+          <action name="powerLookOn" value="V_TPOWERLO=$counter;F_POWERLOON=1"/>
+          <action name="powerLookOff" value="V_TPOWERLO=0;V_PPOWERLO=0;F_POWERLOON=1"/>
+          <action name="changeColor" value="V_LEDRED=$red;V_LEDGREEN=$green;V_LEDBLUE=$blue;V_RANDOM=$random"/>
+        </actions>
+      </default>
+      <model name="EASY 600 TI" value="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="600.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*3.2000/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+        </vars>
+      </model>
+      <model name="EASY 600 M2" value="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="600.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+        <vars>
+          <var name="vOutput" value="V_VOUTPUT*1.0300"/>
+          <var name="iOutput" value="V_IOUTPUT*1.7000/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+        </vars>
+      </model>
+      <model name="EASY 700 TI" value="2" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="700.0000"/>
+        </consts>
+      </model>
+      <model name="EASY 700 M2" value="3" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="700.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+        <vars>
+          <var name="vOutput" value="V_VOUTPUT*1.0300"/>
+          <var name="iOutput" value="V_IOUTPUT*2.3000/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+        </vars>
+      </model>
+      <model name="EASY 900 TI" value="4" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="900.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*4.9400/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+        </vars>
+      </model>
+      <model name="EASY 900 M2" value="5" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="900.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+        <vars>
+          <var name="vOutput" value="V_VOUTPUT*1.0300"/>
+          <var name="iOutput" value="V_IOUTPUT*2.6400/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+        </vars>
+      </model>
+      <model name="EASY 1200 TI" value="6" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1200.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*6.3700/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+        </vars>
+      </model>
+      <model name="EASY 1200 M2" value="7" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1200.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+        <vars>
+          <var name="vOutput" value="V_VOUTPUT*1.0300"/>
+          <var name="iOutput" value="V_IOUTPUT*3.4100/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+        </vars>
+      </model>
+      <model name="EASY 1300 TI" value="8" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1300.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*9.5600/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+          <var name="vBattery" value="V_VBATTERY*0.1340"/>
+        </vars>
+      </model>
+      <model name="EASY 1300 M2" value="9" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1300.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+        <vars>
+          <var name="vOutput" value="V_VOUTPUT*1.0300"/>
+          <var name="iOutput" value="V_IOUTPUT*5.1100/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+          <var name="vBattery" value="V_VBATTERY*0.1340"/>
+        </vars>
+      </model>
+      <model name="EASY 1400 TI" value="10" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1400.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*11.1500/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+          <var name="vBattery" value="V_VBATTERY*0.1340"/>
+        </vars>
+      </model>
+      <model name="EASY 1400 M2" value="11" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1400.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+        <vars>
+          <var name="vOutput" value="V_VOUTPUT*1.0300"/>
+          <var name="iOutput" value="V_IOUTPUT*5.9600/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+          <var name="vBattery" value="V_VBATTERY*0.1340"/>
+        </vars>
+      </model>
+      <model name="EASY 1600 TI" value="12" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1600.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*12.8000/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+          <var name="vBattery" value="V_VBATTERY*0.1340"/>
+        </vars>
+      </model>
+      <model name="EASY 1600 M2" value="13" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1600.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+        <vars>
+          <var name="vOutput" value="V_VOUTPUT*1.0300"/>
+          <var name="iOutput" value="V_IOUTPUT*6.8000/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+          <var name="vBattery" value="V_VBATTERY*0.1340"/>
+        </vars>
+      </model>
+      <model name="EASY 1800 TI" value="14" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1800.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*14.4000/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+          <var name="vBattery" value="V_VBATTERY*0.1340"/>
+        </vars>
+      </model>
+      <model name="EASY 1800 M2" value="15" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1800.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+        <vars>
+          <var name="vOutput" value="V_VOUTPUT*1.0300"/>
+          <var name="iOutput" value="V_IOUTPUT*7.6500/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+          <var name="vBattery" value="V_VBATTERY*0.1340"/>
+        </vars>
+      </model>
+      <model name="EASY 2000 TI" value="16" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="2000.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*15.9300/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+          <var name="vBattery" value="V_VBATTERY*0.1340"/>
+        </vars>
+      </model>
+      <model name="EASY 2000 M2" value="17" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="2000.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+        <vars>
+          <var name="vOutput" value="V_VOUTPUT*1.0300"/>
+          <var name="iOutput" value="V_IOUTPUT*8.5200/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+          <var name="vBattery" value="V_VBATTERY*0.1340"/>
+        </vars>
+      </model>
+      <model name="EASY 2200 TI" value="18" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="2200.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*17.5200/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+          <var name="vBattery" value="V_VBATTERY*0.1340"/>
+        </vars>
+      </model>
+      <model name="EASY 2200 M2" value="19" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="2200.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+        <vars>
+          <var name="vOutput" value="V_VOUTPUT*1.0300"/>
+          <var name="iOutput" value="V_IOUTPUT*9.3700/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+          <var name="vBattery" value="V_VBATTERY*0.1340"/>
+        </vars>
+      </model>
+    </device>
+    <!-- =================================================================== -->
+    <!-- Familia 11 -->
+    <!-- =================================================================== -->
+    <device family="11" name="FAMILIA 11">
+      <capabilities>
+        <cap name="hasFamily" value="1"/>
+        <cap name="hasModel" value="1"/>
+        <cap name="hasVInput" value="1"/>
+        <cap name="hasVOutput" value="1"/>
+        <cap name="hasIOutput" value="1"/>
+        <cap name="hasPOutput" value="1"/>
+        <cap name="hasFOutput" value="1"/>
+        <cap name="hasVBattery" value="1"/>
+        <cap name="hasCBattery" value="1"/>
+        <cap name="hasTemperature" value="1"/>
+        <cap name="hasVersion" value="1"/>
+        <cap name="hasICBattery" value="1"/>
+        <cap name="hasSetICBattery" value="1"/>
+        <cap name="hasShutdownTimer" value="1"/>
+        <cap name="hasManualShutdown" value="1"/>
+        <cap name="hasStandBy" value="0"/>
+        <cap name="hasWakeUp" value="1"/>
+        <cap name="hasNightOff" value="1"/>
+        <cap name="hasSampVInput" value="1"/>
+        <cap name="hasSampVOutput" value="1"/>
+        <cap name="hasSampIOutput" value="1"/>
+        <cap name="hasNominalVInput" value="1"/>
+        <cap name="hasNominalVOutput" value="1"/>
+        <cap name="hasNominalPOutput" value="1"/>
+        <cap name="hasNominalFOutput" value="1"/>
+        <cap name="hasNominalVBattery" value="1"/>
+        <cap name="hasSetDischargeBattery" value="1"/>
+        <cap name="hasChangeAutonomy" value="0"/>
+        <cap name="hasPowerLook" value="0"/>
+        <cap name="hasSetLineSens" value="1"/>
+        <cap name="hasRgbLed" value="0"/>
+      </capabilities>
+      <default>
+        <consts>
+          <const name="C_FINNOMINAL" value="60.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+        </consts>
+      </default>
+    </device>
+    <!-- =================================================================== -->
+    <!-- Familia 12 -->
+    <!-- =================================================================== -->
+    <device family="12" name="SAVE USB">
+      <ranges>
+        <range start="0000" size="27"/>
+      </ranges>
+      <capabilities>
+        <cap name="hasFamily" value="1"/>
+        <cap name="hasModel" value="1"/>
+        <cap name="hasVInput" value="1"/>
+        <cap name="hasVOutput" value="1"/>
+        <cap name="hasIOutput" value="0"/>
+        <cap name="hasPOutput" value="1"/>
+        <cap name="hasFOutput" value="1"/>
+        <cap name="hasVBattery" value="1"/>
+        <cap name="hasCBattery" value="1"/>
+        <cap name="hasTemperature" value="1"/>
+        <cap name="hasVersion" value="1"/>
+        <cap name="hasICBattery" value="0"/>
+        <cap name="hasSetICBattery" value="0"/>
+        <cap name="hasShutdownTimer" value="1"/>
+        <cap name="hasManualShutdown" value="0"/>
+        <cap name="hasStandBy" value="0"/>
+        <cap name="hasWakeUp" value="0"/>
+        <cap name="hasNightOff" value="0"/>
+        <cap name="hasSampVInput" value="0"/>
+        <cap name="hasSampVOutput" value="0"/>
+        <cap name="hasSampIOutput" value="0"/>
+        <cap name="hasNominalVInput" value="1"/>
+        <cap name="hasNominalVOutput" value="1"/>
+        <cap name="hasNominalPOutput" value="1"/>
+        <cap name="hasNominalFOutput" value="1"/>
+        <cap name="hasNominalVBattery" value="1"/>
+        <cap name="hasSetDischargeBattery" value="0"/>
+        <cap name="hasChangeAutonomy" value="0"/>
+        <cap name="hasPowerLook" value="0"/>
+        <cap name="hasSetLineSens" value="0"/>
+        <cap name="hasRgbLed" value="0"/>
+      </capabilities>
+      <default>
+        <map>
+          <alias name="V_VERSION" addr="0000"/>
+          <alias name="V_MODEL" addr="0001"/>
+          <alias name="V_OSC53" addr="0002"/>
+          <alias name="V_OSC57" addr="0003"/>
+          <alias name="V_FOUTCALIB" addr="0004"/>
+          <alias name="V_VBATCALIB" addr="0005"/>
+          <alias name="V_VINCALIB" addr="0006"/>
+          <alias name="V_VOUTCALIB" addr="0007"/>
+          <alias name="V_IOUTCALIB" addr="0009"/>
+          <alias name="V_ACTUALTAP" addr="0011"/>
+          <alias name="V_VINPUT" addr="0012"/>
+          <alias name="V_VOUTPUT" addr="0013"/>
+          <alias name="V_IOUTPUT" addr="0014"/>
+          <alias name="V_VBATTERY" addr="0015"/>
+          <alias name="V_SHUTDOWNTIMER" addr="0016"/>
+          <alias name="V_FOUTPUT" addr="0017"/>
+          <alias name="V_TEMPER" addr="001A"/>
+          <alias name="F_VINSEL220" addr="000A" bit="3"/>
+          <alias name="F_SYNCIN" addr="000C" bit="0"/>
+          <alias name="F_SHUTDOWNTIMERON" addr="000C" bit="4"/>
+          <alias name="F_MAXBATTERY" addr="000C" bit="7"/>
+          <alias name="F_NOVINPUT" addr="000D" bit="0"/>
+          <alias name="F_FENDBATTERY" addr="000E" bit="1"/>
+          <alias name="F_FOVERLOAD" addr="000E" bit="2"/>
+          <alias name="F_FSHORTCIRCUIT" addr="000E" bit="4"/>
+          <alias name="F_FABNORMALVOUT" addr="000E" bit="5"/>
+          <alias name="F_FABNORMALVBAT" addr="000E" bit="6"/>
+          <alias name="F_FINVERTER" addr="000E" bit="7"/>
+          <alias name="F_LOFINPUT" addr="000F" bit="1"/>
+          <alias name="F_HIFINPUT" addr="000F" bit="2"/>
+          <alias name="F_NOSYNCIN" addr="000F" bit="3"/>
+          <alias name="F_LOVINPUT" addr="000F" bit="4"/>
+          <alias name="F_HIVINPUT" addr="000F" bit="5"/>
+          <alias name="F_LOBATTERY" addr="000F" bit="6"/>
+          <alias name="F_NOISEIN" addr="000F" bit="7"/>
+          <alias name="F_OPBATTERY" addr="0010" bit="3"/>
+          <alias name="F_OPSTANDBY" addr="0010" bit="4"/>
+          <alias name="F_OPWARNING" addr="0010" bit="5"/>
+          <alias name="F_OPSTARTUP" addr="0010" bit="6"/>
+        </map>
+        <consts>
+          <const name="C_BATFACTOR" value="0.7250"/>
+          <const name="C_FINNOMINAL" value="60.0000"/>
+          <const name="C_FVOUTTAP0" value="1.2898"/>
+          <const name="C_FVOUTTAP1" value="1.1558"/>
+          <const name="C_FVOUTTAP2" value="1.0172"/>
+          <const name="C_FVOUTTAP3" value="0.8812"/>
+          <const name="C_VBATNOMINAL" value="12.0000"/>
+          <const name="C_VECFACTOR" value="0.0500"/>
+          <const name="C_VINMAX" value="142.0000"/>
+          <const name="C_VINMAX2" value="284.0000"/>
+          <const name="C_VINMIN" value="84.0000"/>
+          <const name="C_VINMIN2" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="115.0000"/>
+          <const name="C_VINNOMINAL2" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="115.0000"/>
+        </consts>
+        <flags>
+          <flag name="opStartup" value="F_OPSTARTUP"/>
+          <flag name="opBattery" value="F_OPBATTERY"/>
+          <flag name="opStandBy" value="F_OPSTANDBY"/>
+          <flag name="opWarning" value="F_OPWARNING"/>
+          <flag name="noVInput" value="F_NOVINPUT"/>
+          <flag name="loVInput" value="(F_NOVINPUT)?0:F_LOVINPUT"/>
+          <flag name="hiVInput" value="F_HIVINPUT"/>
+          <flag name="loFInput" value="F_LOFINPUT"/>
+          <flag name="hiFInput" value="F_HIFINPUT"/>
+          <flag name="noSyncInput" value="F_NOSYNCIN"/>
+          <flag name="syncInput" value="F_SYNCIN"/>
+          <flag name="noiseInput" value="F_NOISEIN"/>
+          <flag name="loBattery" value="F_LOBATTERY"/>
+          <flag name="maxBattery" value="F_MAXBATTERY"/>
+          <flag name="shutdownTimerActive" value="F_SHUTDOWNTIMERON"/>
+          <flag name="noCalibrated" value="V_CALIB!=0xFF"/>
+          <flag name="failOverload" value="F_FOVERLOAD"/>
+          <flag name="failShortcircuit" value="F_FSHORTCIRCUIT"/>
+          <flag name="failInverter" value="F_FINVERTER"/>
+          <flag name="failEndBattery" value="F_FENDBATTERY"/>
+          <flag name="failAbnormalVOutput" value="F_FABNORMALVOUT"/>
+          <flag name="failAbnormalVBattery" value="F_FABNORMALVBAT"/>
+        </flags>
+        <vars>
+          <var name="model" value="V_MODEL"/>
+          <var name="version" value="V_VERSION*0.1000"/>
+          <var name="vInput" value="(!F_VINSEL220||F_OPBATTERY)?((F_NOVINPUT||!V_VINPUT||!V_VINCALIB)?0:(V_VINPUT/V_VINCALIB*115)):((F_NOVINPUT||!V_VINPUT||!V_VINCALIB||!V_IOUTCALIB)?0:(V_VINPUT/V_VINCALIB*230*(V_IOUTPUT/V_IOUTCALIB*C_VECFACTOR+1)))"/>
+          <var name="vOutput" value="(!V_VOUTCALIB||F_OPSTANDBY)?0:((V_VOUTPUT/V_VOUTCALIB)*((V_ACTUALTAP==0)?C_FVOUTTAP0:((V_ACTUALTAP==1)?C_FVOUTTAP1:((V_ACTUALTAP==2)?C_FVOUTTAP2:((V_ACTUALTAP==3)?C_FVOUTTAP3:0))))*115)"/>
+          <var name="fOutput" value="(V_OSC57-V_OSC53)?((53.0+(4.0*(V_FOUTPUT-V_OSC53)/(V_OSC57-V_OSC53)))*0.9806+1.46):0"/>
+          <var name="pOutput" value="(!V_IOUTCALIB)?0:(V_IOUTPUT/V_IOUTCALIB*100)"/>
+          <var name="vBattery" value="(!V_VBATCALIB)?0:(V_VBATTERY/V_VBATCALIB*(C_VBATNOMINAL*13.8/12))"/>
+          <var name="cBattery" value="(((V_VBATTERY/V_VBATCALIB-C_BATFACTOR)/(1-C_BATFACTOR)*100)&lt;0)?0:((V_VBATTERY/V_VBATCALIB-C_BATFACTOR)/(1-C_BATFACTOR)*100)"/>
+          <var name="temperature" value="V_TEMPER"/>
+          <var name="shutdownTimer" value="(F_SHUTDOWNTIMERON)?V_SHUTDOWNTIMER:-1"/>
+          <var name="nominalVInput" value="(F_VINSEL220)?C_VINNOMINAL2:C_VINNOMINAL"/>
+          <var name="nominalVOutput" value="C_VOUTNOMINAL"/>
+          <var name="nominalFOutput" value="C_FINNOMINAL"/>
+          <var name="nominalPOutput" value="C_POUTNOMINAL"/>
+          <var name="nominalVBattery" value="C_VBATNOMINAL"/>
+        </vars>
+      </default>
+      <model name="SAVE USB-TI 500" value="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="500.0000"/>
+        </consts>
+      </model>
+      <model name="SAVE USB-M1 500" value="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="500.0000"/>
+          <const name="C_VINMAX2" value="142.0000"/>
+          <const name="C_VINMIN2" value="84.0000"/>
+          <const name="C_VINNOMINAL2" value="115.0000"/>
+        </consts>
+        <vars>
+          <var name="vInput" value="(F_NOVINPUT||!V_VINPUT||!V_VINCALIB)?0:(V_VINPUT/V_VINCALIB*115)"/>
+          <var name="nominalVInput" value="C_VINNOMINAL"/>
+        </vars>
+      </model>
+      <model name="SAVE USB-M2 500" value="2">
+        <consts>
+          <const name="C_POUTNOMINAL" value="500.0000"/>
+          <const name="C_FVOUTTAP0" value="1.2460"/>
+          <const name="C_FVOUTTAP1" value="1.1620"/>
+          <const name="C_FVOUTTAP2" value="1.0705"/>
+          <const name="C_FVOUTTAP3" value="0.9998"/>
+          <const name="C_VINMAX" value="252.0000"/>
+          <const name="C_VINMAX2" value="252.0000"/>
+          <const name="C_VINMIN" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+        <vars>
+          <var name="vInput" value="(F_NOVINPUT||!V_VINPUT||!V_VINCALIB)?0:(V_VINPUT/V_VINCALIB*115)"/>
+          <var name="nominalVInput" value="C_VINNOMINAL"/>
+        </vars>
+      </model>
+      <model name="SAVE USB-TI 600" value="3" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="600.0000"/>
+        </consts>
+      </model>
+      <model name="SAVE USB-M1 600" value="4" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="600.0000"/>
+          <const name="C_VINMAX2" value="142.0000"/>
+          <const name="C_VINMIN2" value="84.0000"/>
+          <const name="C_VINNOMINAL2" value="115.0000"/>
+        </consts>
+      </model>
+      <model name="SAVE USB-M2 600" value="5" from="2">
+        <consts>
+          <const name="C_POUTNOMINAL" value="600.0000"/>
+          <const name="C_FVOUTTAP0" value="1.2460"/>
+          <const name="C_FVOUTTAP1" value="1.1620"/>
+          <const name="C_FVOUTTAP2" value="1.0705"/>
+          <const name="C_FVOUTTAP3" value="0.9998"/>
+          <const name="C_VINMAX" value="252.0000"/>
+          <const name="C_VINMAX2" value="252.0000"/>
+          <const name="C_VINMIN" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+      </model>
+      <model name="SAVE USB-TI 700" value="6" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="700.0000"/>
+        </consts>
+      </model>
+      <model name="SAVE USB-M1 700" value="7" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="700.0000"/>
+          <const name="C_VINMAX2" value="142.0000"/>
+          <const name="C_VINMIN2" value="84.0000"/>
+          <const name="C_VINNOMINAL2" value="115.0000"/>
+        </consts>
+      </model>
+      <model name="SAVE USB-M2 700" value="8" from="2">
+        <consts>
+          <const name="C_POUTNOMINAL" value="700.0000"/>
+          <const name="C_FVOUTTAP0" value="1.2460"/>
+          <const name="C_FVOUTTAP1" value="1.1620"/>
+          <const name="C_FVOUTTAP2" value="1.0705"/>
+          <const name="C_FVOUTTAP3" value="0.9998"/>
+          <const name="C_VINMAX" value="252.0000"/>
+          <const name="C_VINMAX2" value="252.0000"/>
+          <const name="C_VINMIN" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+      </model>
+      <model name="SAVE USB-TI 900" value="9" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="900.0000"/>
+        </consts>
+      </model>
+      <model name="SAVE USB-M1 900" value="10" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="900.0000"/>
+          <const name="C_VINMAX2" value="142.0000"/>
+          <const name="C_VINMIN2" value="84.0000"/>
+          <const name="C_VINNOMINAL2" value="115.0000"/>
+        </consts>
+      </model>
+      <model name="SAVE USB-M2 900" value="11" from="2">
+        <consts>
+          <const name="C_POUTNOMINAL" value="900.0000"/>
+          <const name="C_FVOUTTAP0" value="1.2460"/>
+          <const name="C_FVOUTTAP1" value="1.1620"/>
+          <const name="C_FVOUTTAP2" value="1.0705"/>
+          <const name="C_FVOUTTAP3" value="0.9998"/>
+          <const name="C_VINMAX" value="252.0000"/>
+          <const name="C_VINMAX2" value="252.0000"/>
+          <const name="C_VINMIN" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+      </model>
+      <model name="SAVE USB-TI 1200" value="12" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1200.0000"/>
+        </consts>
+      </model>
+      <model name="SAVE USB-M1 1200" value="13" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1200.0000"/>
+          <const name="C_VINMAX2" value="142.0000"/>
+          <const name="C_VINMIN2" value="84.0000"/>
+          <const name="C_VINNOMINAL2" value="115.0000"/>
+        </consts>
+      </model>
+      <model name="SAVE USB-M2 1200" value="14" from="2">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1200.0000"/>
+          <const name="C_FVOUTTAP0" value="1.2460"/>
+          <const name="C_FVOUTTAP1" value="1.1620"/>
+          <const name="C_FVOUTTAP2" value="1.0705"/>
+          <const name="C_FVOUTTAP3" value="0.9998"/>
+          <const name="C_VINMAX" value="252.0000"/>
+          <const name="C_VINMAX2" value="252.0000"/>
+          <const name="C_VINMIN" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+      </model>
+    </device>
+    <!-- =================================================================== -->
+    <!-- Familia 13 -->
+    <!-- =================================================================== -->
+    <device family="13" name="SAVE DIGITAL">
+      <ranges>
+        <range start="0080" size="30"/>
+        <range start="00F3" size="1"/>
+        <range start="0136" size="1"/>
+        <range start="0202" size="2"/>
+      </ranges>
+      <capabilities>
+        <cap name="hasFamily" value="1"/>
+        <cap name="hasModel" value="1"/>
+        <cap name="hasVInput" value="1"/>
+        <cap name="hasVOutput" value="1"/>
+        <cap name="hasIOutput" value="1"/>
+        <cap name="hasPOutput" value="1"/>
+        <cap name="hasFOutput" value="1"/>
+        <cap name="hasVBattery" value="1"/>
+        <cap name="hasCBattery" value="1"/>
+        <cap name="hasTemperature" value="1"/>
+        <cap name="hasVersion" value="1"/>
+        <cap name="hasICBattery" value="1"/>
+        <cap name="hasSetICBattery" value="1"/>
+        <cap name="hasShutdownTimer" value="1"/>
+        <cap name="hasManualShutdown" value="1"/>
+        <cap name="hasStandBy" value="0"/>
+        <cap name="hasWakeUp" value="1"/>
+        <cap name="hasNightOff" value="1"/>
+        <cap name="hasSampVInput" value="1"/>
+        <cap name="hasSampVOutput" value="1"/>
+        <cap name="hasSampIOutput" value="1"/>
+        <cap name="hasNominalVInput" value="1"/>
+        <cap name="hasNominalVOutput" value="1"/>
+        <cap name="hasNominalPOutput" value="1"/>
+        <cap name="hasNominalFOutput" value="1"/>
+        <cap name="hasNominalVBattery" value="1"/>
+        <cap name="hasSetDischargeBattery" value="1"/>
+        <cap name="hasChangeAutonomy" value="1"/>
+        <cap name="hasPowerLook" value="1"/>
+        <cap name="hasSetLineSens" value="1"/>
+        <cap name="hasRgbLed" value="0"/>
+      </capabilities>
+      <default>
+        <map>
+          <alias name="V_PPOWERLO" addr="0081"/>
+          <alias name="V_TPOWERLO" addr="0082"/>
+          <alias name="V_CAPBATREF" addr="0083"/>
+          <alias name="V_WAKEUPHI" addr="0084"/>
+          <alias name="V_WAKEUPMID" addr="0085"/>
+          <alias name="V_WAKEUPLOW" addr="0086"/>
+          <alias name="V_CBATTERY" addr="0087"/>
+          <alias name="V_VBATTERY" addr="008A"/>
+          <alias name="V_VINPUT" addr="008B"/>
+          <alias name="V_IOUTPUT" addr="008C"/>
+          <alias name="V_POUTPUT" addr="008D"/>
+          <alias name="V_TEMPER" addr="008E"/>
+          <alias name="V_FOUTPUT" addr="0097"/>
+          <alias name="V_SHUTDOWNTIMER" addr="0098"/>
+          <alias name="V_MODEL" addr="009A"/>
+          <alias name="V_VERSION" addr="009B"/>
+          <alias name="V_VOUTPUT" addr="009D"/>
+          <alias name="V_IOUTCALIB" addr="00F3"/>
+          <alias name="V_SAMPIOUT" addr="0110"/>
+          <alias name="V_SAMPVIN" addr="0111"/>
+          <alias name="V_SAMPVOUT" addr="0112"/>
+          <alias name="V_CAPBATNEW" addr="0136"/>
+          <alias name="V_OSC53" addr="0202"/>
+          <alias name="V_OSC57" addr="0203"/>
+          <alias name="F_AUTOSTART" addr="0080" bit="0"/>
+          <alias name="F_ICBATTERY" addr="0080" bit="2"/>
+          <alias name="F_LINESENS" addr="0080" bit="7"/>
+          <alias name="F_NOBAT" addr="0090" bit="0"/>
+          <alias name="F_OLDBAT" addr="0090" bit="1"/>
+          <alias name="F_OPCHECKUP" addr="0090" bit="2"/>
+          <alias name="F_NOVINPUT" addr="0090" bit="3"/>
+          <alias name="F_LOVINPUT" addr="0090" bit="4"/>
+          <alias name="F_HIVINPUT" addr="0090" bit="5"/>
+          <alias name="F_OPBATTERY" addr="0090" bit="6"/>
+          <alias name="F_HIPOUTPUT" addr="0090" bit="7"/>
+          <alias name="F_LOBATTERY" addr="0091" bit="0"/>
+          <alias name="F_FOVERTEMP" addr="0091" bit="1"/>
+          <alias name="F_FENDBATTERY" addr="0091" bit="2"/>
+          <alias name="F_FOVERLOAD" addr="0091" bit="3"/>
+          <alias name="F_FABNORMALVOUT" addr="0091" bit="4"/>
+          <alias name="F_FABNORMALVBAT" addr="0091" bit="5"/>
+          <alias name="F_FINVERTER" addr="0091" bit="6"/>
+          <alias name="F_FSHORTCIRCUIT" addr="0091" bit="7"/>
+          <alias name="F_SYNCIN" addr="0092" bit="0"/>
+          <alias name="F_SUPERVON" addr="0092" bit="1"/>
+          <alias name="F_MOREBAT" addr="0092" bit="2"/>
+          <alias name="F_LESSBAT" addr="0092" bit="3"/>
+          <alias name="F_RCTRLON" addr="0092" bit="5"/>
+          <alias name="F_POWERLOON" addr="0092" bit="6"/>
+          <alias name="F_NIGHTOFFON" addr="0092" bit="7"/>
+          <alias name="F_TRANSFINV" addr="0095" bit="7"/>
+        </map>
+        <consts>
+          <const name="C_FINNOMINAL" value="60.0000"/>
+          <const name="C_VBATNOMINAL" value="12.0000"/>
+          <const name="C_VINMAX" value="266.0000"/>
+          <const name="C_VINMAX2" value="266.0000"/>
+          <const name="C_VINMIN" value="80.0000"/>
+          <const name="C_VINMIN2" value="80.0000"/>
+          <const name="C_VINNOMINAL" value="115.0000"/>
+          <const name="C_VINNOMINAL2" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="115.0000"/>
+        </consts>
+        <flags>
+          <flag name="opBattery" value="F_OPBATTERY"/>
+          <flag name="opCheckup" value="F_OPCHECKUP"/>
+          <flag name="noVInput" value="F_NOVINPUT"/>
+          <flag name="loVInput" value="(F_NOVINPUT)?0:F_LOVINPUT"/>
+          <flag name="hiVInput" value="F_HIVINPUT"/>
+          <flag name="syncInput" value="F_SYNCIN"/>
+          <flag name="hiPOutput" value="F_HIPOUTPUT"/>
+          <flag name="loBattery" value="F_LOBATTERY"/>
+          <flag name="noBattery" value="F_NOBAT"/>
+          <flag name="oldBattery" value="F_OLDBAT"/>
+          <flag name="moreBattery" value="F_MOREBAT"/>
+          <flag name="lessBattery" value="F_LESSBAT"/>
+          <flag name="remoteControlActive" value="F_RCTRLON"/>
+          <flag name="failOvertemp" value="F_FOVERTEMP"/>
+          <flag name="failOverload" value="F_FOVERLOAD"/>
+          <flag name="failShortcircuit" value="F_FSHORTCIRCUIT"/>
+          <flag name="failInverter" value="F_FINVERTER"/>
+          <flag name="failEndBattery" value="F_FENDBATTERY"/>
+          <flag name="failAbnormalVOutput" value="F_FABNORMALVOUT"/>
+          <flag name="failAbnormalVBattery" value="F_FABNORMALVBAT"/>
+        </flags>
+        <vars>
+          <var name="model" value="V_MODEL"/>
+          <var name="version" value="V_VERSION*0.1000"/>
+          <var name="vInput" value="V_VINPUT*1.0600"/>
+          <var name="vOutput" value="V_VOUTPUT*0.5550"/>
+          <var name="fOutput" value="(V_OSC57-V_OSC53)?((53.0+(4.0*((V_FOUTPUT)-V_OSC53)/(V_OSC57-V_OSC53)))*0.9806+1.46):0"/>
+          <var name="iOutput" value="V_IOUTPUT*4.3000/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+          <var name="pOutput" value="V_POUTPUT"/>
+          <var name="vBattery" value="V_VBATTERY*0.0670"/>
+          <var name="cBattery" value="V_CBATTERY*0.3930"/>
+          <var name="temperature" value="V_TEMPER"/>
+          <var name="sampVInput" value="V_SAMPVIN*0.5000"/>
+          <var name="sampVOutput" value="V_SAMPVOUT*0.5000"/>
+          <var name="sampIOutput" value="V_SAMPIOUT*0.5000"/>
+          <var name="shutdownTimer" value="(V_SHUTDOWNTIMER)?V_SHUTDOWNTIMER:-1"/>
+          <var name="wakeupTimer" value="(F_NIGHTOFFON)?((0x1000000-((V_WAKEUPLOW &amp; 0xFF)|((V_WAKEUPMID &amp; 0xFF)&lt;&lt;8)|((V_WAKEUPHI &amp; 0xFF)&lt;&lt;16)))*5.904144):-1"/>
+          <var name="nightoffTimer" value="(F_NIGHTOFFON)?(((0x1000000-((V_WAKEUPLOW &amp; 0xFF)|((V_WAKEUPMID &amp; 0xFF)&lt;&lt;8)|((V_WAKEUPHI &amp; 0xFF)&lt;&lt;16)))*5.904144)/(((fOutput/59.4)&gt;0.0)?(fOutput/59.4):1.0)):-1"/>
+          <var name="icBattery" value="(F_ICBATTERY)?1:0"/>
+          <var name="nominalVInput" value="(vInput&gt;150.0)?C_VINNOMINAL2:C_VINNOMINAL"/>
+          <var name="nominalVOutput" value="C_VOUTNOMINAL"/>
+          <var name="nominalFOutput" value="C_FINNOMINAL"/>
+          <var name="nominalPOutput" value="C_POUTNOMINAL"/>
+          <var name="nominalVBattery" value="C_VBATNOMINAL"/>
+          <var name="ledRed" value="V_LEDRED"/>
+          <var name="ledGreen" value="V_LEDGREEN"/>
+          <var name="ledBlue" value="V_LEDBLUE"/>
+          <var name="random" value="V_RANDOM"/>
+        </vars>
+        <actions>
+          <action name="superviseOn" value="F_SUPERVON=1"/>
+          <action name="superviseOff" value="F_SUPERVON=0"/>
+          <action name="shutdown" value="F_AUTOSTART=$notmanual;V_SHUTDOWNTIMER=$counter"/>
+          <action name="nightOff" value="F_WAKEUPON=0;F_NIGHTOFFON=0;V_WAKEUPLOW=(0x1000000-$counter/5.904144*(fOutput/59.4))&amp;0xFF;V_WAKEUPMID=((0x1000000-$counter/5.904144*(fOutput/59.4))&amp;0xFF00)&gt;&gt;8;V_WAKEUPHI=((0x1000000-$counter/5.904144*(fOutput/59.4))&amp;0xFF0000)&gt;&gt;16;F_NIGHTOFFON=1"/>
+          <action name="wakeUp" value="F_WAKEUPON=0;F_NIGHTOFFON=0;V_WAKEUPLOW=(0x1000000-$counter/5.904144)&amp;0xFF;V_WAKEUPMID=((0x1000000-$counter/5.904144)&amp;0xFF00)&gt;&gt;8;V_WAKEUPHI=((0x1000000-$counter/5.904144)&amp;0xFF0000)&gt;&gt;16;F_WAKEUPON=1"/>
+          <action name="fullDischarge" value="F_OLDBAT=0;F_OPCHECKUP=1;F_TRANSFINV=1"/>
+          <action name="setICBattery" value="F_ICBATTERY=($value==1)?1:0"/>
+          <action name="setLineSens" value="F_LINESENS=($value&lt;=1)?1:0"/>
+          <action name="moreBat" value="F_MOREBAT=0"/>
+          <action name="lessBat" value="V_CAPBATREF=V_CAPBATNEW;F_LESSBAT=0"/>
+          <action name="powerLookOn" value="V_TPOWERLO=$counter;F_POWERLOON=1"/>
+          <action name="powerLookOff" value="V_TPOWERLO=0;V_PPOWERLO=0;F_POWERLOON=1"/>
+          <action name="changeColor" value="V_LEDRED=$red;V_LEDGREEN=$green;V_LEDBLUE=$blue;V_RANDOM=$random"/>
+        </actions>
+      </default>
+      <model name="SAVE DIGITAL 600 TI" value="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="600.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*3.2000/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+        </vars>
+      </model>
+      <model name="SAVE DIGITAL 600 M2" value="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="600.0000"/>
+          <const name="C_VINMIN" value="166.0000"/>
+          <const name="C_VINMIN2" value="166.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+        <vars>
+          <var name="vOutput" value="V_VOUTPUT*1.0300"/>
+          <var name="iOutput" value="V_IOUTPUT*1.7000/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+          <var name="nominalVInput" value="C_VINNOMINAL"/>
+        </vars>
+      </model>
+      <model name="SAVE DIGITAL 700 TI" value="2" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="700.0000"/>
+        </consts>
+      </model>
+      <model name="SAVE DIGITAL 700 M2" value="3" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="700.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*2.3000/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+        </vars>
+      </model>
+      <model name="SAVE DIGITAL 900 TI" value="4" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="900.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*4.9400/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+        </vars>
+      </model>
+      <model name="SAVE DIGITAL 900 M2" value="5" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="900.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*2.6400/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+        </vars>
+      </model>
+      <model name="SAVE DIGITAL 1200 TI" value="6" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1200.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*6.3700/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+        </vars>
+      </model>
+      <model name="SAVE DIGITAL 1200 M2" value="7" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1200.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*3.4100/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+        </vars>
+      </model>
+      <model name="SAVE DIGITAL 1300 TI" value="8" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1300.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*9.5600/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+          <var name="vBattery" value="V_VBATTERY*0.1340"/>
+        </vars>
+      </model>
+      <model name="SAVE DIGITAL 1300 M2" value="9" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1300.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*5.1100/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+          <var name="vBattery" value="V_VBATTERY*0.1340"/>
+        </vars>
+      </model>
+      <model name="SAVE DIGITAL 1400 TI" value="10" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1400.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*11.1500/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+          <var name="vBattery" value="V_VBATTERY*0.1340"/>
+        </vars>
+      </model>
+      <model name="SAVE DIGITAL 1400 M2" value="11" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1400.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*5.9600/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+          <var name="vBattery" value="V_VBATTERY*0.1340"/>
+        </vars>
+      </model>
+      <model name="SAVE DIGITAL 1600 TI" value="12" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1600.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*12.8000/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+          <var name="vBattery" value="V_VBATTERY*0.1340"/>
+        </vars>
+      </model>
+      <model name="SAVE DIGITAL 1600 M2" value="13" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1600.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*6.8000/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+          <var name="vBattery" value="V_VBATTERY*0.1340"/>
+        </vars>
+      </model>
+      <model name="SAVE DIGITAL 1800 TI" value="14" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1800.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*14.4000/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+          <var name="vBattery" value="V_VBATTERY*0.1340"/>
+        </vars>
+      </model>
+      <model name="SAVE DIGITAL 1800 M2" value="15" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1800.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*7.6500/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+          <var name="vBattery" value="V_VBATTERY*0.1340"/>
+        </vars>
+      </model>
+      <model name="SAVE DIGITAL 2000 TI" value="16" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="2000.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*15.9300/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+          <var name="vBattery" value="V_VBATTERY*0.1340"/>
+        </vars>
+      </model>
+      <model name="SAVE DIGITAL 2000 M2" value="17" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="2000.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*8.5200/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+          <var name="vBattery" value="V_VBATTERY*0.1340"/>
+        </vars>
+      </model>
+      <model name="SAVE DIGITAL 2200 TI" value="18" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="2200.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*17.5200/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+          <var name="vBattery" value="V_VBATTERY*0.1340"/>
+        </vars>
+      </model>
+      <model name="SAVE DIGITAL 2200 M2" value="19" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="2200.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*9.3700/((V_IOUTCALIB&gt;0.0)?V_IOUTCALIB:1.0)"/>
+          <var name="vBattery" value="V_VBATTERY*0.1340"/>
+        </vars>
+      </model>
+      <model name="SAVE DIGITAL 500 TI" value="20" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="500.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+        </consts>
+      </model>
+      <model name="SAVE DIGITAL 500 M2" value="21" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="500.0000"/>
+        </consts>
+      </model>
+    </device>
+    <!-- =================================================================== -->
+    <!-- Familia 14 -->
+    <!-- =================================================================== -->
+    <device family="14" name="NEW/QUADRI">
+      <ranges>
+        <range start="0000" size="27"/>
+      </ranges>
+      <capabilities>
+        <cap name="hasFamily" value="1"/>
+        <cap name="hasModel" value="1"/>
+        <cap name="hasVInput" value="1"/>
+        <cap name="hasVOutput" value="1"/>
+        <cap name="hasIOutput" value="0"/>
+        <cap name="hasPOutput" value="1"/>
+        <cap name="hasFOutput" value="1"/>
+        <cap name="hasVBattery" value="1"/>
+        <cap name="hasCBattery" value="1"/>
+        <cap name="hasTemperature" value="1"/>
+        <cap name="hasVersion" value="1"/>
+        <cap name="hasICBattery" value="0"/>
+        <cap name="hasSetICBattery" value="0"/>
+        <cap name="hasShutdownTimer" value="1"/>
+        <cap name="hasManualShutdown" value="0"/>
+        <cap name="hasStandBy" value="0"/>
+        <cap name="hasWakeUp" value="0"/>
+        <cap name="hasNightOff" value="0"/>
+        <cap name="hasSampVInput" value="0"/>
+        <cap name="hasSampVOutput" value="0"/>
+        <cap name="hasSampIOutput" value="0"/>
+        <cap name="hasNominalVInput" value="1"/>
+        <cap name="hasNominalVOutput" value="1"/>
+        <cap name="hasNominalPOutput" value="1"/>
+        <cap name="hasNominalFOutput" value="1"/>
+        <cap name="hasNominalVBattery" value="1"/>
+        <cap name="hasSetDischargeBattery" value="0"/>
+        <cap name="hasChangeAutonomy" value="0"/>
+        <cap name="hasPowerLook" value="0"/>
+        <cap name="hasSetLineSens" value="0"/>
+        <cap name="hasRgbLed" value="0"/>
+      </capabilities>
+      <default>
+        <map>
+          <alias name="V_VERSION" addr="0000"/>
+          <alias name="V_MODEL" addr="0001"/>
+          <alias name="V_OSC53" addr="0002"/>
+          <alias name="V_OSC57" addr="0003"/>
+          <alias name="V_FOUTCALIB" addr="0004"/>
+          <alias name="V_VBATCALIB" addr="0005"/>
+          <alias name="V_VINCALIB" addr="0006"/>
+          <alias name="V_VOUTCALIB" addr="0007"/>
+          <alias name="V_IOUTCALIB" addr="0009"/>
+          <alias name="V_ACTUALTAP" addr="0011"/>
+          <alias name="V_VINPUT" addr="0012"/>
+          <alias name="V_VOUTPUT" addr="0013"/>
+          <alias name="V_IOUTPUT" addr="0014"/>
+          <alias name="V_VBATTERY" addr="0015"/>
+          <alias name="V_SHUTDOWNTIMER" addr="0016"/>
+          <alias name="V_FOUTPUT" addr="0017"/>
+          <alias name="V_TEMPER" addr="001A"/>
+          <alias name="F_VINSEL220" addr="000A" bit="2"/>
+          <alias name="F_SYNCIN" addr="000C" bit="0"/>
+          <alias name="F_SHUTDOWNTIMERON" addr="000C" bit="4"/>
+          <alias name="F_MAXBATTERY" addr="000C" bit="7"/>
+          <alias name="F_NOVINPUT" addr="000D" bit="0"/>
+          <alias name="F_FENDBATTERY" addr="000E" bit="1"/>
+          <alias name="F_FOVERLOAD" addr="000E" bit="2"/>
+          <alias name="F_FSHORTCIRCUIT" addr="000E" bit="4"/>
+          <alias name="F_FABNORMALVOUT" addr="000E" bit="5"/>
+          <alias name="F_FABNORMALVBAT" addr="000E" bit="6"/>
+          <alias name="F_FINVERTER" addr="000E" bit="7"/>
+          <alias name="F_LOFINPUT" addr="000F" bit="1"/>
+          <alias name="F_HIFINPUT" addr="000F" bit="2"/>
+          <alias name="F_NOSYNCIN" addr="000F" bit="3"/>
+          <alias name="F_LOVINPUT" addr="000F" bit="4"/>
+          <alias name="F_HIVINPUT" addr="000F" bit="5"/>
+          <alias name="F_LOBATTERY" addr="000F" bit="6"/>
+          <alias name="F_NOISEIN" addr="000F" bit="7"/>
+          <alias name="F_OPBATTERY" addr="0010" bit="3"/>
+          <alias name="F_OPSTANDBY" addr="0010" bit="4"/>
+          <alias name="F_OPWARNING" addr="0010" bit="5"/>
+          <alias name="F_OPSTARTUP" addr="0010" bit="6"/>
+        </map>
+        <consts>
+          <const name="C_BATFACTOR" value="0.7250"/>
+          <const name="C_FINNOMINAL" value="60.0000"/>
+          <const name="C_FVOUTTAP0" value="1.2898"/>
+          <const name="C_FVOUTTAP1" value="1.1558"/>
+          <const name="C_FVOUTTAP2" value="1.0172"/>
+          <const name="C_FVOUTTAP3" value="0.8812"/>
+          <const name="C_VBATNOMINAL" value="12.0000"/>
+          <const name="C_VECFACTOR" value="0.0500"/>
+          <const name="C_VINMAX" value="142.0000"/>
+          <const name="C_VINMAX2" value="284.0000"/>
+          <const name="C_VINMIN" value="84.0000"/>
+          <const name="C_VINMIN2" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="115.0000"/>
+          <const name="C_VINNOMINAL2" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="115.0000"/>
+        </consts>
+        <flags>
+          <flag name="opStartup" value="F_OPSTARTUP"/>
+          <flag name="opBattery" value="F_OPBATTERY"/>
+          <flag name="opStandBy" value="F_OPSTANDBY"/>
+          <flag name="opWarning" value="F_OPWARNING"/>
+          <flag name="noVInput" value="F_NOVINPUT"/>
+          <flag name="loVInput" value="(F_NOVINPUT)?0:F_LOVINPUT"/>
+          <flag name="hiVInput" value="F_HIVINPUT"/>
+          <flag name="loFInput" value="F_LOFINPUT"/>
+          <flag name="hiFInput" value="F_HIFINPUT"/>
+          <flag name="noSyncInput" value="F_NOSYNCIN"/>
+          <flag name="syncInput" value="F_SYNCIN"/>
+          <flag name="noiseInput" value="F_NOISEIN"/>
+          <flag name="loBattery" value="F_LOBATTERY"/>
+          <flag name="maxBattery" value="F_MAXBATTERY"/>
+          <flag name="shutdownTimerActive" value="F_SHUTDOWNTIMERON"/>
+          <flag name="noCalibrated" value="V_CALIB!=0xFF"/>
+          <flag name="failOverload" value="F_FOVERLOAD"/>
+          <flag name="failShortcircuit" value="F_FSHORTCIRCUIT"/>
+          <flag name="failInverter" value="F_FINVERTER"/>
+          <flag name="failEndBattery" value="F_FENDBATTERY"/>
+          <flag name="failAbnormalVOutput" value="F_FABNORMALVOUT"/>
+          <flag name="failAbnormalVBattery" value="F_FABNORMALVBAT"/>
+        </flags>
+        <vars>
+          <var name="model" value="V_MODEL"/>
+          <var name="version" value="V_VERSION*0.1000"/>
+          <var name="vInput" value="(!F_VINSEL220||F_OPBATTERY)?((F_NOVINPUT||!V_VINPUT||!V_VINCALIB)?0:(V_VINPUT/V_VINCALIB*115)):((F_NOVINPUT||!V_VINPUT||!V_VINCALIB||!V_IOUTCALIB)?0:(V_VINPUT/V_VINCALIB*230*(V_IOUTPUT/V_IOUTCALIB*C_VECFACTOR+1)))"/>
+          <var name="vOutput" value="(!V_VOUTCALIB||F_OPSTANDBY)?0:((V_VOUTPUT/V_VOUTCALIB)*((V_ACTUALTAP==0)?C_FVOUTTAP0:((V_ACTUALTAP==1)?C_FVOUTTAP1:((V_ACTUALTAP==2)?C_FVOUTTAP2:((V_ACTUALTAP==3)?C_FVOUTTAP3:0))))*115)"/>
+          <var name="fOutput" value="(V_OSC57-V_OSC53)?((53.0+(4.0*(V_FOUTPUT-V_OSC53)/(V_OSC57-V_OSC53)))*0.9806+1.46):0"/>
+          <var name="pOutput" value="(!V_IOUTCALIB)?0:(V_IOUTPUT/V_IOUTCALIB*100)"/>
+          <var name="vBattery" value="(!V_VBATCALIB)?0:(V_VBATTERY/V_VBATCALIB*(C_VBATNOMINAL*13.8/12))"/>
+          <var name="cBattery" value="(((V_VBATTERY/V_VBATCALIB-C_BATFACTOR)/(1-C_BATFACTOR)*100)&lt;0)?0:((V_VBATTERY/V_VBATCALIB-C_BATFACTOR)/(1-C_BATFACTOR)*100)"/>
+          <var name="temperature" value="V_TEMPER"/>
+          <var name="shutdownTimer" value="(F_SHUTDOWNTIMERON)?V_SHUTDOWNTIMER:-1"/>
+          <var name="nominalVInput" value="(F_VINSEL220)?C_VINNOMINAL2:C_VINNOMINAL"/>
+          <var name="nominalVOutput" value="C_VOUTNOMINAL"/>
+          <var name="nominalFOutput" value="C_FINNOMINAL"/>
+          <var name="nominalPOutput" value="C_POUTNOMINAL"/>
+          <var name="nominalVBattery" value="C_VBATNOMINAL"/>
+        </vars>
+      </default>
+      <model name="EASY WAY-TI 500" value="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="500.0000"/>
+        </consts>
+      </model>
+      <model name="EASY WAY-M1 500" value="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="500.0000"/>
+          <const name="C_VINMAX2" value="142.0000"/>
+          <const name="C_VINMIN2" value="84.0000"/>
+          <const name="C_VINNOMINAL2" value="115.0000"/>
+        </consts>
+        <vars>
+          <var name="vInput" value="(F_NOVINPUT||!V_VINPUT||!V_VINCALIB)?0:(V_VINPUT/V_VINCALIB*115)"/>
+          <var name="nominalVInput" value="C_VINNOMINAL"/>
+        </vars>
+      </model>
+      <model name="EASY WAY-M2 500" value="2">
+        <consts>
+          <const name="C_POUTNOMINAL" value="500.0000"/>
+          <const name="C_FVOUTTAP0" value="1.2460"/>
+          <const name="C_FVOUTTAP1" value="1.1620"/>
+          <const name="C_FVOUTTAP2" value="1.0705"/>
+          <const name="C_FVOUTTAP3" value="0.9998"/>
+          <const name="C_VINMAX" value="252.0000"/>
+          <const name="C_VINMAX2" value="252.0000"/>
+          <const name="C_VINMIN" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+        <vars>
+          <var name="vInput" value="(F_NOVINPUT||!V_VINPUT||!V_VINCALIB)?0:(V_VINPUT/V_VINCALIB*115)"/>
+          <var name="nominalVInput" value="C_VINNOMINAL"/>
+        </vars>
+      </model>
+      <model name="EASY WAY-TI 600" value="3" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="600.0000"/>
+        </consts>
+      </model>
+      <model name="EASY WAY-M1 600" value="4" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="600.0000"/>
+          <const name="C_VINMAX2" value="142.0000"/>
+          <const name="C_VINMIN2" value="84.0000"/>
+          <const name="C_VINNOMINAL2" value="115.0000"/>
+        </consts>
+      </model>
+      <model name="EASY WAY-M2 600" value="5" from="2">
+        <consts>
+          <const name="C_POUTNOMINAL" value="600.0000"/>
+          <const name="C_FVOUTTAP0" value="1.2460"/>
+          <const name="C_FVOUTTAP1" value="1.1620"/>
+          <const name="C_FVOUTTAP2" value="1.0705"/>
+          <const name="C_FVOUTTAP3" value="0.9998"/>
+          <const name="C_VINMAX" value="252.0000"/>
+          <const name="C_VINMAX2" value="252.0000"/>
+          <const name="C_VINMIN" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+      </model>
+      <model name="EASY WAY-TI 700" value="6" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="700.0000"/>
+        </consts>
+      </model>
+      <model name="EASY WAY-M1 700" value="7" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="700.0000"/>
+          <const name="C_VINMAX2" value="142.0000"/>
+          <const name="C_VINMIN2" value="84.0000"/>
+          <const name="C_VINNOMINAL2" value="115.0000"/>
+        </consts>
+      </model>
+      <model name="EASY WAY-M2 700" value="8" from="2">
+        <consts>
+          <const name="C_POUTNOMINAL" value="700.0000"/>
+          <const name="C_FVOUTTAP0" value="1.2460"/>
+          <const name="C_FVOUTTAP1" value="1.1620"/>
+          <const name="C_FVOUTTAP2" value="1.0705"/>
+          <const name="C_FVOUTTAP3" value="0.9998"/>
+          <const name="C_VINMAX" value="252.0000"/>
+          <const name="C_VINMAX2" value="252.0000"/>
+          <const name="C_VINMIN" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+      </model>
+      <model name="EASY WAY-TI 1200" value="9" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1200.0000"/>
+        </consts>
+      </model>
+      <model name="EASY WAY-M1 1200" value="10" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1200.0000"/>
+          <const name="C_VINMAX2" value="142.0000"/>
+          <const name="C_VINMIN2" value="84.0000"/>
+          <const name="C_VINNOMINAL2" value="115.0000"/>
+        </consts>
+      </model>
+      <model name="EASY WAY-M2 1200" value="11" from="2">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1200.0000"/>
+          <const name="C_FVOUTTAP0" value="1.2460"/>
+          <const name="C_FVOUTTAP1" value="1.1620"/>
+          <const name="C_FVOUTTAP2" value="1.0705"/>
+          <const name="C_FVOUTTAP3" value="0.9998"/>
+          <const name="C_VINMAX" value="252.0000"/>
+          <const name="C_VINMAX2" value="252.0000"/>
+          <const name="C_VINMIN" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+      </model>
+      <model name="EASY WAY-TI 1300" value="12" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1300.0000"/>
+        </consts>
+      </model>
+      <model name="EASY WAY-M1 1300" value="13" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1300.0000"/>
+          <const name="C_VINMAX2" value="142.0000"/>
+          <const name="C_VINMIN2" value="84.0000"/>
+          <const name="C_VINNOMINAL2" value="115.0000"/>
+        </consts>
+      </model>
+      <model name="EASY WAY-M2 1300" value="14" from="2">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1300.0000"/>
+          <const name="C_FVOUTTAP0" value="1.2460"/>
+          <const name="C_FVOUTTAP1" value="1.1620"/>
+          <const name="C_FVOUTTAP2" value="1.0705"/>
+          <const name="C_FVOUTTAP3" value="0.9998"/>
+          <const name="C_VINMAX" value="252.0000"/>
+          <const name="C_VINMAX2" value="252.0000"/>
+          <const name="C_VINMIN" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+      </model>
+      <model name="EASY WAY-TI 1400" value="15" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1400.0000"/>
+        </consts>
+      </model>
+      <model name="EASY WAY-M1 1400" value="16" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1400.0000"/>
+          <const name="C_VINMAX2" value="142.0000"/>
+          <const name="C_VINMIN2" value="84.0000"/>
+          <const name="C_VINNOMINAL2" value="115.0000"/>
+        </consts>
+      </model>
+      <model name="EASY WAY-M2 1400" value="17" from="2">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1400.0000"/>
+          <const name="C_FVOUTTAP0" value="1.2460"/>
+          <const name="C_FVOUTTAP1" value="1.1620"/>
+          <const name="C_FVOUTTAP2" value="1.0705"/>
+          <const name="C_FVOUTTAP3" value="0.9998"/>
+          <const name="C_VINMAX" value="252.0000"/>
+          <const name="C_VINMAX2" value="252.0000"/>
+          <const name="C_VINMIN" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+      </model>
+      <model name="EASY WAY-TI 1600" value="18" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1600.0000"/>
+        </consts>
+      </model>
+      <model name="EASY WAY-M1 1600" value="19" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1600.0000"/>
+          <const name="C_VINMAX2" value="142.0000"/>
+          <const name="C_VINMIN2" value="84.0000"/>
+          <const name="C_VINNOMINAL2" value="115.0000"/>
+        </consts>
+      </model>
+      <model name="EASY WAY-M2 1600" value="20" from="2">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1600.0000"/>
+          <const name="C_FVOUTTAP0" value="1.2460"/>
+          <const name="C_FVOUTTAP1" value="1.1620"/>
+          <const name="C_FVOUTTAP2" value="1.0705"/>
+          <const name="C_FVOUTTAP3" value="0.9998"/>
+          <const name="C_VINMAX" value="252.0000"/>
+          <const name="C_VINMAX2" value="252.0000"/>
+          <const name="C_VINMIN" value="175.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+      </model>
+    </device>
+    <!-- =================================================================== -->
+    <!-- Familia 15 -->
+    <!-- =================================================================== -->
+    <device family="15" name="EASY JET">
+      <ranges>
+        <range start="0080" size="23"/>
+        <range start="00C9" size="1"/>
+      </ranges>
+      <capabilities>
+        <cap name="hasFamily" value="1"/>
+        <cap name="hasModel" value="1"/>
+        <cap name="hasVInput" value="1"/>
+        <cap name="hasVOutput" value="1"/>
+        <cap name="hasIOutput" value="1"/>
+        <cap name="hasPOutput" value="1"/>
+        <cap name="hasFOutput" value="1"/>
+        <cap name="hasVBattery" value="1"/>
+        <cap name="hasCBattery" value="1"/>
+        <cap name="hasTemperature" value="1"/>
+        <cap name="hasVersion" value="1"/>
+        <cap name="hasICBattery" value="0"/>
+        <cap name="hasSetICBattery" value="0"/>
+        <cap name="hasShutdownTimer" value="1"/>
+        <cap name="hasManualShutdown" value="1"/>
+        <cap name="hasStandBy" value="1"/>
+        <cap name="hasWakeUp" value="1"/>
+        <cap name="hasNightOff" value="1"/>
+        <cap name="hasSampVInput" value="1"/>
+        <cap name="hasSampVOutput" value="1"/>
+        <cap name="hasSampIOutput" value="1"/>
+        <cap name="hasNominalVInput" value="1"/>
+        <cap name="hasNominalVOutput" value="1"/>
+        <cap name="hasNominalPOutput" value="1"/>
+        <cap name="hasNominalFOutput" value="1"/>
+        <cap name="hasNominalVBattery" value="1"/>
+        <cap name="hasSetDischargeBattery" value="1"/>
+        <cap name="hasChangeAutonomy" value="0"/>
+        <cap name="hasPowerLook" value="0"/>
+        <cap name="hasSetLineSens" value="1"/>
+        <cap name="hasRgbLed" value="0"/>
+      </capabilities>
+      <default>
+        <map>
+          <alias name="V_WAKEUPLOW" addr="0080"/>
+          <alias name="V_WAKEUPMID" addr="0081"/>
+          <alias name="V_WAKEUPHI" addr="0082"/>
+          <alias name="V_MODEL" addr="0085"/>
+          <alias name="V_VINPUT" addr="0086"/>
+          <alias name="V_VOUTPUT" addr="0087"/>
+          <alias name="V_IOUTPUT" addr="0088"/>
+          <alias name="V_POUTPUT" addr="0089"/>
+          <alias name="V_FOUTPUT" addr="008A"/>
+          <alias name="V_VBATTERY" addr="008B"/>
+          <alias name="V_TEMPER" addr="0090"/>
+          <alias name="V_CBATTERY" addr="0092"/>
+          <alias name="V_VERSION" addr="0093"/>
+          <alias name="V_SAMPVIN" addr="00A4"/>
+          <alias name="V_SAMPVOUT" addr="00A8"/>
+          <alias name="V_SAMPIOUT" addr="00AC"/>
+          <alias name="V_LINESENS" addr="00B8"/>
+          <alias name="V_SHUTDOWNTIMER" addr="00C9"/>
+          <alias name="V_SUPERVIDX" addr="00E8"/>
+          <alias name="F_FOVERTEMP" addr="008D" bit="0"/>
+          <alias name="F_FINTERNAL" addr="008D" bit="1"/>
+          <alias name="F_FSHORTCIRCUIT" addr="008D" bit="2"/>
+          <alias name="F_FOVERLOAD" addr="008D" bit="3"/>
+          <alias name="F_FENDBATTERY" addr="008D" bit="4"/>
+          <alias name="F_FABNORMALVOUT" addr="008D" bit="5"/>
+          <alias name="F_FABNORMALVBAT" addr="008D" bit="6"/>
+          <alias name="F_FINVERTER" addr="008D" bit="7"/>
+          <alias name="F_LOFINPUT" addr="008E" bit="0"/>
+          <alias name="F_FFAN" addr="008E" bit="1"/>
+          <alias name="F_NOSYNCIN" addr="008E" bit="2"/>
+          <alias name="F_LOVINPUT" addr="008E" bit="3"/>
+          <alias name="F_HIVINPUT" addr="008E" bit="4"/>
+          <alias name="F_NOVINPUT" addr="008E" bit="5"/>
+          <alias name="F_LOBATTERY" addr="008E" bit="6"/>
+          <alias name="F_NOISEIN" addr="008E" bit="7"/>
+          <alias name="F_OPBATTERY" addr="008F" bit="3"/>
+          <alias name="F_OPSTANDBY" addr="008F" bit="4"/>
+          <alias name="F_OPWARNING" addr="008F" bit="5"/>
+          <alias name="F_OPSTARTUP" addr="008F" bit="6"/>
+          <alias name="F_OPCHECKUP" addr="008F" bit="7"/>
+          <alias name="F_NIGHTOFFON" addr="0091" bit="0"/>
+          <alias name="F_MAXBATTERY" addr="0091" bit="1"/>
+          <alias name="F_SHUTDOWNTIMERON" addr="0091" bit="4"/>
+          <alias name="F_WAKEUPNOVIN" addr="0091" bit="5"/>
+          <alias name="F_WAKEUPON" addr="0091" bit="7"/>
+          <alias name="F_TRANSFINV" addr="0094" bit="5"/>
+          <alias name="F_RCTRLON" addr="0095" bit="3"/>
+          <alias name="F_VINSEL220" addr="0095" bit="5"/>
+          <alias name="F_SUPERVON" addr="0096" bit="3"/>
+        </map>
+        <consts>
+          <const name="C_FINNOMINAL" value="60.0000"/>
+          <const name="C_LSENSHI" value="33.0000"/>
+          <const name="C_LSENSLO" value="55.0000"/>
+          <const name="C_LSENSNORMAL" value="41.0000"/>
+          <const name="C_LSENSVHI" value="25.0000"/>
+          <const name="C_LSENSVLO" value="63.0000"/>
+          <const name="C_VBATNOMINAL" value="24.0000"/>
+          <const name="C_VINMAX" value="145.0000"/>
+          <const name="C_VINMAX2" value="255.0000"/>
+          <const name="C_VINMIN" value="82.0000"/>
+          <const name="C_VINMIN2" value="180.0000"/>
+          <const name="C_VINNOMINAL" value="115.0000"/>
+          <const name="C_VINNOMINAL2" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="115.0000"/>
+        </consts>
+        <flags>
+          <flag name="opStartup" value="F_OPSTARTUP"/>
+          <flag name="opBattery" value="F_OPBATTERY"/>
+          <flag name="opStandBy" value="F_OPSTANDBY"/>
+          <flag name="opCheckup" value="F_OPCHECKUP"/>
+          <flag name="opWarning" value="F_OPWARNING"/>
+          <flag name="noVInput" value="F_NOVINPUT"/>
+          <flag name="loVInput" value="(F_NOVINPUT)?0:F_LOVINPUT"/>
+          <flag name="hiVInput" value="F_HIVINPUT"/>
+          <flag name="loFInput" value="F_LOFINPUT"/>
+          <flag name="noSyncInput" value="F_NOSYNCIN"/>
+          <flag name="noiseInput" value="F_NOISEIN"/>
+          <flag name="loBattery" value="F_LOBATTERY"/>
+          <flag name="maxBattery" value="F_MAXBATTERY"/>
+          <flag name="shutdownTimerActive" value="F_SHUTDOWNTIMERON"/>
+          <flag name="remoteControlActive" value="F_RCTRLON"/>
+          <flag name="failOvertemp" value="F_FOVERTEMP"/>
+          <flag name="failInternal" value="F_FINTERNAL"/>
+          <flag name="failOverload" value="F_FOVERLOAD"/>
+          <flag name="failShortcircuit" value="F_FSHORTCIRCUIT"/>
+          <flag name="failInverter" value="F_FINVERTER"/>
+          <flag name="failFan" value="F_FFAN"/>
+          <flag name="failEndBattery" value="F_FENDBATTERY"/>
+          <flag name="failAbnormalVOutput" value="F_FABNORMALVOUT"/>
+          <flag name="failAbnormalVBattery" value="F_FABNORMALVBAT"/>
+        </flags>
+        <vars>
+          <var name="model" value="V_MODEL"/>
+          <var name="version" value="V_VERSION*0.1000"/>
+          <var name="vInput" value="V_VINPUT"/>
+          <var name="vOutput" value="V_VOUTPUT*0.6090"/>
+          <var name="fOutput" value="V_FOUTPUT*0.2500"/>
+          <var name="iOutput" value="V_IOUTPUT*0.0625"/>
+          <var name="pOutput" value="V_POUTPUT"/>
+          <var name="vBattery" value="V_VBATTERY*0.1250"/>
+          <var name="cBattery" value="V_CBATTERY"/>
+          <var name="temperature" value="V_TEMPER"/>
+          <var name="sampVInput" value="V_SAMPVIN*0.5000"/>
+          <var name="sampVOutput" value="V_SAMPVOUT*0.5000"/>
+          <var name="sampIOutput" value="V_SAMPIOUT*0.5000"/>
+          <var name="shutdownTimer" value="(F_SHUTDOWNTIMERON)?V_SHUTDOWNTIMER:-1"/>
+          <var name="wakeupTimer" value="(F_WAKEUPON)?0x1000000-((V_WAKEUPLOW &amp; 0xFF)|((V_WAKEUPMID &amp; 0xFF)&lt;&lt;8)|((V_WAKEUPHI &amp; 0xFF)&lt;&lt;16)):-1"/>
+          <var name="nightoffTimer" value="(F_NIGHTOFFON)?0x1000000-((V_WAKEUPLOW &amp; 0xFF)|((V_WAKEUPMID &amp; 0xFF)&lt;&lt;8)|((V_WAKEUPHI &amp; 0xFF)&lt;&lt;16)):-1"/>
+          <var name="nominalVInput" value="(F_VINSEL220)?C_VINNOMINAL2:C_VINNOMINAL"/>
+          <var name="nominalVOutput" value="C_VOUTNOMINAL"/>
+          <var name="nominalFOutput" value="C_FINNOMINAL"/>
+          <var name="nominalPOutput" value="C_POUTNOMINAL"/>
+          <var name="nominalVBattery" value="C_VBATNOMINAL"/>
+        </vars>
+        <actions>
+          <action name="superviseOn" value="F_SUPERVON=1"/>
+          <action name="superviseOff" value="F_SUPERVON=0"/>
+          <action name="shutdown" value="F_SUPERVON=0;V_SHUTDOWNTIMER=$counter;F_SHUTDOWNTIMERON=1"/>
+          <action name="standby" value="F_WAKEUPNOVIN=1;F_SUPERVON=1;V_SHUTDOWNTIMER=$counter;F_SHUTDOWNTIMERON=1"/>
+          <action name="nightOff" value="F_WAKEUPON=0;F_NIGHTOFFON=0;V_WAKEUPLOW=(0x1000000-$counter)&amp;0xFF;V_WAKEUPMID=((0x1000000-$counter)&amp;0xFF00)&gt;&gt;8;V_WAKEUPHI=((0x1000000-$counter)&amp;0xFF0000)&gt;&gt;16;F_NIGHTOFFON=1"/>
+          <action name="wakeUp" value="F_WAKEUPON=0;F_NIGHTOFFON=0;V_WAKEUPLOW=(0x1000000-$counter)&amp;0xFF;V_WAKEUPMID=((0x1000000-$counter)&amp;0xFF00)&gt;&gt;8;V_WAKEUPHI=((0x1000000-$counter)&amp;0xFF0000)&gt;&gt;16;F_WAKEUPNOVIN=$novin;F_WAKEUPON=1"/>
+          <action name="fullDischarge" value="F_OPCHECKUP=1;V_SUPERVIDX=0;F_TRANSFINV=1"/>
+          <action name="setLineSens" value="V_LINESENS=($value==4)?C_LSENSVHI:(($value==3)?C_LSENSHI:(($value==1)?C_LSENSLO:(($value==0)?C_LSENSVLO:C_LSENSNORMAL)))"/>
+        </actions>
+      </default>
+      <model name="EASY JET 1400 TI" value="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1400.0000"/>
+        </consts>
+      </model>
+      <model name="EASY JET 1400 M2" value="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1400.0000"/>
+          <const name="C_VINMAX" value="255.0000"/>
+          <const name="C_VINMIN" value="180.0000"/>
+          <const name="C_VINNOMINAL" value="220.0000"/>
+          <const name="C_VOUTNOMINAL" value="220.0000"/>
+        </consts>
+        <vars>
+          <var name="vOutput" value="V_VOUTPUT*1.1250"/>
+          <var name="iOutput" value="V_IOUTPUT*0.0390"/>
+        </vars>
+      </model>
+      <model name="EASY JET 1600 TI" value="2" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1600.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*0.1050"/>
+        </vars>
+      </model>
+      <model name="EASY JET 1600 M2" value="3" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1600.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*0.0508"/>
+        </vars>
+      </model>
+      <model name="EASY JET 2000 TI" value="4" from="0">
+        <consts>
+          <const name="C_POUTNOMINAL" value="2000.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*0.1050"/>
+        </vars>
+      </model>
+      <model name="EASY JET 2000 M2" value="5" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="2000.0000"/>
+        </consts>
+        <vars>
+          <var name="iOutput" value="V_IOUTPUT*0.0508"/>
+        </vars>
+      </model>
+      <model name="EASY JET 1400 M1" value="6" from="0"/>
+      <model name="EASY JET 1200 M2" value="7" from="1">
+        <consts>
+          <const name="C_POUTNOMINAL" value="1200.0000"/>
+        </consts>
+      </model>
+    </device>
+  </devices>
+</supervise>

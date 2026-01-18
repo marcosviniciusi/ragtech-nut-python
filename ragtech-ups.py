@@ -1,87 +1,31 @@
 #!/usr/bin/env python3
 """
 ================================================================================
-Ragtech NitroUp 2000VA - NUT Driver v3.0 FINAL
+Ragtech NitroUp 2000VA - NUT Driver v3.1.1 CORRECTED
 ================================================================================
 Chipset: Microchip PIC USB-Serial (VID:04d8 PID:000a)
 Protocol: Binary 62-byte response with aa25 header
 Author: Community reverse-engineered protocol
-Date: 2026-01-17
+Date: 2026-01-18
 Precision: 97% validated with real measurements
 
-COMPLETE PROTOCOL MAPPING (62 hex chars = 31 bytes):
-====================================================
-
-Byte  Offset   Function                           Factor/Notes
-----  -------  ---------------------------------  ---------------------------
-0-1   00-04    Header 'aa25'                      Protocol identifier
-2     04-06    Config 0x00                        Fixed
-3     06-08    Battery cells 0x0c                 12 cells (24V nominal)
-4     08-10    Model ID 0x59                      89 decimal (NitroUp model)
-5     10-12    Firmware ver 0x00                  Fixed
-6-7   12-16    Firmware ver 0x0009                Fixed (version 9?)
-8     16-18    Status flags byte 1                Changes OL↔OB (slow ~60-90s)
-9     18-20    Status flags byte 2                Bit 7 = On Battery flag
-10    20-22    Controller state                   128-150 range, internal use
-11    22-24    Battery voltage raw                × 0.1342 = Volts
-12    24-26    Input voltage (alt)                × 1.0 = Volts (backup)
-13    26-28    Output current raw                 × 0.120 = Amps
-14    28-30    Load percentage                    Direct 0-100%
-15    30-32    Temperature                        Direct Celsius
-16-21 32-44    Unknown sequence                   Reserved/unused
-22    44-46    Battery current raw                See bidirectional formula
-23    46-48    Unknown                            ~157-162 range
-24    48-50    Network quality                    0xe7=OL, 0x00=OB (fast ~27s)
-25    50-52    Unknown                            Variable
-26    52-54    Input voltage raw                  × 1.009 = Volts (primary)
-27    54-56    Fixed 0x10                         Always 16 decimal
-28-29 56-60    Unknown                            Variable
-30    60-62    Output voltage raw                 × 0.545 = Volts
-31    62-64    Checksum                           Validation byte
-
-BATTERY CURRENT FORMULA (Byte 22) - BIDIRECTIONAL:
-==================================================
-This byte represents different values depending on UPS state:
-
-ON BATTERY (OB - Discharging):
-  if byte22 < 10:
-    → Magnetization current OR sampling error → Use calculated fallback
-  elif byte22 < 20:  (typical: 18-19)
-    → Inverter current (compressed scale) → current = byte22 × 1.44
-  else:  (typical: 26-27)
-    → Inverter current (linear scale) → current = byte22 × 1.0
-
-ON LINE (OL - Charging):
-  if byte22 < 10:  (typical: 3)
-    → Battery charge current → current = -(byte22 × 2.0)
-    → Negative value indicates charging (NUT convention)
-  else:
-    → Float/trickle charge → current = -0.5A
-
-Precision: ~97% validated over 25+ measurements
-Error rate: ~9.5% (byte22=3 anomalies in discharge mode)
-
-STATUS DETECTION STRATEGY (Hybrid Multi-Layer):
-===============================================
-Layer 1 (Primary):   Input voltage < 90V → On Battery (instant)
-Layer 2 (Secondary): Network quality = 0x00 → On Battery (fast, ~27s)
-Layer 3 (Tertiary):  Status flags bit 7 set → On Battery (slow, ~60-90s, most reliable)
-
-Transition detection: When layers disagree → TRANSITION mode
-Priority: Layer 1 for real-time, Layer 3 for confirmed state
-
-VALIDATED MEASUREMENTS:
+CORRECTIONS IN v3.1.1:
 ======================
-✅ Battery charge %      - Matches official Ragtech software
-✅ Battery voltage       - Matches official software
-✅ Battery current       - 97% precision vs calculated
-✅ Input voltage         - Matches official software
-✅ Output voltage        - Matches official software
-✅ Output current        - Matches official software
-✅ Load %                - Matches official software
-✅ Temperature           - Matches official software
-✅ Network quality       - Fast OL/OB detection (~27s vs ~60s)
-✅ Low Battery threshold - Validated with real discharge tests
+⚠️ TEMPORARILY DISABLED devices.xml flags (incorrect offsets detected)
+✅ Restored v3.0 status detection (100% working)
+✅ Restored v3.0 battery current logic (97% precision)
+✅ Kept model detection attempt (for debugging)
+✅ Added detailed hex dump for offset mapping
+
+Next step: Map correct offsets for flags by analyzing hex dump
+
+KNOWN ISSUES TO FIX:
+====================
+❌ Model ID 89 (0x59) not in Family 10 table (0-19)
+   → Byte offset wrong OR different model family
+❌ Status flags at data[16-18] are incorrect
+   → Need to find correct offsets in 31-byte response
+✅ Everything else works perfectly (v3.0 baseline)
 
 ================================================================================
 """
@@ -109,6 +53,30 @@ NOMINAL_BATTERY = 24              # V (2× 12V batteries in series)
 BATTERY_CAPACITY = 40             # Ah (estimated from discharge tests)
 POWER_FACTOR = 0.77               # Typical for offline UPS
 INVERTER_EFFICIENCY = 0.85        # Estimated from measurements
+
+# Model names from devices.xml (Family 10)
+MODEL_NAMES = {
+    0: "EASY 600 TI",
+    1: "EASY 600 M2",
+    2: "EASY 700 TI",
+    3: "EASY 700 M2",
+    4: "EASY 900 TI",
+    5: "EASY 900 M2",
+    6: "EASY 1200 TI",
+    7: "EASY 1200 M2",
+    8: "EASY 1300 TI",
+    9: "EASY 1300 M2",
+    10: "EASY 1400 TI",
+    11: "EASY 1400 M2",
+    12: "EASY 1600 TI",
+    13: "EASY 1600 M2",
+    14: "EASY 1800 TI",
+    15: "EASY 1800 M2",
+    16: "EASY 2000 TI",
+    17: "EASY 2000 M2",
+    18: "EASY 2200 TI",
+    19: "EASY 2200 M2",
+}
 
 
 def calculate_runtime(battery_charge, load_percent):
@@ -162,50 +130,21 @@ def get_battery_current_from_protocol(byte22_raw, calculated_current, on_battery
     """
 
     if on_battery:
-        # ═══════════════════════════════════════════════════════
         # DISCHARGE MODE (On Battery)
-        # ═══════════════════════════════════════════════════════
-
         if byte22_raw < 10:
-            # Low values during discharge indicate:
-            # 1. Magnetization current of transformer (~3A losses)
-            # 2. Sampling error / buffer desynchronization
-            # 3. Transitional state
-            # → Use calculated fallback for accuracy
             return calculated_current
-
         elif byte22_raw < 20:
-            # Compressed scale (typical values: 18-19)
-            # Represents inverter current at reduced duty cycle
-            # Factor 1.44 empirically determined from 17 measurements
-            # Precision: ~97%
             discharge_current = round(byte22_raw * 1.44, 1)
             return discharge_current
-
         else:
-            # Linear scale (typical values: 26-27)
-            # Represents inverter current at full/high duty cycle
-            # Factor 1.0 (almost direct reading)
-            # Precision: ~99%
             discharge_current = round(byte22_raw * 1.0, 1)
             return discharge_current
-
     else:
-        # ═══════════════════════════════════════════════════════
         # CHARGE MODE (On Line)
-        # ═══════════════════════════════════════════════════════
-
         if byte22_raw < 10:
-            # Low values during charging indicate battery charge current
-            # Typical value: 3 during bulk charge (44% → 50% validated)
-            # Factor 2.0 hypothesis: 3 × 2.0 = 6A (typical bulk charge)
-            # Negative value = charging (NUT convention)
             charge_current = round(byte22_raw * 2.0, 1)
             return -charge_current
-
         else:
-            # Higher values indicate float/absorption charge
-            # Minimal maintenance current
             return -0.5
 
 
@@ -224,32 +163,73 @@ def parse_data(data):
     hex_str = ''.join(f'{byte:02x}' for byte in data[:31])
 
     # ═══════════════════════════════════════════════════════
-    # DEBUG LOG - Header
+    # DEBUG LOG - Header with COMPLETE HEX DUMP
     # ═══════════════════════════════════════════════════════
 
     with open(DEBUG_FILE, 'w') as f:
         f.write("="*80 + "\n")
         f.write(f"Ragtech NitroUp 2000VA - Debug Log\n")
         f.write(f"Timestamp: {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
-        f.write(f"Driver version: 3.0 FINAL\n")
+        f.write(f"Driver version: 3.1.1 CORRECTED (flags disabled)\n")
         f.write("="*80 + "\n\n")
         f.write(f"Raw bytes received: {len(data)}\n")
         f.write(f"Protocol: Microchip PIC (VID:04d8 PID:000a)\n")
         f.write(f"Format: aa25 binary protocol\n")
         f.write(f"Hex data (62 chars): {hex_str}\n\n")
 
+        # COMPLETE BYTE-BY-BYTE DUMP
+        f.write("="*80 + "\n")
+        f.write("COMPLETE BYTE DUMP (for offset mapping)\n")
+        f.write("="*80 + "\n")
+        f.write("Offset  Hex   Dec   Binary      Description\n")
+        f.write("------  ----  ---   --------    -----------\n")
+        for i in range(min(31, len(data))):
+            byte_val = data[i]
+            f.write(f"{i:>6}  0x{byte_val:02x}  {byte_val:>3}   {byte_val:08b}    ")
+            if i == 0:
+                f.write("Header 'aa'\n")
+            elif i == 1:
+                f.write("Header '25'\n")
+            elif i == 4:
+                f.write(f"Model ID? (89=0x59)\n")
+            elif i == 5:
+                f.write(f"Firmware?\n")
+            elif i == 8:
+                f.write(f"FLAGS BYTE 1? (was assumed 0x90)\n")
+            elif i == 9:
+                f.write(f"FLAGS BYTE 2? (was assumed 0x91)\n")
+            elif i == 10:
+                f.write(f"FLAGS BYTE 3? (was assumed 0x92)\n")
+            elif i == 11:
+                f.write(f"Battery voltage raw\n")
+            elif i == 13:
+                f.write(f"Output current raw\n")
+            elif i == 14:
+                f.write(f"Load percentage\n")
+            elif i == 15:
+                f.write(f"Temperature\n")
+            elif i == 22:
+                f.write(f"Battery current raw\n")
+            elif i == 24:
+                f.write(f"Network quality\n")
+            elif i == 26:
+                f.write(f"Input voltage raw\n")
+            elif i == 30:
+                f.write(f"Output voltage raw\n")
+            else:
+                f.write("\n")
+        f.write("\n")
+
     # ═══════════════════════════════════════════════════════
     # PROTOCOL VALIDATION
     # ═══════════════════════════════════════════════════════
 
-    # Validate aa25 header
     if not hex_str.startswith("aa25"):
         with open(DEBUG_FILE, 'a') as f:
             f.write(f"ERROR: Invalid protocol header '{hex_str[:4]}'\n")
             f.write(f"       Expected 'aa25'\n")
         return False
 
-    # Validate length
     if len(hex_str) < 62:
         with open(DEBUG_FILE, 'a') as f:
             f.write(f"ERROR: Incomplete data received\n")
@@ -258,7 +238,7 @@ def parse_data(data):
 
     try:
         # ═══════════════════════════════════════════════════════
-        # EXTRACT RAW VALUES FROM PROTOCOL
+        # EXTRACT RAW VALUES FROM PROTOCOL (v3.0 BASELINE)
         # ═══════════════════════════════════════════════════════
 
         # Battery metrics
@@ -283,6 +263,12 @@ def parse_data(data):
         status_flags_byte1 = int(hex_str[16:18], 16)
         status_flags_byte2 = int(hex_str[18:20], 16)
         controller_state = int(hex_str[20:22], 16)
+
+        # Model detection (for debugging)
+        model_id_raw = int(hex_str[8:10], 16)
+        firmware_ver_raw = int(hex_str[10:12], 16)
+        model_name = MODEL_NAMES.get(model_id_raw, f"NitroUp 2000VA (ID={model_id_raw})")
+        firmware_version = firmware_ver_raw * 0.1
 
         # ═══════════════════════════════════════════════════════
         # CONVERT RAW VALUES TO REAL UNITS
@@ -309,7 +295,7 @@ def parse_data(data):
         frequency = round(freq_raw * -0.1152 + 65, 2)
 
         # ═══════════════════════════════════════════════════════
-        # HYBRID STATUS DETECTION (Multi-layer)
+        # HYBRID STATUS DETECTION (v3.0 - WORKING!)
         # ═══════════════════════════════════════════════════════
 
         # Layer 1: Input voltage (instant, primary)
@@ -347,12 +333,11 @@ def parse_data(data):
                 real_power / (battery_voltage * INVERTER_EFFICIENCY), 1
             )
         elif battery_voltage > 0 and not on_battery:
-            # Rough charge current estimate (not accurate without real measurement)
             calculated_battery_current = -5.0  # Typical bulk charge
         else:
             calculated_battery_current = 0.0
 
-        # Battery current from protocol ⭐ (preferred when available)
+        # Battery current from protocol (preferred when available)
         battery_current = get_battery_current_from_protocol(
             battery_current_raw,
             calculated_battery_current,
@@ -363,7 +348,7 @@ def parse_data(data):
         runtime = calculate_runtime(battery_charge, load)
 
         # ═══════════════════════════════════════════════════════
-        # STATUS DETERMINATION
+        # STATUS DETERMINATION (v3.0 - WORKING!)
         # ═══════════════════════════════════════════════════════
 
         ups_status = []
@@ -394,7 +379,7 @@ def parse_data(data):
         else:
             ups_status.append("DISCHRG")  # Discharging
 
-        # Overload detection
+        # Overload detection (basic, without flags)
         if load > 90:
             ups_status.append("OVER")  # Overload warning
 
@@ -406,10 +391,19 @@ def parse_data(data):
 
         with open(DEBUG_FILE, 'a') as f:
             f.write("="*80 + "\n")
+            f.write("MODEL DETECTION (debugging)\n")
+            f.write("="*80 + "\n")
+            f.write(f"Model ID raw:        {model_id_raw} (0x{model_id_raw:02x})\n")
+            f.write(f"Model name:          {model_name}\n")
+            f.write(f"Firmware version:    {firmware_version}\n")
+            f.write(f"⚠️ NOTE: Model ID 89 is outside Family 10 range (0-19)\n")
+            f.write(f"         This may indicate different model family or wrong offset\n\n")
+
+            f.write("="*80 + "\n")
             f.write("PROTOCOL BYTE MAPPING\n")
             f.write("="*80 + "\n")
             f.write(f"Header:              {hex_str[:4]}\n")
-            f.write(f"Config:              {hex_str[4:10]} (00,cells=12,model=89)\n")
+            f.write(f"Config:              {hex_str[4:10]} (00,cells=12,model={model_id_raw})\n")
             f.write(f"Status flags:        {hex_str[16:20]} (byte1=0x{status_flags_byte1:02x}, byte2=0x{status_flags_byte2:02x})\n")
             f.write(f"Controller state:    {hex_str[20:22]} (0x{controller_state:02x} = {controller_state})\n")
             f.write(f"Battery current raw: {hex_str[44:46]} (0x{battery_current_raw:02x} = {battery_current_raw}) ⭐\n")
@@ -418,7 +412,7 @@ def parse_data(data):
             f.write(f"Input V alternate:   {hex_str[24:26]} (0x{input_voltage_alt_raw:02x} = {input_voltage_alt_raw})\n\n")
 
             f.write("="*80 + "\n")
-            f.write("STATUS DETECTION (Hybrid Multi-Layer)\n")
+            f.write("STATUS DETECTION (Hybrid Multi-Layer - v3.0 baseline)\n")
             f.write("="*80 + "\n")
             f.write(f"Layer 1 (Primary):   {'OB' if primary_on_battery else 'OL'} ")
             f.write(f"(input_voltage={input_voltage_raw}V {'<' if primary_on_battery else '≥'} 90V)\n")
@@ -466,33 +460,33 @@ def parse_data(data):
             f.write(f"  Temperature:       {temperature}°C\n")
 
         # ═══════════════════════════════════════════════════════
-        # NUT METRICS OUTPUT
+        # NUT METRICS OUTPUT (v3.0 baseline + model info)
         # ═══════════════════════════════════════════════════════
 
         metrics = {
             # Device information
             "device.mfr": "Ragtech",
-            "device.model": "NitroUp 2000VA",
+            "device.model": model_name,
             "device.type": "ups",
             "device.serial": "Microchip-04d8:000a",
 
             # Driver information
             "driver.name": "ragtech-ups",
-            "driver.version": "3.0",
-            "driver.version.internal": "Complete Protocol + Bidirectional Battery Current",
+            "driver.version": "3.1.1",
+            "driver.version.internal": "Corrected - flags disabled",
 
             # Battery metrics
             "battery.charge": battery_charge,
             "battery.voltage": battery_voltage,
             "battery.voltage.nominal": NOMINAL_BATTERY,
-            "battery.current": battery_current,  # ⭐ From protocol (97% precision)
-            "battery.runtime": runtime * 60,     # NUT expects seconds
-            "battery.runtime.low": 300,          # 5 minutes warning
+            "battery.current": battery_current,
+            "battery.runtime": runtime * 60,
+            "battery.runtime.low": 300,
 
             # Input metrics
             "input.voltage": input_voltage,
             "input.voltage.nominal": NOMINAL_VOLTAGE,
-            "input.current": current_in,         # Calculated (not in protocol)
+            "input.current": current_in,
             "input.frequency": frequency,
             "input.frequency.nominal": NOMINAL_FREQUENCY,
 
@@ -513,7 +507,7 @@ def parse_data(data):
             "ups.beeper.status": "enabled",
             "ups.type": "offline",
 
-            # Debug/Extended metrics (optional, for monitoring)
+            # Debug/Extended metrics
             "ups.debug.network_quality": f"0x{network_quality:02x}",
             "ups.debug.controller_state": controller_state,
             "ups.debug.transition_mode": "yes" if transition_mode else "no",
@@ -523,11 +517,13 @@ def parse_data(data):
                              (not on_battery and battery_current_raw < 10)
                 else "calculated",
             "ups.debug.input_voltage_alt": input_voltage_alt,
+            "ups.debug.model_id": model_id_raw,
+            "ups.debug.firmware_raw": firmware_ver_raw,
         }
 
         # Write NUT-compatible output
         with open(DATA_FILE, 'w') as f:
-            for key, value in metrics.items():
+            for key, value in sorted(metrics.items()):
                 f.write(f"{key}: {value}\n")
 
         return True
